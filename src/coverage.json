@@ -1,29 +1,150 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-23T09:28:32.573Z",
+  "generatedAt": "2026-02-23T10:27:27.598Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 6,
-    "implemented": 6,
+    "total": 16,
+    "implemented": 16,
     "items": [
       {
-        "id": "REQ-28",
-        "summary": "Update all text color classes in frontend/src/pages/LandingPage.tsx from black (text-black, text-gray-900, text-gray-800) to white (text-white) for all headings, paragraphs, body text, and labels including hero section, problem section, how it works section, stakeholder cards, and impact metrics to ensure visibility against the dark background",
+        "id": "REQ-37",
+        "summary": "Create a My Projects page (frontend/src/pages/MyProjects.tsx) for the Student Dashboard that displays all projects the student has applied to or is working on, with status indicators (Applied, In Progress, Completed), project details, and filtering options",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/pages/LandingPage.tsx"
+          "frontend/src/pages/MyProjects.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/pages/LandingPage.tsx"
+          "frontend/src/pages/MyProjects.tsx"
         ]
       },
       {
-        "id": "REQ-29",
-        "summary": "Update all text color classes in frontend/src/pages/StudentDashboard.tsx from black to white including sidebar navigation labels, dashboard headings, profile completion text, skill tags, project card titles and descriptions, applied projects list, and mentor messages preview to maintain consistency with the white text theme",
+        "id": "REQ-38",
+        "summary": "Create a Skill Profile page (frontend/src/pages/SkillProfile.tsx) for the Student Dashboard that displays the student's skill strengths, certifications, and allows editing of skill data with save functionality",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/SkillProfile.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/SkillProfile.tsx"
+        ]
+      },
+      {
+        "id": "REQ-39",
+        "summary": "Create a Mentorship page (frontend/src/pages/Mentorship.tsx) for the Student Dashboard that displays mentor messages, allows sending messages to mentors, and shows mentorship requests with status tracking",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/Mentorship.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/Mentorship.tsx"
+        ]
+      },
+      {
+        "id": "REQ-40",
+        "summary": "Create a Settings page (frontend/src/pages/StudentSettings.tsx) for the Student Dashboard that allows students to update profile information, change notification preferences, and manage account settings",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/StudentSettings.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/StudentSettings.tsx"
+        ]
+      },
+      {
+        "id": "REQ-41",
+        "summary": "Create an Applicants page (frontend/src/pages/Applicants.tsx) for the Industry Dashboard that displays all students who have applied to the company's projects, with skill match percentages, filtering by project, and contact functionality",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/Applicants.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/Applicants.tsx"
+        ]
+      },
+      {
+        "id": "REQ-42",
+        "summary": "Create an Analytics page (frontend/src/pages/IndustryAnalytics.tsx) for the Industry Dashboard that displays project performance metrics, applicant statistics, engagement rates, and growth charts for the company's posted projects",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/IndustryAnalytics.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/IndustryAnalytics.tsx"
+        ]
+      },
+      {
+        "id": "REQ-43",
+        "summary": "Create a Settings page (frontend/src/pages/IndustrySettings.tsx) for the Industry Dashboard that allows industry partners to update company profile information, manage team members, and configure posting preferences",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/IndustrySettings.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/IndustrySettings.tsx"
+        ]
+      },
+      {
+        "id": "REQ-44",
+        "summary": "Create a Users page (frontend/src/pages/Users.tsx) for the Admin Dashboard that displays all registered users (students, industry partners, admins) with filtering, search functionality, and user management actions",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/Users.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/Users.tsx"
+        ]
+      },
+      {
+        "id": "REQ-45",
+        "summary": "Create a Projects page (frontend/src/pages/AdminProjects.tsx) for the Admin Dashboard that displays all projects posted on the platform with approval status, moderation tools, and analytics",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/AdminProjects.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/AdminProjects.tsx"
+        ]
+      },
+      {
+        "id": "REQ-46",
+        "summary": "Create a Revenue page (frontend/src/pages/Revenue.tsx) for the Admin Dashboard that displays platform revenue metrics, subscription data, payment history, and financial growth charts",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/Revenue.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/Revenue.tsx"
+        ]
+      },
+      {
+        "id": "REQ-47",
+        "summary": "Create a Reports page (frontend/src/pages/Reports.tsx) for the Admin Dashboard that displays platform activity reports, user engagement metrics, and export functionality for generating custom reports",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/Reports.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/Reports.tsx"
+        ]
+      },
+      {
+        "id": "REQ-48",
+        "summary": "Create a Settings page (frontend/src/pages/AdminSettings.tsx) for the Admin Dashboard that allows admins to configure platform settings, manage access controls, and update system preferences",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/AdminSettings.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/AdminSettings.tsx"
+        ]
+      },
+      {
+        "id": "REQ-49",
+        "summary": "Update frontend/src/pages/StudentDashboard.tsx to replace the hardcoded sidebar links with proper React Router Link components that navigate to /student/my-projects, /student/skill-profile, /student/mentorship, and /student/settings",
         "status": "implemented",
         "plannedFiles": [
           "frontend/src/pages/StudentDashboard.tsx"
@@ -33,8 +154,8 @@
         ]
       },
       {
-        "id": "REQ-30",
-        "summary": "Update all text color classes in frontend/src/pages/IndustryDashboard.tsx from black to white including sidebar navigation, dashboard headings, project listings, status indicators, applicant cards, skill match percentages, and analytics section text to ensure uniform white text styling across the dashboard",
+        "id": "REQ-50",
+        "summary": "Update frontend/src/pages/IndustryDashboard.tsx to replace the hardcoded sidebar links with proper React Router Link components that navigate to /industry/applicants, /industry/analytics, and /industry/settings",
         "status": "implemented",
         "plannedFiles": [
           "frontend/src/pages/IndustryDashboard.tsx"
@@ -44,8 +165,8 @@
         ]
       },
       {
-        "id": "REQ-31",
-        "summary": "Update all text color classes in frontend/src/pages/AdminDashboard.tsx from black to white including sidebar navigation, overview headings, user count metrics, project statistics, revenue data, growth chart labels, and recent activity feed text to maintain the white text theme consistently",
+        "id": "REQ-51",
+        "summary": "Update frontend/src/pages/AdminDashboard.tsx to replace the hardcoded sidebar links with proper React Router Link components that navigate to /admin/users, /admin/projects, /admin/revenue, and /admin/reports, and /admin/settings",
         "status": "implemented",
         "plannedFiles": [
           "frontend/src/pages/AdminDashboard.tsx"
@@ -55,25 +176,14 @@
         ]
       },
       {
-        "id": "REQ-32",
-        "summary": "Update all text color classes in frontend/src/pages/AISkillMapping.tsx from black to white including page headings, upload box instructions, analyze button labels, AI analysis result headings, extracted skills list, skill strength labels, suggested projects, and match score text to ensure complete white text coverage",
+        "id": "REQ-52",
+        "summary": "Update frontend/src/App.tsx to add route definitions for all new dashboard pages including student routes (/student/my-projects, /student/skill-profile, /student/mentorship, /student/settings), industry routes (/industry/applicants, /industry/analytics, /industry/settings), and admin routes (/admin/users, /admin/projects, /admin/revenue, /admin/reports, /admin/settings) with proper ProtectedRoute guards",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/pages/AISkillMapping.tsx"
+          "frontend/src/App.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/pages/AISkillMapping.tsx"
-        ]
-      },
-      {
-        "id": "REQ-33",
-        "summary": "Update all text color classes in frontend/src/components/RoleSelectionModal.tsx from black to white including modal title, role selection card titles (Student, Industry Partner, Admin), role descriptions, and any instruction text to maintain white text consistency in the registration flow",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/components/RoleSelectionModal.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/components/RoleSelectionModal.tsx"
+          "frontend/src/App.tsx"
         ]
       }
     ]
@@ -83,12 +193,23 @@
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/components/RoleSelectionModal.tsx",
-    "frontend/src/pages/AISkillMapping.tsx",
+    "frontend/src/App.tsx",
+    "frontend/src/hooks/useProjects.ts",
     "frontend/src/pages/AdminDashboard.tsx",
+    "frontend/src/pages/AdminProjects.tsx",
+    "frontend/src/pages/AdminSettings.tsx",
+    "frontend/src/pages/Applicants.tsx",
+    "frontend/src/pages/IndustryAnalytics.tsx",
     "frontend/src/pages/IndustryDashboard.tsx",
-    "frontend/src/pages/LandingPage.tsx",
+    "frontend/src/pages/IndustrySettings.tsx",
+    "frontend/src/pages/Mentorship.tsx",
+    "frontend/src/pages/MyProjects.tsx",
+    "frontend/src/pages/Reports.tsx",
+    "frontend/src/pages/Revenue.tsx",
+    "frontend/src/pages/SkillProfile.tsx",
     "frontend/src/pages/StudentDashboard.tsx",
+    "frontend/src/pages/StudentSettings.tsx",
+    "frontend/src/pages/Users.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

@@ -1,15 +1,16 @@
 import { useState } from 'react';
-import { useNavigate } from '@tanstack/react-router';
 import { useQueryClient } from '@tanstack/react-query';
-import { GraduationCap, Building2, Shield, Rocket } from 'lucide-react';
+import { GraduationCap, Building2, Shield } from 'lucide-react';
 import { useActor } from '../hooks/useActor';
 import { AppUserRole } from '../backend';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from './ui/dialog';
-import { Button } from './ui/button';
 
-export default function RoleSelectionModal() {
+interface RoleSelectionModalProps {
+  onComplete: (dashboardPath: string) => void;
+}
+
+export default function RoleSelectionModal({ onComplete }: RoleSelectionModalProps) {
   const { actor } = useActor();
-  const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [selectedRole, setSelectedRole] = useState<AppUserRole | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -50,21 +51,32 @@ export default function RoleSelectionModal() {
     setError('');
 
     try {
+      console.log('Registering user with role:', role);
+      
       // Register with minimal information - just the role
-      // Using empty strings for name and email as they're optional
       await actor.register('', '', role);
       
-      // Invalidate and refetch user profile
-      await queryClient.invalidateQueries({ queryKey: ['currentUserProfile'] });
+      console.log('Registration successful, invalidating queries');
       
-      // Navigate to appropriate dashboard
+      // Invalidate all queries to refresh data
+      await queryClient.invalidateQueries({ queryKey: ['currentUserProfile'] });
+      await queryClient.invalidateQueries({ queryKey: ['userRole'] });
+      
+      // Wait a bit for queries to settle
+      await new Promise(resolve => setTimeout(resolve, 100));
+      
+      // Determine dashboard path
       const dashboardMap: Record<AppUserRole, string> = {
         [AppUserRole.student]: '/student-dashboard',
         [AppUserRole.industryPartner]: '/industry-dashboard',
         [AppUserRole.admin]: '/admin-dashboard'
       };
       
-      navigate({ to: dashboardMap[role] });
+      const dashboardPath = dashboardMap[role];
+      console.log('Navigating to:', dashboardPath);
+      
+      // Call the onComplete callback to trigger navigation
+      onComplete(dashboardPath);
     } catch (err: any) {
       console.error('Registration error:', err);
       setError(err.message || 'Failed to register. Please try again.');

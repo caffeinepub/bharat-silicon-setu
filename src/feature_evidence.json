@@ -2,10 +2,10 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-update-all-text-color-classes-in-frontend-src-pages-landingpage-tsx-from-black-text-black-text-gray-900-text-gray-800-to-white-text-white-for-all-headings-paragraphs-body-text-and-labels-including-hero-section-problem-section-how-it-works-section-stakeholder-cards-and-impact-metrics-to-ensure-visibility-against-the-dark-background",
-      "featureTitle": "Update all text color classes in frontend/src/pages/LandingPage.tsx from black (text-black, text-gray-900, text-gray-800) to white (text-white) for all headings, paragraphs, body text, and labels including hero section, problem section, how it works section, stakeholder cards, and impact metrics to ensure visibility against the dark background",
+      "featureId": "feature-create-a-my-projects-page-frontend-src-pages-myprojects-tsx-for-the-student-dashboard-that-displays-all-projects-the-student-has-applied-to-or-is-working-on-with-status-indicators-applied-in-progress-completed-project-details-and-filtering-options",
+      "featureTitle": "Create a My Projects page (frontend/src/pages/MyProjects.tsx) for the Student Dashboard that displays all projects the student has applied to or is working on, with status indicators (Applied, In Progress, Completed), project details, and filtering options",
       "files": [
-        "frontend/src/pages/LandingPage.tsx"
+        "frontend/src/pages/MyProjects.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -16,13 +16,222 @@
         "authorization@4.0.0"
       ],
       "testIds": [
-        "REQ-28"
+        "REQ-37"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-update-all-text-color-classes-in-frontend-src-pages-studentdashboard-tsx-from-black-to-white-including-sidebar-navigation-labels-dashboard-headings-profile-completion-text-skill-tags-project-card-titles-and-descriptions-applied-projects-list-and-mentor-messages-preview-to-maintain-consistency-with-the-white-text-theme",
-      "featureTitle": "Update all text color classes in frontend/src/pages/StudentDashboard.tsx from black to white including sidebar navigation labels, dashboard headings, profile completion text, skill tags, project card titles and descriptions, applied projects list, and mentor messages preview to maintain consistency with the white text theme",
+      "featureId": "feature-create-a-skill-profile-page-frontend-src-pages-skillprofile-tsx-for-the-student-dashboard-that-displays-the-student-s-skill-strengths-certifications-and-allows-editing-of-skill-data-with-save-functionality",
+      "featureTitle": "Create a Skill Profile page (frontend/src/pages/SkillProfile.tsx) for the Student Dashboard that displays the student's skill strengths, certifications, and allows editing of skill data with save functionality",
+      "files": [
+        "frontend/src/pages/SkillProfile.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-38"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-a-mentorship-page-frontend-src-pages-mentorship-tsx-for-the-student-dashboard-that-displays-mentor-messages-allows-sending-messages-to-mentors-and-shows-mentorship-requests-with-status-tracking",
+      "featureTitle": "Create a Mentorship page (frontend/src/pages/Mentorship.tsx) for the Student Dashboard that displays mentor messages, allows sending messages to mentors, and shows mentorship requests with status tracking",
+      "files": [
+        "frontend/src/pages/Mentorship.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-39"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-a-settings-page-frontend-src-pages-studentsettings-tsx-for-the-student-dashboard-that-allows-students-to-update-profile-information-change-notification-preferences-and-manage-account-settings",
+      "featureTitle": "Create a Settings page (frontend/src/pages/StudentSettings.tsx) for the Student Dashboard that allows students to update profile information, change notification preferences, and manage account settings",
+      "files": [
+        "frontend/src/pages/StudentSettings.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-40"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-an-applicants-page-frontend-src-pages-applicants-tsx-for-the-industry-dashboard-that-displays-all-students-who-have-applied-to-the-company-s-projects-with-skill-match-percentages-filtering-by-project-and-contact-functionality",
+      "featureTitle": "Create an Applicants page (frontend/src/pages/Applicants.tsx) for the Industry Dashboard that displays all students who have applied to the company's projects, with skill match percentages, filtering by project, and contact functionality",
+      "files": [
+        "frontend/src/pages/Applicants.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-41"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-an-analytics-page-frontend-src-pages-industryanalytics-tsx-for-the-industry-dashboard-that-displays-project-performance-metrics-applicant-statistics-engagement-rates-and-growth-charts-for-the-company-s-posted-projects",
+      "featureTitle": "Create an Analytics page (frontend/src/pages/IndustryAnalytics.tsx) for the Industry Dashboard that displays project performance metrics, applicant statistics, engagement rates, and growth charts for the company's posted projects",
+      "files": [
+        "frontend/src/pages/IndustryAnalytics.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-42"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-a-settings-page-frontend-src-pages-industrysettings-tsx-for-the-industry-dashboard-that-allows-industry-partners-to-update-company-profile-information-manage-team-members-and-configure-posting-preferences",
+      "featureTitle": "Create a Settings page (frontend/src/pages/IndustrySettings.tsx) for the Industry Dashboard that allows industry partners to update company profile information, manage team members, and configure posting preferences",
+      "files": [
+        "frontend/src/pages/IndustrySettings.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-43"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-a-users-page-frontend-src-pages-users-tsx-for-the-admin-dashboard-that-displays-all-registered-users-students-industry-partners-admins-with-filtering-search-functionality-and-user-management-actions",
+      "featureTitle": "Create a Users page (frontend/src/pages/Users.tsx) for the Admin Dashboard that displays all registered users (students, industry partners, admins) with filtering, search functionality, and user management actions",
+      "files": [
+        "frontend/src/pages/Users.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-44"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-a-projects-page-frontend-src-pages-adminprojects-tsx-for-the-admin-dashboard-that-displays-all-projects-posted-on-the-platform-with-approval-status-moderation-tools-and-analytics",
+      "featureTitle": "Create a Projects page (frontend/src/pages/AdminProjects.tsx) for the Admin Dashboard that displays all projects posted on the platform with approval status, moderation tools, and analytics",
+      "files": [
+        "frontend/src/pages/AdminProjects.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-45"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-a-revenue-page-frontend-src-pages-revenue-tsx-for-the-admin-dashboard-that-displays-platform-revenue-metrics-subscription-data-payment-history-and-financial-growth-charts",
+      "featureTitle": "Create a Revenue page (frontend/src/pages/Revenue.tsx) for the Admin Dashboard that displays platform revenue metrics, subscription data, payment history, and financial growth charts",
+      "files": [
+        "frontend/src/pages/Revenue.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-46"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-a-reports-page-frontend-src-pages-reports-tsx-for-the-admin-dashboard-that-displays-platform-activity-reports-user-engagement-metrics-and-export-functionality-for-generating-custom-reports",
+      "featureTitle": "Create a Reports page (frontend/src/pages/Reports.tsx) for the Admin Dashboard that displays platform activity reports, user engagement metrics, and export functionality for generating custom reports",
+      "files": [
+        "frontend/src/pages/Reports.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-47"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-a-settings-page-frontend-src-pages-adminsettings-tsx-for-the-admin-dashboard-that-allows-admins-to-configure-platform-settings-manage-access-controls-and-update-system-preferences",
+      "featureTitle": "Create a Settings page (frontend/src/pages/AdminSettings.tsx) for the Admin Dashboard that allows admins to configure platform settings, manage access controls, and update system preferences",
+      "files": [
+        "frontend/src/pages/AdminSettings.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-48"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-update-frontend-src-pages-studentdashboard-tsx-to-replace-the-hardcoded-sidebar-links-with-proper-react-router-link-components-that-navigate-to-student-my-projects-student-skill-profile-student-mentorship-and-student-settings",
+      "featureTitle": "Update frontend/src/pages/StudentDashboard.tsx to replace the hardcoded sidebar links with proper React Router Link components that navigate to /student/my-projects, /student/skill-profile, /student/mentorship, and /student/settings",
       "files": [
         "frontend/src/pages/StudentDashboard.tsx"
       ],
@@ -35,13 +244,13 @@
         "authorization@4.0.0"
       ],
       "testIds": [
-        "REQ-29"
+        "REQ-49"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-update-all-text-color-classes-in-frontend-src-pages-industrydashboard-tsx-from-black-to-white-including-sidebar-navigation-dashboard-headings-project-listings-status-indicators-applicant-cards-skill-match-percentages-and-analytics-section-text-to-ensure-uniform-white-text-styling-across-the-dashboard",
-      "featureTitle": "Update all text color classes in frontend/src/pages/IndustryDashboard.tsx from black to white including sidebar navigation, dashboard headings, project listings, status indicators, applicant cards, skill match percentages, and analytics section text to ensure uniform white text styling across the dashboard",
+      "featureId": "feature-update-frontend-src-pages-industrydashboard-tsx-to-replace-the-hardcoded-sidebar-links-with-proper-react-router-link-components-that-navigate-to-industry-applicants-industry-analytics-and-industry-settings",
+      "featureTitle": "Update frontend/src/pages/IndustryDashboard.tsx to replace the hardcoded sidebar links with proper React Router Link components that navigate to /industry/applicants, /industry/analytics, and /industry/settings",
       "files": [
         "frontend/src/pages/IndustryDashboard.tsx"
       ],
@@ -54,13 +263,13 @@
         "authorization@4.0.0"
       ],
       "testIds": [
-        "REQ-30"
+        "REQ-50"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-update-all-text-color-classes-in-frontend-src-pages-admindashboard-tsx-from-black-to-white-including-sidebar-navigation-overview-headings-user-count-metrics-project-statistics-revenue-data-growth-chart-labels-and-recent-activity-feed-text-to-maintain-the-white-text-theme-consistently",
-      "featureTitle": "Update all text color classes in frontend/src/pages/AdminDashboard.tsx from black to white including sidebar navigation, overview headings, user count metrics, project statistics, revenue data, growth chart labels, and recent activity feed text to maintain the white text theme consistently",
+      "featureId": "feature-update-frontend-src-pages-admindashboard-tsx-to-replace-the-hardcoded-sidebar-links-with-proper-react-router-link-components-that-navigate-to-admin-users-admin-projects-admin-revenue-and-admin-reports-and-admin-settings",
+      "featureTitle": "Update frontend/src/pages/AdminDashboard.tsx to replace the hardcoded sidebar links with proper React Router Link components that navigate to /admin/users, /admin/projects, /admin/revenue, and /admin/reports, and /admin/settings",
       "files": [
         "frontend/src/pages/AdminDashboard.tsx"
       ],
@@ -73,15 +282,15 @@
         "authorization@4.0.0"
       ],
       "testIds": [
-        "REQ-31"
+        "REQ-51"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-update-all-text-color-classes-in-frontend-src-pages-aiskillmapping-tsx-from-black-to-white-including-page-headings-upload-box-instructions-analyze-button-labels-ai-analysis-result-headings-extracted-skills-list-skill-strength-labels-suggested-projects-and-match-score-text-to-ensure-complete-white-text-coverage",
-      "featureTitle": "Update all text color classes in frontend/src/pages/AISkillMapping.tsx from black to white including page headings, upload box instructions, analyze button labels, AI analysis result headings, extracted skills list, skill strength labels, suggested projects, and match score text to ensure complete white text coverage",
+      "featureId": "feature-update-frontend-src-app-tsx-to-add-route-definitions-for-all-new-dashboard-pages-including-student-routes-student-my-projects-student-skill-profile-student-mentorship-student-settings-industry-routes-industry-applicants-industry-analytics-industry-settings-and-admin-routes-admin-users-admin-projects-admin-revenue-admin-reports-admin-settings-with-proper-protectedroute-guards",
+      "featureTitle": "Update frontend/src/App.tsx to add route definitions for all new dashboard pages including student routes (/student/my-projects, /student/skill-profile, /student/mentorship, /student/settings), industry routes (/industry/applicants, /industry/analytics, /industry/settings), and admin routes (/admin/users, /admin/projects, /admin/revenue, /admin/reports, /admin/settings) with proper ProtectedRoute guards",
       "files": [
-        "frontend/src/pages/AISkillMapping.tsx"
+        "frontend/src/App.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -92,26 +301,7 @@
         "authorization@4.0.0"
       ],
       "testIds": [
-        "REQ-32"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-update-all-text-color-classes-in-frontend-src-components-roleselectionmodal-tsx-from-black-to-white-including-modal-title-role-selection-card-titles-student-industry-partner-admin-role-descriptions-and-any-instruction-text-to-maintain-white-text-consistency-in-the-registration-flow",
-      "featureTitle": "Update all text color classes in frontend/src/components/RoleSelectionModal.tsx from black to white including modal title, role selection card titles (Student, Industry Partner, Admin), role descriptions, and any instruction text to maintain white text consistency in the registration flow",
-      "files": [
-        "frontend/src/components/RoleSelectionModal.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0",
-        "authorization@4.0.0"
-      ],
-      "testIds": [
-        "REQ-33"
+        "REQ-52"
       ],
       "confidence": "high"
     }

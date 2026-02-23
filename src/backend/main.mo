@@ -91,10 +91,7 @@ actor {
   };
 
   public query ({ caller }) func getUserRole() : async ?AppUserRole {
-    if (caller.isAnonymous()) {
-      return null;
-    };
-
+    // Now allowing guests to retrieve their role for correct routing
     switch (userProfiles.get(caller)) {
       case (?profile) { ?profile.role };
       case (null) { null };

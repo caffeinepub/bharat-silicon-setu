@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { useNavigate } from '@tanstack/react-router';
+import { useNavigate, Link, useLocation } from '@tanstack/react-router';
 import { useQueryClient } from '@tanstack/react-query';
-import { GraduationCap, Briefcase, MessageSquare, LogOut, TrendingUp, Award, BookOpen, Target } from 'lucide-react';
+import { GraduationCap, Briefcase, MessageSquare, LogOut, TrendingUp, Award, BookOpen, Target, Settings } from 'lucide-react';
 import { useInternetIdentity } from '../hooks/useInternetIdentity';
 import { useGetApprovedProjects } from '../hooks/useProjects';
 import { useGetContactRequests } from '../hooks/useContactRequests';
@@ -9,9 +9,11 @@ import { Button } from '../components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
+import { Outlet } from '@tanstack/react-router';
 
 export default function StudentDashboard() {
   const navigate = useNavigate();
+  const location = useLocation();
   const queryClient = useQueryClient();
   const { clear } = useInternetIdentity();
   const { data: projects = [], isLoading: projectsLoading } = useGetApprovedProjects();
@@ -26,6 +28,88 @@ export default function StudentDashboard() {
   const mockSkills = ['VLSI Design', 'Verilog', 'SystemVerilog', 'Digital Design', 'ASIC Design'];
   const profileCompletion = 75;
 
+  const isActive = (path: string) => location.pathname === path;
+
+  // Check if we're on a sub-route
+  const isSubRoute = location.pathname !== '/student-dashboard';
+
+  // If on a sub-route, render the Outlet
+  if (isSubRoute) {
+    return (
+      <div className="min-h-screen bg-background dark">
+        {/* Sidebar */}
+        <aside className="fixed left-0 top-0 h-full w-64 bg-card border-r border-border p-6 flex flex-col">
+          <div className="flex items-center gap-2 mb-8">
+            <GraduationCap className="h-8 w-8 text-primary" />
+            <span className="text-xl font-display font-bold text-white">Student Portal</span>
+          </div>
+          
+          <nav className="flex-1 space-y-2">
+            <Link
+              to="/student-dashboard"
+              className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
+                isActive('/student-dashboard') ? 'bg-primary/10 text-primary' : 'hover:bg-accent'
+              }`}
+            >
+              <Target className="h-5 w-5" />
+              <span className="text-white">Dashboard</span>
+            </Link>
+            <Link
+              to="/student/my-projects"
+              className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
+                isActive('/student/my-projects') ? 'bg-primary/10 text-primary' : 'hover:bg-accent'
+              }`}
+            >
+              <Briefcase className="h-5 w-5" />
+              <span className="text-white">My Projects</span>
+            </Link>
+            <Link
+              to="/student/skill-profile"
+              className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
+                isActive('/student/skill-profile') ? 'bg-primary/10 text-primary' : 'hover:bg-accent'
+              }`}
+            >
+              <BookOpen className="h-5 w-5" />
+              <span className="text-white">Skill Profile</span>
+            </Link>
+            <Link
+              to="/student/mentorship"
+              className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
+                isActive('/student/mentorship') ? 'bg-primary/10 text-primary' : 'hover:bg-accent'
+              }`}
+            >
+              <MessageSquare className="h-5 w-5" />
+              <span className="text-white">Mentorship</span>
+            </Link>
+            <Link
+              to="/student/settings"
+              className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
+                isActive('/student/settings') ? 'bg-primary/10 text-primary' : 'hover:bg-accent'
+              }`}
+            >
+              <Settings className="h-5 w-5" />
+              <span className="text-white">Settings</span>
+            </Link>
+          </nav>
+
+          <Button
+            onClick={handleLogout}
+            variant="outline"
+            className="w-full justify-start gap-3"
+          >
+            <LogOut className="h-5 w-5" />
+            Logout
+          </Button>
+        </aside>
+
+        {/* Main Content */}
+        <main className="ml-64">
+          <Outlet />
+        </main>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-background dark">
       {/* Sidebar */}
@@ -36,22 +120,41 @@ export default function StudentDashboard() {
         </div>
         
         <nav className="flex-1 space-y-2">
-          <button className="w-full flex items-center gap-3 px-4 py-3 rounded-lg bg-primary/10 text-primary font-medium">
+          <Link
+            to="/student-dashboard"
+            className="w-full flex items-center gap-3 px-4 py-3 rounded-lg bg-primary/10 text-primary font-medium"
+          >
             <Target className="h-5 w-5" />
             <span className="text-white">Dashboard</span>
-          </button>
-          <button className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-accent transition-colors text-white">
+          </Link>
+          <Link
+            to="/student/my-projects"
+            className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-accent transition-colors"
+          >
             <Briefcase className="h-5 w-5" />
-            <span>Projects</span>
-          </button>
-          <button className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-accent transition-colors text-white">
+            <span className="text-white">My Projects</span>
+          </Link>
+          <Link
+            to="/student/skill-profile"
+            className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-accent transition-colors"
+          >
             <BookOpen className="h-5 w-5" />
-            <span>My Skills</span>
-          </button>
-          <button className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-accent transition-colors text-white">
+            <span className="text-white">Skill Profile</span>
+          </Link>
+          <Link
+            to="/student/mentorship"
+            className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-accent transition-colors"
+          >
             <MessageSquare className="h-5 w-5" />
-            <span>Messages</span>
-          </button>
+            <span className="text-white">Mentorship</span>
+          </Link>
+          <Link
+            to="/student/settings"
+            className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-accent transition-colors"
+          >
+            <Settings className="h-5 w-5" />
+            <span className="text-white">Settings</span>
+          </Link>
         </nav>
 
         <Button

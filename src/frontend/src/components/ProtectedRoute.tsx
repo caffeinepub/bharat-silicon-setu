@@ -15,11 +15,20 @@ export default function ProtectedRoute({ children, requiredRole }: ProtectedRout
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log('ProtectedRoute check:', { 
+      isInitializing, 
+      roleLoading, 
+      hasIdentity: !!identity, 
+      userRole,
+      requiredRole 
+    });
+
     // Wait for initialization to complete
     if (isInitializing || roleLoading) return;
 
     // Redirect to landing if not authenticated
     if (!identity) {
+      console.log('No identity, redirecting to landing page');
       navigate({ to: '/' });
       return;
     }
@@ -33,6 +42,7 @@ export default function ProtectedRoute({ children, requiredRole }: ProtectedRout
       };
 
       if (userRole !== roleMap[requiredRole]) {
+        console.log('Role mismatch, redirecting to correct dashboard');
         // Redirect to correct dashboard based on user's actual role
         const dashboardMap: Record<AppUserRole, string> = {
           [AppUserRole.student]: '/student-dashboard',

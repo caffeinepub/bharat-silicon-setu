@@ -1,14 +1,14 @@
 # Specification
 
 ## Summary
-**Goal:** Change all black text to white throughout the application for better visibility against dark backgrounds.
+**Goal:** Implement functional sidebar navigation pages for all three dashboards (Student, Industry, Admin) with proper routing and role-based access.
 
 **Planned changes:**
-- Update all text colors from black/gray to white in LandingPage.tsx (hero section, problem section, how it works, stakeholder cards, impact metrics)
-- Update all text colors from black to white in StudentDashboard.tsx (sidebar, headings, skill tags, project cards, applied projects, mentor messages)
-- Update all text colors from black to white in IndustryDashboard.tsx (sidebar, project listings, status indicators, applicant cards, analytics)
-- Update all text colors from black to white in AdminDashboard.tsx (sidebar, metrics, revenue data, chart labels, activity feed)
-- Update all text colors from black to white in AISkillMapping.tsx (headings, instructions, skill analysis results, match scores)
-- Update all text colors from black to white in RoleSelectionModal.tsx (modal title, role card titles and descriptions)
+- Create My Projects, Skill Profile, Mentorship, and Settings pages for Student Dashboard
+- Create Applicants, Analytics, and Settings pages for Industry Dashboard
+- Create Users, Projects, Revenue, Reports, and Settings pages for Admin Dashboard
+- Update all three dashboard components to use React Router Link components for sidebar navigation
+- Add route definitions in App.tsx for all new pages with ProtectedRoute guards
+- Maintain white text on dark background styling consistently across all pages
 
-**User-visible outcome:** All text throughout the application displays in white color, providing consistent readability against the dark blue professional theme.
+**User-visible outcome:** Users can navigate through all sidebar menu options in their respective dashboards, accessing functional pages for managing projects, profiles, analytics, users, and settings based on their role.

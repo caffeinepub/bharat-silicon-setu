@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { useNavigate } from '@tanstack/react-router';
+import { useNavigate, Link, useLocation } from '@tanstack/react-router';
 import { useQueryClient } from '@tanstack/react-query';
-import { Building2, Briefcase, Users, LogOut, Plus, TrendingUp, Target, Award } from 'lucide-react';
+import { Building2, Briefcase, Users, LogOut, Plus, TrendingUp, Target, Settings } from 'lucide-react';
 import { useInternetIdentity } from '../hooks/useInternetIdentity';
 import { useGetUserProjects, useSaveProject } from '../hooks/useProjects';
 import { Button } from '../components/ui/button';
@@ -12,9 +12,11 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Input } from '../components/ui/input';
 import { Textarea } from '../components/ui/textarea';
 import { Label } from '../components/ui/label';
+import { Outlet } from '@tanstack/react-router';
 
 export default function IndustryDashboard() {
   const navigate = useNavigate();
+  const location = useLocation();
   const queryClient = useQueryClient();
   const { clear, identity } = useInternetIdentity();
   const { data: projects = [], isLoading: projectsLoading } = useGetUserProjects();
@@ -57,6 +59,88 @@ export default function IndustryDashboard() {
     }
   };
 
+  const isActive = (path: string) => location.pathname === path;
+
+  // Check if we're on a sub-route
+  const isSubRoute = location.pathname !== '/industry-dashboard';
+
+  // If on a sub-route, render the Outlet
+  if (isSubRoute) {
+    return (
+      <div className="min-h-screen bg-background dark">
+        {/* Sidebar */}
+        <aside className="fixed left-0 top-0 h-full w-64 bg-card border-r border-border p-6 flex flex-col">
+          <div className="flex items-center gap-2 mb-8">
+            <Building2 className="h-8 w-8 text-primary" />
+            <span className="text-xl font-display font-bold text-white">Industry Portal</span>
+          </div>
+          
+          <nav className="flex-1 space-y-2">
+            <Link
+              to="/industry-dashboard"
+              className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
+                isActive('/industry-dashboard') ? 'bg-primary/10 text-primary' : 'hover:bg-accent'
+              }`}
+            >
+              <Target className="h-5 w-5" />
+              <span className="text-white">Dashboard</span>
+            </Link>
+            <Link
+              to="/industry/post-project"
+              className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
+                isActive('/industry/post-project') ? 'bg-primary/10 text-primary' : 'hover:bg-accent'
+              }`}
+            >
+              <Briefcase className="h-5 w-5" />
+              <span className="text-white">Post Project</span>
+            </Link>
+            <Link
+              to="/industry/applicants"
+              className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
+                isActive('/industry/applicants') ? 'bg-primary/10 text-primary' : 'hover:bg-accent'
+              }`}
+            >
+              <Users className="h-5 w-5" />
+              <span className="text-white">Applicants</span>
+            </Link>
+            <Link
+              to="/industry/analytics"
+              className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
+                isActive('/industry/analytics') ? 'bg-primary/10 text-primary' : 'hover:bg-accent'
+              }`}
+            >
+              <TrendingUp className="h-5 w-5" />
+              <span className="text-white">Analytics</span>
+            </Link>
+            <Link
+              to="/industry/settings"
+              className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
+                isActive('/industry/settings') ? 'bg-primary/10 text-primary' : 'hover:bg-accent'
+              }`}
+            >
+              <Settings className="h-5 w-5" />
+              <span className="text-white">Settings</span>
+            </Link>
+          </nav>
+
+          <Button
+            onClick={handleLogout}
+            variant="outline"
+            className="w-full justify-start gap-3"
+          >
+            <LogOut className="h-5 w-5" />
+            Logout
+          </Button>
+        </aside>
+
+        {/* Main Content */}
+        <main className="ml-64">
+          <Outlet />
+        </main>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-background dark">
       {/* Sidebar */}
@@ -67,22 +151,41 @@ export default function IndustryDashboard() {
         </div>
         
         <nav className="flex-1 space-y-2">
-          <button className="w-full flex items-center gap-3 px-4 py-3 rounded-lg bg-primary/10 text-primary font-medium">
+          <Link
+            to="/industry-dashboard"
+            className="w-full flex items-center gap-3 px-4 py-3 rounded-lg bg-primary/10 text-primary font-medium"
+          >
             <Target className="h-5 w-5" />
             <span className="text-white">Dashboard</span>
-          </button>
-          <button className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-accent transition-colors text-white">
+          </Link>
+          <Link
+            to="/industry/post-project"
+            className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-accent transition-colors"
+          >
             <Briefcase className="h-5 w-5" />
-            <span>My Projects</span>
-          </button>
-          <button className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-accent transition-colors text-white">
+            <span className="text-white">Post Project</span>
+          </Link>
+          <Link
+            to="/industry/applicants"
+            className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-accent transition-colors"
+          >
             <Users className="h-5 w-5" />
-            <span>Applicants</span>
-          </button>
-          <button className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-accent transition-colors text-white">
+            <span className="text-white">Applicants</span>
+          </Link>
+          <Link
+            to="/industry/analytics"
+            className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-accent transition-colors"
+          >
             <TrendingUp className="h-5 w-5" />
-            <span>Analytics</span>
-          </button>
+            <span className="text-white">Analytics</span>
+          </Link>
+          <Link
+            to="/industry/settings"
+            className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-accent transition-colors"
+          >
+            <Settings className="h-5 w-5" />
+            <span className="text-white">Settings</span>
+          </Link>
         </nav>
 
         <Button
@@ -106,55 +209,54 @@ export default function IndustryDashboard() {
             </div>
             <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
               <DialogTrigger asChild>
-                <Button size="lg">
-                  <Plus className="h-5 w-5 mr-2" />
-                  Create Project
+                <Button>
+                  <Plus className="h-4 w-4 mr-2" />
+                  Post Project
                 </Button>
               </DialogTrigger>
               <DialogContent>
                 <DialogHeader>
                   <DialogTitle className="text-white">Create New Project</DialogTitle>
                   <DialogDescription className="text-white">
-                    Post a new project to find skilled semiconductor professionals
+                    Post a new project to find talented students
                   </DialogDescription>
                 </DialogHeader>
-                <div className="space-y-4 py-4">
+                <div className="space-y-4">
                   <div className="space-y-2">
                     <Label htmlFor="title" className="text-white">Project Title</Label>
                     <Input
                       id="title"
+                      placeholder="e.g., VLSI Design Internship"
                       value={newProject.title}
                       onChange={(e) => setNewProject({ ...newProject, title: e.target.value })}
-                      placeholder="e.g., ASIC Design Engineer"
+                      className="text-white"
                     />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="description" className="text-white">Description</Label>
                     <Textarea
                       id="description"
+                      placeholder="Describe the project requirements..."
                       value={newProject.description}
                       onChange={(e) => setNewProject({ ...newProject, description: e.target.value })}
-                      placeholder="Describe the project requirements..."
                       rows={4}
+                      className="text-white"
                     />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="skills" className="text-white">Required Skills (comma-separated)</Label>
                     <Input
                       id="skills"
+                      placeholder="e.g., VLSI, Verilog, SystemVerilog"
                       value={newProject.skillsRequired}
                       onChange={(e) => setNewProject({ ...newProject, skillsRequired: e.target.value })}
-                      placeholder="e.g., Verilog, VLSI, SystemVerilog"
+                      className="text-white"
                     />
                   </div>
-                </div>
-                <div className="flex justify-end gap-3">
-                  <Button variant="outline" onClick={() => setIsCreateDialogOpen(false)}>
-                    Cancel
-                  </Button>
                   <Button 
                     onClick={handleCreateProject}
-                    disabled={!newProject.title || !newProject.description || saveProjectMutation.isPending}
+                    disabled={saveProjectMutation.isPending}
+                    className="w-full"
                   >
                     {saveProjectMutation.isPending ? 'Creating...' : 'Create Project'}
                   </Button>
@@ -163,16 +265,16 @@ export default function IndustryDashboard() {
             </Dialog>
           </div>
 
-          {/* Stats Grid */}
-          <div className="grid md:grid-cols-4 gap-6">
+          {/* Analytics Cards */}
+          <div className="grid md:grid-cols-3 gap-6">
             <Card>
               <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-sm font-medium text-white">Active Projects</CardTitle>
+                <CardTitle className="text-sm font-medium text-white">Total Projects</CardTitle>
                 <Briefcase className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold text-white">{projects.length}</div>
-                <p className="text-xs text-white mt-1">Total posted</p>
+                <p className="text-xs text-white mt-1">Active postings</p>
               </CardContent>
             </Card>
             <Card>
@@ -181,116 +283,63 @@ export default function IndustryDashboard() {
                 <Users className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold text-white">24</div>
-                <p className="text-xs text-white mt-1">+12% from last month</p>
+                <div className="text-2xl font-bold text-white">47</div>
+                <p className="text-xs text-white mt-1">Across all projects</p>
               </CardContent>
             </Card>
             <Card>
               <CardHeader className="flex flex-row items-center justify-between pb-2">
                 <CardTitle className="text-sm font-medium text-white">Avg Match Score</CardTitle>
-                <Award className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold text-white">82%</div>
-                <p className="text-xs text-white mt-1">High quality matches</p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between pb-2">
-                <CardTitle className="text-sm font-medium text-white">Hired</CardTitle>
                 <TrendingUp className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold text-white">8</div>
-                <p className="text-xs text-white mt-1">This quarter</p>
+                <div className="text-2xl font-bold text-white">82%</div>
+                <p className="text-xs text-white mt-1">Quality candidates</p>
               </CardContent>
             </Card>
           </div>
 
-          {/* Tabs */}
-          <Tabs defaultValue="projects" className="space-y-6">
-            <TabsList>
-              <TabsTrigger value="projects" className="text-white">My Projects</TabsTrigger>
-              <TabsTrigger value="applicants" className="text-white">Applicants</TabsTrigger>
-              <TabsTrigger value="analytics" className="text-white">Analytics</TabsTrigger>
-            </TabsList>
-
-            {/* Projects Tab */}
-            <TabsContent value="projects" className="space-y-6">
+          {/* Projects List */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-white">Your Projects</CardTitle>
+              <CardDescription className="text-white">Manage your posted projects</CardDescription>
+            </CardHeader>
+            <CardContent>
               {projectsLoading ? (
                 <div className="text-center py-12 text-white">Loading projects...</div>
               ) : projects.length === 0 ? (
-                <Card>
-                  <CardContent className="py-12 text-center">
-                    <Briefcase className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                    <p className="text-white mb-4">No projects yet</p>
-                    <Button onClick={() => setIsCreateDialogOpen(true)}>
-                      <Plus className="h-4 w-4 mr-2" />
-                      Create Your First Project
-                    </Button>
-                  </CardContent>
-                </Card>
+                <div className="text-center py-12">
+                  <Briefcase className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+                  <p className="text-white">No projects yet</p>
+                  <Button className="mt-4" onClick={() => setIsCreateDialogOpen(true)}>
+                    Post Your First Project
+                  </Button>
+                </div>
               ) : (
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-4">
                   {projects.map((project, index) => (
-                    <Card key={index}>
-                      <CardHeader>
-                        <div className="flex justify-between items-start">
-                          <div>
-                            <CardTitle className="text-white">{project.title}</CardTitle>
-                            <CardDescription className="text-white">{project.description}</CardDescription>
-                          </div>
-                          <Badge variant={project.approved ? "default" : "secondary"} className="text-white">
-                            {project.approved ? "Approved" : "Pending"}
+                    <div key={index} className="p-4 border border-border rounded-lg">
+                      <div className="flex justify-between items-start mb-2">
+                        <h3 className="text-white font-semibold">{project.title}</h3>
+                        <Badge variant={project.approved ? 'default' : 'secondary'} className="text-white">
+                          {project.approved ? 'Approved' : 'Pending'}
+                        </Badge>
+                      </div>
+                      <p className="text-white text-sm mb-3">{project.description}</p>
+                      <div className="flex flex-wrap gap-2">
+                        {project.skillsRequired.map((skill) => (
+                          <Badge key={skill} variant="outline" className="text-white">
+                            {skill}
                           </Badge>
-                        </div>
-                      </CardHeader>
-                      <CardContent className="space-y-4">
-                        <div>
-                          <p className="text-sm font-medium mb-2 text-white">Required Skills:</p>
-                          <div className="flex flex-wrap gap-2">
-                            {project.skillsRequired.map((skill) => (
-                              <Badge key={skill} variant="outline" className="text-white">
-                                {skill}
-                              </Badge>
-                            ))}
-                          </div>
-                        </div>
-                        <div className="flex gap-2">
-                          <Button variant="outline" className="flex-1">View Applicants</Button>
-                          <Button variant="outline" className="flex-1">Edit</Button>
-                        </div>
-                      </CardContent>
-                    </Card>
+                        ))}
+                      </div>
+                    </div>
                   ))}
                 </div>
               )}
-            </TabsContent>
-
-            {/* Applicants Tab */}
-            <TabsContent value="applicants" className="space-y-6">
-              <Card>
-                <CardContent className="py-12 text-center">
-                  <Users className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                  <p className="text-white">No applicants yet</p>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            {/* Analytics Tab */}
-            <TabsContent value="analytics" className="space-y-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-white">Analytics Overview</CardTitle>
-                  <CardDescription className="text-white">Track your hiring performance</CardDescription>
-                </CardHeader>
-                <CardContent className="py-12 text-center">
-                  <TrendingUp className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                  <p className="text-white">Analytics coming soon</p>
-                </CardContent>
-              </Card>
-            </TabsContent>
-          </Tabs>
+            </CardContent>
+          </Card>
         </div>
       </main>
     </div>

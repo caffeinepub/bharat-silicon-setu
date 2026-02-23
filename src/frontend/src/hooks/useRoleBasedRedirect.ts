@@ -8,8 +8,14 @@ export function useRoleBasedRedirect() {
   const query = useQuery<AppUserRole | null>({
     queryKey: ['userRole'],
     queryFn: async () => {
-      if (!actor) throw new Error('Actor not available');
-      return actor.getUserRole();
+      if (!actor) {
+        console.log('Actor not available for role query');
+        throw new Error('Actor not available');
+      }
+      console.log('Fetching user role from backend');
+      const role = await actor.getUserRole();
+      console.log('User role fetched:', role);
+      return role;
     },
     enabled: !!actor && !actorFetching,
     retry: false,

@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useActor } from './useActor';
-import { Project } from '../backend';
+import { Project, UserProfile } from '../backend';
 
 export function useGetApprovedProjects() {
   const { actor, isFetching: actorFetching } = useActor();
@@ -40,6 +40,21 @@ export function useSaveProject() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['userProjects'] });
       queryClient.invalidateQueries({ queryKey: ['approvedProjects'] });
+    },
+  });
+}
+
+export function useSaveCallerUserProfile() {
+  const { actor } = useActor();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (profile: UserProfile) => {
+      if (!actor) throw new Error('Actor not available');
+      return actor.saveCallerUserProfile(profile);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['currentUserProfile'] });
     },
   });
 }

@@ -8,8 +8,14 @@ export function useUserProfile() {
   const query = useQuery<UserProfile | null>({
     queryKey: ['currentUserProfile'],
     queryFn: async () => {
-      if (!actor) throw new Error('Actor not available');
-      return actor.getCallerUserProfile();
+      if (!actor) {
+        console.log('Actor not available for profile query');
+        throw new Error('Actor not available');
+      }
+      console.log('Fetching user profile from backend');
+      const profile = await actor.getCallerUserProfile();
+      console.log('User profile fetched:', profile ? 'Profile exists' : 'No profile');
+      return profile;
     },
     enabled: !!actor && !actorFetching,
     retry: false,
