@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 17,
+  "projectStateVersion": 19,
   "summary": "Bharat Silicon Setu - A semiconductor execution ecosystem SaaS platform connecting students, semiconductor companies, startups, and institutions. Built with React + Tailwind CSS with a dark blue professional startup theme.",
   "architectural_notes": [
     "React + Tailwind CSS stack for all UI components",
@@ -386,6 +386,102 @@
         "REQ-52"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-update-frontend-src-pages-myprojects-tsx-to-fetch-real-user-projects-from-the-backend-using-the-useprojects-hook-instead-of-displaying-mock-data-showing-actual-project-applications-with-real-status-indicators-and-project-details",
+      "title": "Update frontend/src/pages/MyProjects.tsx to fetch real user projects from the backend using the useProjects hook instead of displaying mock data, showing actual project applications with real status indicators and project details",
+      "reqIds": [
+        "REQ-53"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-frontend-src-pages-skillprofile-tsx-to-display-actual-user-skills-from-backend-using-useuserprofile-hook-and-persist-skill-changes-using-usesavecalleruserprofile-hook-with-proper-form-validation-and-success-feedback",
+      "title": "Update frontend/src/pages/SkillProfile.tsx to display actual user skills from backend using useUserProfile hook and persist skill changes using useSaveCallerUserProfile hook with proper form validation and success feedback",
+      "reqIds": [
+        "REQ-54"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-frontend-src-pages-mentorship-tsx-to-fetch-real-contact-requests-using-usecontactrequests-hook-and-enable-sending-messages-using-usesendcontactrequest-hook-with-proper-message-validation-and-confirmation-feedback",
+      "title": "Update frontend/src/pages/Mentorship.tsx to fetch real contact requests using useContactRequests hook and enable sending messages using useSendContactRequest hook with proper message validation and confirmation feedback",
+      "reqIds": [
+        "REQ-55"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-frontend-src-pages-studentsettings-tsx-to-load-real-user-profile-data-using-useuserprofile-hook-and-save-changes-using-usesavecalleruserprofile-hook-with-form-validation-success-notifications-and-proper-error-handling",
+      "title": "Update frontend/src/pages/StudentSettings.tsx to load real user profile data using useUserProfile hook and save changes using useSaveCallerUserProfile hook with form validation, success notifications, and proper error handling",
+      "reqIds": [
+        "REQ-56"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-frontend-src-pages-applicants-tsx-to-fetch-real-project-applicants-from-the-backend-instead-of-using-mock-data-displaying-actual-student-applications-with-real-skill-match-percentages-and-contact-functionality",
+      "title": "Update frontend/src/pages/Applicants.tsx to fetch real project applicants from the backend instead of using mock data, displaying actual student applications with real skill match percentages and contact functionality",
+      "reqIds": [
+        "REQ-57"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-frontend-src-pages-industryanalytics-tsx-to-display-real-analytics-data-from-the-backend-including-actual-applicant-counts-active-project-metrics-and-engagement-rates-with-proper-data-visualization",
+      "title": "Update frontend/src/pages/IndustryAnalytics.tsx to display real analytics data from the backend including actual applicant counts, active project metrics, and engagement rates with proper data visualization",
+      "reqIds": [
+        "REQ-59"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-frontend-src-pages-industrysettings-tsx-to-load-actual-company-profile-data-using-useuserprofile-hook-and-save-changes-using-usesavecalleruserprofile-hook-with-validation-and-success-feedback",
+      "title": "Update frontend/src/pages/IndustrySettings.tsx to load actual company profile data using useUserProfile hook and save changes using useSaveCallerUserProfile hook with validation and success feedback",
+      "reqIds": [
+        "REQ-61"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-frontend-src-pages-users-tsx-to-fetch-and-display-real-platform-users-from-the-backend-instead-of-mock-data-with-working-search-functionality-and-role-based-filtering",
+      "title": "Update frontend/src/pages/Users.tsx to fetch and display real platform users from the backend instead of mock data, with working search functionality and role-based filtering",
+      "reqIds": [
+        "REQ-62"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-frontend-src-pages-adminprojects-tsx-to-fetch-real-platform-projects-from-backend-with-actual-approval-status-implementing-working-approve-reject-functionality-that-updates-project-status-in-the-backend",
+      "title": "Update frontend/src/pages/AdminProjects.tsx to fetch real platform projects from backend with actual approval status, implementing working approve/reject functionality that updates project status in the backend",
+      "reqIds": [
+        "REQ-64"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-frontend-src-pages-revenue-tsx-to-fetch-and-display-actual-platform-revenue-data-from-the-backend-including-total-revenue-monthly-breakdown-and-subscription-statistics-instead-of-placeholder-mock-data",
+      "title": "Update frontend/src/pages/Revenue.tsx to fetch and display actual platform revenue data from the backend including total revenue, monthly breakdown, and subscription statistics instead of placeholder mock data",
+      "reqIds": [
+        "REQ-66"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-frontend-src-pages-reports-tsx-to-fetch-real-platform-activity-data-from-the-backend-including-daily-active-users-project-applications-and-message-counts-with-working-date-range-filtering-and-json-export-functionality",
+      "title": "Update frontend/src/pages/Reports.tsx to fetch real platform activity data from the backend including daily active users, project applications, and message counts with working date range filtering and JSON export functionality",
+      "reqIds": [
+        "REQ-68"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-frontend-src-pages-adminsettings-tsx-to-load-actual-platform-configuration-settings-from-the-backend-and-enable-saving-configuration-changes-including-site-name-maintenance-mode-and-user-access-controls-with-persistence",
+      "title": "Update frontend/src/pages/AdminSettings.tsx to load actual platform configuration settings from the backend and enable saving configuration changes including site name, maintenance mode, and user access controls with persistence",
+      "reqIds": [
+        "REQ-70"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -472,21 +568,59 @@
       "status": "pending"
     },
     {
-      "id": "AR-19",
-      "summary": "Implement functional pages for all Student Dashboard sidebar options (My Projects, Skill Profile, Mentorship, Settings) with content and navigation",
-      "reqIds": [],
+      "id": "AR-24",
+      "summary": "Add backend methods in backend/main.mo to store and retrieve project applications, linking students to projects with application status (Applied, In Progress, Completed) and timestamp data",
+      "reqIds": [
+        "REQ-58"
+      ],
       "status": "pending"
     },
     {
-      "id": "AR-20",
-      "summary": "Implement functional pages for all Industry Dashboard sidebar options (Post Project, Applicants, Analytics, Settings) with content and navigation",
-      "reqIds": [],
+      "id": "AR-26",
+      "summary": "Add backend methods in backend/main.mo to calculate and return analytics metrics for industry partners including total applicants per project, active project counts, and engagement statistics",
+      "reqIds": [
+        "REQ-60"
+      ],
       "status": "pending"
     },
     {
-      "id": "AR-21",
-      "summary": "Implement functional pages for all Admin Dashboard sidebar options (Users, Projects, Revenue, Reports) with content and navigation",
-      "reqIds": [],
+      "id": "AR-29",
+      "summary": "Add backend query method in backend/main.mo to return all registered users with their profiles, roles, and registration timestamps, accessible only to admin users",
+      "reqIds": [
+        "REQ-63"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-31",
+      "summary": "Add backend methods in backend/main.mo to allow admins to approve or reject projects, updating project approval status and making approved projects visible to students",
+      "reqIds": [
+        "REQ-65"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-33",
+      "summary": "Add backend data structures and methods in backend/main.mo to track platform revenue including subscription payments, revenue timestamps, and methods to calculate total and monthly revenue accessible to admin users only",
+      "reqIds": [
+        "REQ-67"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-35",
+      "summary": "Add backend methods in backend/main.mo to track and return platform activity metrics including daily active user counts, application statistics, and message counts with date range filtering for admin reporting",
+      "reqIds": [
+        "REQ-69"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-37",
+      "summary": "Add backend data structure in backend/main.mo to store platform configuration settings including site name, maintenance mode flag, and registration settings with methods to get and update settings restricted to admin role",
+      "reqIds": [
+        "REQ-71"
+      ],
       "status": "pending"
     }
   ],

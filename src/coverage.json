@@ -1,29 +1,31 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-23T10:27:27.598Z",
+  "generatedAt": "2026-02-23T11:30:48.967Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 16,
-    "implemented": 16,
+    "total": 19,
+    "implemented": 12,
     "items": [
       {
-        "id": "REQ-37",
-        "summary": "Create a My Projects page (frontend/src/pages/MyProjects.tsx) for the Student Dashboard that displays all projects the student has applied to or is working on, with status indicators (Applied, In Progress, Completed), project details, and filtering options",
+        "id": "REQ-53",
+        "summary": "Update frontend/src/pages/MyProjects.tsx to fetch real user projects from the backend using the useProjects hook instead of displaying mock data, showing actual project applications with real status indicators and project details",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/pages/MyProjects.tsx"
+          "frontend/src/pages/MyProjects.tsx",
+          "frontend/src/hooks/useProjects.ts"
         ],
         "matchedFiles": [
-          "frontend/src/pages/MyProjects.tsx"
+          "frontend/src/pages/MyProjects.tsx",
+          "frontend/src/hooks/useProjects.ts"
         ]
       },
       {
-        "id": "REQ-38",
-        "summary": "Create a Skill Profile page (frontend/src/pages/SkillProfile.tsx) for the Student Dashboard that displays the student's skill strengths, certifications, and allows editing of skill data with save functionality",
+        "id": "REQ-54",
+        "summary": "Update frontend/src/pages/SkillProfile.tsx to display actual user skills from backend using useUserProfile hook and persist skill changes using useSaveCallerUserProfile hook with proper form validation and success feedback",
         "status": "implemented",
         "plannedFiles": [
           "frontend/src/pages/SkillProfile.tsx"
@@ -33,19 +35,20 @@
         ]
       },
       {
-        "id": "REQ-39",
-        "summary": "Create a Mentorship page (frontend/src/pages/Mentorship.tsx) for the Student Dashboard that displays mentor messages, allows sending messages to mentors, and shows mentorship requests with status tracking",
+        "id": "REQ-55",
+        "summary": "Update frontend/src/pages/Mentorship.tsx to fetch real contact requests using useContactRequests hook and enable sending messages using useSendContactRequest hook with proper message validation and confirmation feedback",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/pages/Mentorship.tsx"
+          "frontend/src/pages/Mentorship.tsx",
+          "frontend/src/hooks/useContactRequests.ts"
         ],
         "matchedFiles": [
           "frontend/src/pages/Mentorship.tsx"
         ]
       },
       {
-        "id": "REQ-40",
-        "summary": "Create a Settings page (frontend/src/pages/StudentSettings.tsx) for the Student Dashboard that allows students to update profile information, change notification preferences, and manage account settings",
+        "id": "REQ-56",
+        "summary": "Update frontend/src/pages/StudentSettings.tsx to load real user profile data using useUserProfile hook and save changes using useSaveCallerUserProfile hook with form validation, success notifications, and proper error handling",
         "status": "implemented",
         "plannedFiles": [
           "frontend/src/pages/StudentSettings.tsx"
@@ -55,30 +58,48 @@
         ]
       },
       {
-        "id": "REQ-41",
-        "summary": "Create an Applicants page (frontend/src/pages/Applicants.tsx) for the Industry Dashboard that displays all students who have applied to the company's projects, with skill match percentages, filtering by project, and contact functionality",
+        "id": "REQ-57",
+        "summary": "Update frontend/src/pages/Applicants.tsx to fetch real project applicants from the backend instead of using mock data, displaying actual student applications with real skill match percentages and contact functionality",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/pages/Applicants.tsx"
+          "frontend/src/pages/Applicants.tsx",
+          "frontend/src/hooks/useProjects.ts"
         ],
         "matchedFiles": [
-          "frontend/src/pages/Applicants.tsx"
+          "frontend/src/pages/Applicants.tsx",
+          "frontend/src/hooks/useProjects.ts"
         ]
       },
       {
-        "id": "REQ-42",
-        "summary": "Create an Analytics page (frontend/src/pages/IndustryAnalytics.tsx) for the Industry Dashboard that displays project performance metrics, applicant statistics, engagement rates, and growth charts for the company's posted projects",
+        "id": "REQ-58",
+        "summary": "Add backend methods in backend/main.mo to store and retrieve project applications, linking students to projects with application status (Applied, In Progress, Completed) and timestamp data",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-59",
+        "summary": "Update frontend/src/pages/IndustryAnalytics.tsx to display real analytics data from the backend including actual applicant counts, active project metrics, and engagement rates with proper data visualization",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/pages/IndustryAnalytics.tsx"
+          "frontend/src/pages/IndustryAnalytics.tsx",
+          "frontend/src/hooks/useAnalytics.ts"
         ],
         "matchedFiles": [
-          "frontend/src/pages/IndustryAnalytics.tsx"
+          "frontend/src/pages/IndustryAnalytics.tsx",
+          "frontend/src/hooks/useAnalytics.ts"
         ]
       },
       {
-        "id": "REQ-43",
-        "summary": "Create a Settings page (frontend/src/pages/IndustrySettings.tsx) for the Industry Dashboard that allows industry partners to update company profile information, manage team members, and configure posting preferences",
+        "id": "REQ-60",
+        "summary": "Add backend methods in backend/main.mo to calculate and return analytics metrics for industry partners including total applicants per project, active project counts, and engagement statistics",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-61",
+        "summary": "Update frontend/src/pages/IndustrySettings.tsx to load actual company profile data using useUserProfile hook and save changes using useSaveCallerUserProfile hook with validation and success feedback",
         "status": "implemented",
         "plannedFiles": [
           "frontend/src/pages/IndustrySettings.tsx"
@@ -88,126 +109,134 @@
         ]
       },
       {
-        "id": "REQ-44",
-        "summary": "Create a Users page (frontend/src/pages/Users.tsx) for the Admin Dashboard that displays all registered users (students, industry partners, admins) with filtering, search functionality, and user management actions",
+        "id": "REQ-62",
+        "summary": "Update frontend/src/pages/Users.tsx to fetch and display real platform users from the backend instead of mock data, with working search functionality and role-based filtering",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/pages/Users.tsx"
+          "frontend/src/pages/Users.tsx",
+          "frontend/src/hooks/useUsers.ts"
         ],
         "matchedFiles": [
-          "frontend/src/pages/Users.tsx"
+          "frontend/src/pages/Users.tsx",
+          "frontend/src/hooks/useUsers.ts"
         ]
       },
       {
-        "id": "REQ-45",
-        "summary": "Create a Projects page (frontend/src/pages/AdminProjects.tsx) for the Admin Dashboard that displays all projects posted on the platform with approval status, moderation tools, and analytics",
+        "id": "REQ-63",
+        "summary": "Add backend query method in backend/main.mo to return all registered users with their profiles, roles, and registration timestamps, accessible only to admin users",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-64",
+        "summary": "Update frontend/src/pages/AdminProjects.tsx to fetch real platform projects from backend with actual approval status, implementing working approve/reject functionality that updates project status in the backend",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/pages/AdminProjects.tsx"
+          "frontend/src/pages/AdminProjects.tsx",
+          "frontend/src/hooks/useProjects.ts"
         ],
         "matchedFiles": [
-          "frontend/src/pages/AdminProjects.tsx"
+          "frontend/src/pages/AdminProjects.tsx",
+          "frontend/src/hooks/useProjects.ts"
         ]
       },
       {
-        "id": "REQ-46",
-        "summary": "Create a Revenue page (frontend/src/pages/Revenue.tsx) for the Admin Dashboard that displays platform revenue metrics, subscription data, payment history, and financial growth charts",
+        "id": "REQ-65",
+        "summary": "Add backend methods in backend/main.mo to allow admins to approve or reject projects, updating project approval status and making approved projects visible to students",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-66",
+        "summary": "Update frontend/src/pages/Revenue.tsx to fetch and display actual platform revenue data from the backend including total revenue, monthly breakdown, and subscription statistics instead of placeholder mock data",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/pages/Revenue.tsx"
+          "frontend/src/pages/Revenue.tsx",
+          "frontend/src/hooks/useRevenue.ts"
         ],
         "matchedFiles": [
-          "frontend/src/pages/Revenue.tsx"
+          "frontend/src/pages/Revenue.tsx",
+          "frontend/src/hooks/useRevenue.ts"
         ]
       },
       {
-        "id": "REQ-47",
-        "summary": "Create a Reports page (frontend/src/pages/Reports.tsx) for the Admin Dashboard that displays platform activity reports, user engagement metrics, and export functionality for generating custom reports",
+        "id": "REQ-67",
+        "summary": "Add backend data structures and methods in backend/main.mo to track platform revenue including subscription payments, revenue timestamps, and methods to calculate total and monthly revenue accessible to admin users only",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-68",
+        "summary": "Update frontend/src/pages/Reports.tsx to fetch real platform activity data from the backend including daily active users, project applications, and message counts with working date range filtering and JSON export functionality",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/pages/Reports.tsx"
+          "frontend/src/pages/Reports.tsx",
+          "frontend/src/hooks/useReports.ts"
         ],
         "matchedFiles": [
-          "frontend/src/pages/Reports.tsx"
+          "frontend/src/pages/Reports.tsx",
+          "frontend/src/hooks/useReports.ts"
         ]
       },
       {
-        "id": "REQ-48",
-        "summary": "Create a Settings page (frontend/src/pages/AdminSettings.tsx) for the Admin Dashboard that allows admins to configure platform settings, manage access controls, and update system preferences",
+        "id": "REQ-69",
+        "summary": "Add backend methods in backend/main.mo to track and return platform activity metrics including daily active user counts, application statistics, and message counts with date range filtering for admin reporting",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-70",
+        "summary": "Update frontend/src/pages/AdminSettings.tsx to load actual platform configuration settings from the backend and enable saving configuration changes including site name, maintenance mode, and user access controls with persistence",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/pages/AdminSettings.tsx"
+          "frontend/src/pages/AdminSettings.tsx",
+          "frontend/src/hooks/usePlatformConfig.ts"
         ],
         "matchedFiles": [
-          "frontend/src/pages/AdminSettings.tsx"
+          "frontend/src/pages/AdminSettings.tsx",
+          "frontend/src/hooks/usePlatformConfig.ts"
         ]
       },
       {
-        "id": "REQ-49",
-        "summary": "Update frontend/src/pages/StudentDashboard.tsx to replace the hardcoded sidebar links with proper React Router Link components that navigate to /student/my-projects, /student/skill-profile, /student/mentorship, and /student/settings",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/pages/StudentDashboard.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/pages/StudentDashboard.tsx"
-        ]
-      },
-      {
-        "id": "REQ-50",
-        "summary": "Update frontend/src/pages/IndustryDashboard.tsx to replace the hardcoded sidebar links with proper React Router Link components that navigate to /industry/applicants, /industry/analytics, and /industry/settings",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/pages/IndustryDashboard.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/pages/IndustryDashboard.tsx"
-        ]
-      },
-      {
-        "id": "REQ-51",
-        "summary": "Update frontend/src/pages/AdminDashboard.tsx to replace the hardcoded sidebar links with proper React Router Link components that navigate to /admin/users, /admin/projects, /admin/revenue, and /admin/reports, and /admin/settings",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/pages/AdminDashboard.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/pages/AdminDashboard.tsx"
-        ]
-      },
-      {
-        "id": "REQ-52",
-        "summary": "Update frontend/src/App.tsx to add route definitions for all new dashboard pages including student routes (/student/my-projects, /student/skill-profile, /student/mentorship, /student/settings), industry routes (/industry/applicants, /industry/analytics, /industry/settings), and admin routes (/admin/users, /admin/projects, /admin/revenue, /admin/reports, /admin/settings) with proper ProtectedRoute guards",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/App.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/App.tsx"
-        ]
+        "id": "REQ-71",
+        "summary": "Add backend data structure in backend/main.mo to store platform configuration settings including site name, maintenance mode flag, and registration settings with methods to get and update settings restricted to admin role",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
       }
     ]
   },
   "changedFiles": [
+    "backend/main.mo",
+    "backend/migration.mo",
     "build-request.json",
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/App.tsx",
+    "frontend/src/backend.d.ts",
+    "frontend/src/backend.ts",
+    "frontend/src/declarations/backend.did.d.ts",
+    "frontend/src/declarations/backend.did.js",
+    "frontend/src/hooks/useAnalytics.ts",
+    "frontend/src/hooks/usePlatformConfig.ts",
     "frontend/src/hooks/useProjects.ts",
-    "frontend/src/pages/AdminDashboard.tsx",
+    "frontend/src/hooks/useReports.ts",
+    "frontend/src/hooks/useRevenue.ts",
+    "frontend/src/hooks/useUsers.ts",
     "frontend/src/pages/AdminProjects.tsx",
     "frontend/src/pages/AdminSettings.tsx",
     "frontend/src/pages/Applicants.tsx",
     "frontend/src/pages/IndustryAnalytics.tsx",
-    "frontend/src/pages/IndustryDashboard.tsx",
     "frontend/src/pages/IndustrySettings.tsx",
     "frontend/src/pages/Mentorship.tsx",
     "frontend/src/pages/MyProjects.tsx",
     "frontend/src/pages/Reports.tsx",
     "frontend/src/pages/Revenue.tsx",
     "frontend/src/pages/SkillProfile.tsx",
-    "frontend/src/pages/StudentDashboard.tsx",
     "frontend/src/pages/StudentSettings.tsx",
     "frontend/src/pages/Users.tsx",
     "project_state.json",

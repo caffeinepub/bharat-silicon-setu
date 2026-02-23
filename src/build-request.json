@@ -1,351 +1,402 @@
 {
   "kind": "build_request",
-  "title": "Implement functional sidebar navigation pages for all dashboards",
+  "title": "Implement full functionality for all Student, Industry, and Admin dashboard pages",
   "projectName": "Bharat Silicon Setu",
-  "priority": "high",
+  "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-37",
-      "text": "Create a My Projects page (frontend/src/pages/MyProjects.tsx) for the Student Dashboard that displays all projects the student has applied to or is working on, with status indicators (Applied, In Progress, Completed), project details, and filtering options",
+      "id": "REQ-53",
+      "text": "Update frontend/src/pages/MyProjects.tsx to fetch real user projects from the backend using the useProjects hook instead of displaying mock data, showing actual project applications with real status indicators and project details",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-last"
+          "msg-final"
         ],
         "quotes": [
-          "make work all the options like wise 4th version"
+          "All options 1 to 3",
+          "when you navigate to sidebar options like Settings, My Projects, Skill Profile, etc., you see empty pages without any actual content or interface"
         ]
       },
       "acceptanceCriteria": [
-        "Page is accessible via Student Dashboard sidebar navigation",
-        "Displays all user-specific projects fetched from backend",
-        "Shows project status badges (Applied, In Progress, Completed)",
-        "Includes project title, description, and application date",
-        "Uses white text on dark background for consistency"
+        "MyProjects page displays real user projects from backend",
+        "Project status indicators reflect actual data from backend",
+        "Page handles loading and error states appropriately",
+        "Empty state message shown when user has no projects"
       ]
     },
     {
-      "id": "REQ-38",
-      "text": "Create a Skill Profile page (frontend/src/pages/SkillProfile.tsx) for the Student Dashboard that displays the student's skill strengths, certifications, and allows editing of skill data with save functionality",
+      "id": "REQ-54",
+      "text": "Update frontend/src/pages/SkillProfile.tsx to display actual user skills from backend using useUserProfile hook and persist skill changes using useSaveCallerUserProfile hook with proper form validation and success feedback",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-last"
+          "msg-final"
         ],
         "quotes": [
-          "make work all the options like wise 4th version"
+          "All options 1 to 3",
+          "into there there is no interface"
         ]
       },
       "acceptanceCriteria": [
-        "Page is accessible via Student Dashboard sidebar navigation",
-        "Displays skill tags with strength percentages (VLSI, RTL, Embedded Systems, FPGA)",
-        "Includes editable fields for adding/removing skills",
-        "Shows certifications and educational background",
-        "Has a save button that persists changes to backend"
+        "Skill profile loads real user data from backend",
+        "Add skill functionality works and persists to backend",
+        "Remove skill functionality works and updates backend",
+        "Success toast notification shown after saving",
+        "Validation prevents adding duplicate or empty skills"
       ]
     },
     {
-      "id": "REQ-39",
-      "text": "Create a Mentorship page (frontend/src/pages/Mentorship.tsx) for the Student Dashboard that displays mentor messages, allows sending messages to mentors, and shows mentorship requests with status tracking",
+      "id": "REQ-55",
+      "text": "Update frontend/src/pages/Mentorship.tsx to fetch real contact requests using useContactRequests hook and enable sending messages using useSendContactRequest hook with proper message validation and confirmation feedback",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-last"
+          "msg-final"
         ],
         "quotes": [
-          "make work all the options like wise 4th version"
+          "All options 1 to 3"
         ]
       },
       "acceptanceCriteria": [
-        "Page is accessible via Student Dashboard sidebar navigation",
-        "Displays list of mentor messages from contact requests",
-        "Includes message composition interface with send functionality",
-        "Shows mentorship request status (Pending, Accepted, Active)",
-        "Uses white text styling consistently"
+        "Mentorship page displays real received contact requests from backend",
+        "Send message form validates recipient Principal ID format",
+        "Messages are successfully sent to backend and confirmed with toast",
+        "Message list updates automatically after sending",
+        "Empty state shown when no messages exist"
       ]
     },
     {
-      "id": "REQ-40",
-      "text": "Create a Settings page (frontend/src/pages/StudentSettings.tsx) for the Student Dashboard that allows students to update profile information, change notification preferences, and manage account settings",
+      "id": "REQ-56",
+      "text": "Update frontend/src/pages/StudentSettings.tsx to load real user profile data using useUserProfile hook and save changes using useSaveCallerUserProfile hook with form validation, success notifications, and proper error handling",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-last"
+          "msg-final"
         ],
         "quotes": [
-          "make work all the options like wise 4th version"
+          "All options 1 to 3",
+          "sitting is there but into there there is no interface"
         ]
       },
       "acceptanceCriteria": [
-        "Page is accessible via Student Dashboard sidebar navigation",
-        "Includes editable profile fields (name, email, bio)",
-        "Has notification preference toggles",
-        "Includes save button that persists changes to backend",
-        "Uses white text on dark background"
+        "Settings page loads actual user profile data",
+        "Form fields are populated with current user data",
+        "Save functionality persists changes to backend",
+        "Success toast shown after successful save",
+        "Validation prevents saving invalid data"
       ]
     },
     {
-      "id": "REQ-41",
-      "text": "Create an Applicants page (frontend/src/pages/Applicants.tsx) for the Industry Dashboard that displays all students who have applied to the company's projects, with skill match percentages, filtering by project, and contact functionality",
-      "target": "frontend",
+      "id": "REQ-57",
+      "text": "Update frontend/src/pages/Applicants.tsx to fetch real project applicants from the backend instead of using mock data, displaying actual student applications with real skill match percentages and contact functionality",
+      "target": "both",
       "source": {
         "messageIds": [
-          "msg-last"
+          "msg-final"
         ],
         "quotes": [
-          "make work all the options like wise 4th version"
+          "All options 1 to 3"
         ]
       },
       "acceptanceCriteria": [
-        "Page is accessible via Industry Dashboard sidebar navigation",
-        "Displays student applicant cards with skill match percentages",
-        "Shows skill tags for each applicant (VLSI, RTL, Embedded Systems, FPGA)",
-        "Includes filter dropdown to view applicants by specific project",
-        "Has contact/message button for each applicant"
+        "Applicants page displays real applications from backend",
+        "Skill match percentages calculated from actual student data",
+        "Filter by project works with real project list",
+        "Contact request dialog sends messages to backend",
+        "Empty state shown when no applicants exist"
       ]
     },
     {
-      "id": "REQ-42",
-      "text": "Create an Analytics page (frontend/src/pages/IndustryAnalytics.tsx) for the Industry Dashboard that displays project performance metrics, applicant statistics, engagement rates, and growth charts for the company's posted projects",
-      "target": "frontend",
+      "id": "REQ-58",
+      "text": "Add backend methods in backend/main.mo to store and retrieve project applications, linking students to projects with application status (Applied, In Progress, Completed) and timestamp data",
+      "target": "backend",
       "source": {
         "messageIds": [
-          "msg-last"
+          "msg-final"
         ],
         "quotes": [
-          "make work all the options like wise 4th version"
+          "All options 1 to 3"
         ]
       },
       "acceptanceCriteria": [
-        "Page is accessible via Industry Dashboard sidebar navigation",
-        "Shows total applicants count across all projects",
-        "Displays active projects count",
-        "Includes engagement rate percentage metric",
-        "Has growth chart visualization placeholder",
-        "Uses white text for all labels and metrics"
+        "Backend stores project application records with student-project relationships",
+        "Applications include status field with valid status options",
+        "Query methods return applications filtered by student or project",
+        "Application timestamps are recorded"
       ]
     },
     {
-      "id": "REQ-43",
-      "text": "Create a Settings page (frontend/src/pages/IndustrySettings.tsx) for the Industry Dashboard that allows industry partners to update company profile information, manage team members, and configure posting preferences",
-      "target": "frontend",
+      "id": "REQ-59",
+      "text": "Update frontend/src/pages/IndustryAnalytics.tsx to display real analytics data from the backend including actual applicant counts, active project metrics, and engagement rates with proper data visualization",
+      "target": "both",
       "source": {
         "messageIds": [
-          "msg-last"
+          "msg-final"
         ],
         "quotes": [
-          "make work all the options like wise 4th version"
+          "All options 1 to 3"
         ]
       },
       "acceptanceCriteria": [
-        "Page is accessible via Industry Dashboard sidebar navigation",
-        "Includes editable company profile fields (company name, description, contact info)",
-        "Has save button that persists changes to backend",
-        "Uses white text styling consistently",
-        "Includes sections for team management and preferences"
+        "Analytics page fetches real metrics from backend",
+        "Total applicants count reflects actual application data",
+        "Active projects count shows real project status data",
+        "Engagement rate calculated from actual platform activity",
+        "Data updates when new applications or projects are created"
       ]
     },
     {
-      "id": "REQ-44",
-      "text": "Create a Users page (frontend/src/pages/Users.tsx) for the Admin Dashboard that displays all registered users (students, industry partners, admins) with filtering, search functionality, and user management actions",
-      "target": "frontend",
+      "id": "REQ-60",
+      "text": "Add backend methods in backend/main.mo to calculate and return analytics metrics for industry partners including total applicants per project, active project counts, and engagement statistics",
+      "target": "backend",
       "source": {
         "messageIds": [
-          "msg-last"
+          "msg-final"
         ],
         "quotes": [
-          "make work all the options like wise 4th version"
+          "All options 1 to 3"
         ]
       },
       "acceptanceCriteria": [
-        "Page is accessible via Admin Dashboard sidebar navigation",
-        "Displays user list with role badges (Student, Industry Partner, Admin)",
-        "Includes search functionality to find users by name or email",
-        "Has filter dropdown to view users by role",
-        "Shows user registration dates and status",
-        "Uses white text on dark background"
+        "Backend calculates applicant counts per project",
+        "Active project count excludes completed/archived projects",
+        "Engagement metrics calculated from application and interaction data",
+        "Analytics methods return data filtered by industry partner"
       ]
     },
     {
-      "id": "REQ-45",
-      "text": "Create a Projects page (frontend/src/pages/AdminProjects.tsx) for the Admin Dashboard that displays all projects posted on the platform with approval status, moderation tools, and analytics",
+      "id": "REQ-61",
+      "text": "Update frontend/src/pages/IndustrySettings.tsx to load actual company profile data using useUserProfile hook and save changes using useSaveCallerUserProfile hook with validation and success feedback",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-last"
+          "msg-final"
         ],
         "quotes": [
-          "make work all the options like wise 4th version"
+          "All options 1 to 3"
         ]
       },
       "acceptanceCriteria": [
-        "Page is accessible via Admin Dashboard sidebar navigation",
-        "Displays all projects with status badges (Pending, Approved, Rejected)",
-        "Shows project details including company name, title, and application count",
-        "Includes approve/reject action buttons for pending projects",
-        "Has filtering by project status",
-        "Uses white text styling consistently"
+        "Industry settings page loads real company profile data",
+        "Form fields populate with current company information",
+        "Save button persists changes to backend",
+        "Success notification shown after saving",
+        "Form validation prevents invalid inputs"
       ]
     },
     {
-      "id": "REQ-46",
-      "text": "Create a Revenue page (frontend/src/pages/Revenue.tsx) for the Admin Dashboard that displays platform revenue metrics, subscription data, payment history, and financial growth charts",
-      "target": "frontend",
+      "id": "REQ-62",
+      "text": "Update frontend/src/pages/Users.tsx to fetch and display real platform users from the backend instead of mock data, with working search functionality and role-based filtering",
+      "target": "both",
       "source": {
         "messageIds": [
-          "msg-last"
+          "msg-final"
         ],
         "quotes": [
-          "make work all the options like wise 4th version"
+          "All options 1 to 3"
         ]
       },
       "acceptanceCriteria": [
-        "Page is accessible via Admin Dashboard sidebar navigation",
-        "Shows total revenue generated metric",
-        "Displays monthly revenue breakdown",
-        "Includes subscription tier statistics",
-        "Has revenue growth chart placeholder",
-        "Uses white text for all financial data and labels"
+        "Users page displays all registered users from backend",
+        "Search box filters users by name or email in real-time",
+        "Role filter shows only users with selected role",
+        "User table shows actual registration dates and roles",
+        "Pagination or infinite scroll for large user lists"
       ]
     },
     {
-      "id": "REQ-47",
-      "text": "Create a Reports page (frontend/src/pages/Reports.tsx) for the Admin Dashboard that displays platform activity reports, user engagement metrics, and export functionality for generating custom reports",
-      "target": "frontend",
+      "id": "REQ-63",
+      "text": "Add backend query method in backend/main.mo to return all registered users with their profiles, roles, and registration timestamps, accessible only to admin users",
+      "target": "backend",
       "source": {
         "messageIds": [
-          "msg-last"
+          "msg-final"
         ],
         "quotes": [
-          "make work all the options like wise 4th version"
+          "All options 1 to 3"
         ]
       },
       "acceptanceCriteria": [
-        "Page is accessible via Admin Dashboard sidebar navigation",
-        "Displays recent activity feed with user actions and timestamps",
-        "Shows engagement metrics (daily active users, project applications, messages sent)",
-        "Includes date range selector for custom report periods",
-        "Has export button to download report data",
-        "Uses white text on dark background consistently"
+        "Backend method returns complete user list with profile data",
+        "Method includes authorization check for admin role only",
+        "User data includes Principal ID, role, registration date, and profile info",
+        "Query is optimized for performance with many users"
       ]
     },
     {
-      "id": "REQ-48",
-      "text": "Create a Settings page (frontend/src/pages/AdminSettings.tsx) for the Admin Dashboard that allows admins to configure platform settings, manage access controls, and update system preferences",
-      "target": "frontend",
+      "id": "REQ-64",
+      "text": "Update frontend/src/pages/AdminProjects.tsx to fetch real platform projects from backend with actual approval status, implementing working approve/reject functionality that updates project status in the backend",
+      "target": "both",
       "source": {
         "messageIds": [
-          "msg-last"
+          "msg-final"
         ],
         "quotes": [
-          "make work all the options like wise 4th version"
+          "All options 1 to 3"
         ]
       },
       "acceptanceCriteria": [
-        "Page is accessible via Admin Dashboard sidebar navigation",
-        "Includes platform configuration options",
-        "Has access control management interface",
-        "Shows system preferences with save functionality",
-        "Uses white text styling consistently"
+        "Admin projects page displays all platform projects from backend",
+        "Filter by status shows projects with matching approval state",
+        "Approve button updates project status to approved in backend",
+        "Reject button updates project status to rejected in backend",
+        "Success notifications shown after status changes"
       ]
     },
     {
-      "id": "REQ-49",
-      "text": "Update frontend/src/pages/StudentDashboard.tsx to replace the hardcoded sidebar links with proper React Router Link components that navigate to /student/my-projects, /student/skill-profile, /student/mentorship, and /student/settings",
-      "target": "frontend",
+      "id": "REQ-65",
+      "text": "Add backend methods in backend/main.mo to allow admins to approve or reject projects, updating project approval status and making approved projects visible to students",
+      "target": "backend",
       "source": {
         "messageIds": [
-          "msg-last"
+          "msg-final"
         ],
         "quotes": [
-          "make work all the options like wise 4th version"
+          "All options 1 to 3"
         ]
       },
       "acceptanceCriteria": [
-        "Sidebar navigation items use React Router Link components",
-        "Clicking 'My Projects' navigates to /student/my-projects",
-        "Clicking 'Skill Profile' navigates to /student/skill-profile",
-        "Clicking 'Mentorship' navigates to /student/mentorship",
-        "Clicking 'Settings' navigates to /student/settings",
-        "Active route is highlighted in the sidebar"
+        "Backend includes approveProject method for admin use",
+        "Backend includes rejectProject method for admin use",
+        "Methods verify caller has admin role before execution",
+        "Project approval status field updated correctly",
+        "Only approved projects returned in student project queries"
       ]
     },
     {
-      "id": "REQ-50",
-      "text": "Update frontend/src/pages/IndustryDashboard.tsx to replace the hardcoded sidebar links with proper React Router Link components that navigate to /industry/applicants, /industry/analytics, and /industry/settings",
-      "target": "frontend",
+      "id": "REQ-66",
+      "text": "Update frontend/src/pages/Revenue.tsx to fetch and display actual platform revenue data from the backend including total revenue, monthly breakdown, and subscription statistics instead of placeholder mock data",
+      "target": "both",
       "source": {
         "messageIds": [
-          "msg-last"
+          "msg-final"
         ],
         "quotes": [
-          "make work all the options like wise 4th version"
+          "All options 1 to 3"
         ]
       },
       "acceptanceCriteria": [
-        "Sidebar navigation items use React Router Link components",
-        "Clicking 'Applicants' navigates to /industry/applicants",
-        "Clicking 'Analytics' navigates to /industry/analytics",
-        "Clicking 'Settings' navigates to /industry/settings",
-        "Active route is highlighted in the sidebar"
+        "Revenue page fetches real financial data from backend",
+        "Total revenue displays actual calculated amount",
+        "Monthly breakdown shows revenue per month from backend",
+        "Subscription tier statistics reflect actual user subscription data",
+        "Data updates when new revenue is recorded"
       ]
     },
     {
-      "id": "REQ-51",
-      "text": "Update frontend/src/pages/AdminDashboard.tsx to replace the hardcoded sidebar links with proper React Router Link components that navigate to /admin/users, /admin/projects, /admin/revenue, and /admin/reports, and /admin/settings",
-      "target": "frontend",
+      "id": "REQ-67",
+      "text": "Add backend data structures and methods in backend/main.mo to track platform revenue including subscription payments, revenue timestamps, and methods to calculate total and monthly revenue accessible to admin users only",
+      "target": "backend",
       "source": {
         "messageIds": [
-          "msg-last"
+          "msg-final"
         ],
         "quotes": [
-          "make work all the options like wise 4th version"
+          "All options 1 to 3"
         ]
       },
       "acceptanceCriteria": [
-        "Sidebar navigation items use React Router Link components",
-        "Clicking 'Users' navigates to /admin/users",
-        "Clicking 'Projects' navigates to /admin/projects",
-        "Clicking 'Revenue' navigates to /admin/revenue",
-        "Clicking 'Reports' navigates to /admin/reports",
-        "Clicking 'Settings' navigates to /admin/settings",
-        "Active route is highlighted in the sidebar"
+        "Backend stores revenue records with amount and timestamp",
+        "Methods calculate total platform revenue",
+        "Methods return monthly revenue breakdown",
+        "Revenue queries restricted to admin role",
+        "Subscription tier data tracked per user"
       ]
     },
     {
-      "id": "REQ-52",
-      "text": "Update frontend/src/App.tsx to add route definitions for all new dashboard pages including student routes (/student/my-projects, /student/skill-profile, /student/mentorship, /student/settings), industry routes (/industry/applicants, /industry/analytics, /industry/settings), and admin routes (/admin/users, /admin/projects, /admin/revenue, /admin/reports, /admin/settings) with proper ProtectedRoute guards",
-      "target": "frontend",
+      "id": "REQ-68",
+      "text": "Update frontend/src/pages/Reports.tsx to fetch real platform activity data from the backend including daily active users, project applications, and message counts with working date range filtering and JSON export functionality",
+      "target": "both",
       "source": {
         "messageIds": [
-          "msg-last"
+          "msg-final"
         ],
         "quotes": [
-          "make work all the options like wise 4th version"
+          "All options 1 to 3"
         ]
       },
       "acceptanceCriteria": [
-        "All student sub-routes are registered with 'student' role protection",
-        "All industry sub-routes are registered with 'industryPartner' role protection",
-        "All admin sub-routes are registered with 'admin' role protection",
-        "Routes use lazy loading for page components",
-        "Navigation between routes works correctly"
+        "Reports page displays actual platform activity metrics",
+        "Date range filter queries backend for specific time period",
+        "Daily active users count reflects actual login activity",
+        "Project applications count shows real application data",
+        "Export button downloads actual data as JSON file"
+      ]
+    },
+    {
+      "id": "REQ-69",
+      "text": "Add backend methods in backend/main.mo to track and return platform activity metrics including daily active user counts, application statistics, and message counts with date range filtering for admin reporting",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-final"
+        ],
+        "quotes": [
+          "All options 1 to 3"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend tracks user activity timestamps for DAU calculation",
+        "Methods return activity metrics filtered by date range",
+        "Application counts aggregated by date",
+        "Message counts tracked and queryable by date",
+        "Activity queries restricted to admin users"
+      ]
+    },
+    {
+      "id": "REQ-70",
+      "text": "Update frontend/src/pages/AdminSettings.tsx to load actual platform configuration settings from the backend and enable saving configuration changes including site name, maintenance mode, and user access controls with persistence",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-final"
+        ],
+        "quotes": [
+          "All options 1 to 3"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Admin settings page loads current platform settings from backend",
+        "Site name field updates platform configuration",
+        "Maintenance mode toggle persists to backend",
+        "User access control settings save successfully",
+        "Success notifications shown after saving settings"
+      ]
+    },
+    {
+      "id": "REQ-71",
+      "text": "Add backend data structure in backend/main.mo to store platform configuration settings including site name, maintenance mode flag, and registration settings with methods to get and update settings restricted to admin role",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-final"
+        ],
+        "quotes": [
+          "All options 1 to 3"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend stores platform configuration as stable variable",
+        "Configuration includes site name, maintenance mode, and registration flags",
+        "getSettings method returns current configuration",
+        "updateSettings method persists changes",
+        "Settings methods verify admin authorization"
       ]
     }
   ],
   "constraints": [
-    "Do not modify frontend/src/hooks/useInternetIdentity.ts or frontend/src/hooks/useActor.ts",
-    "Do not change the backend single-actor architecture in backend/main.mo",
-    "Maintain white text color scheme consistently across all new pages",
-    "Use the existing dark blue professional startup theme from Tailwind configuration",
-    "Preserve existing authentication and role-based access control logic"
+    "Maintain the single-actor architecture in backend/main.mo",
+    "Do not modify immutable frontend paths including frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, and frontend/src/components/ui",
+    "Preserve existing authentication and role-based routing logic",
+    "Keep the dark blue professional theme consistent across all pages",
+    "Ensure all backend methods include proper authorization checks based on user roles"
   ],
   "nonGoals": [
-    "Implementing real-time messaging functionality",
-    "Adding external API integrations",
-    "Modifying the backend data models or storage structure",
-    "Changing the Internet Identity authentication flow",
-    "Adding new user roles beyond student, industryPartner, and admin"
+    "Implementing real-time WebSocket communication",
+    "Adding external database integration",
+    "Implementing payment processing beyond tracking revenue data",
+    "Creating mobile-specific views or native mobile apps",
+    "Integrating third-party analytics services"
   ],
   "imageRequirements": {
     "required": [],

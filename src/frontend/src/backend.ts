@@ -89,12 +89,30 @@ export class ExternalBlob {
         return this;
     }
 }
+export interface AnalyticsData {
+    activeProjects: bigint;
+    engagementRate: number;
+    projectApplicantCounts: Array<[Principal, bigint]>;
+}
 export interface ContactRequest {
     to: Principal;
     from: Principal;
     message: string;
 }
 export type Time = bigint;
+export interface ReportData {
+    endDate: Time;
+    messagesSent: bigint;
+    dailyActiveUsers: bigint;
+    projectApplications: bigint;
+    startDate: Time;
+}
+export interface ProjectApplication {
+    status: string;
+    timestamp: Time;
+    student: Principal;
+    project: Principal;
+}
 export interface Project {
     title: string;
     createdBy: Principal;
@@ -102,12 +120,21 @@ export interface Project {
     description: string;
     approved: boolean;
 }
+export interface RevenueData {
+    timestamp: Time;
+    totalRevenue: number;
+}
 export interface UserProfile {
     name: string;
     role: AppUserRole;
     email: string;
     registrationTimestamp: Time;
     principalId: Principal;
+}
+export interface PlatformConfig {
+    maintenanceMode: boolean;
+    siteName: string;
+    registrationOpen: boolean;
 }
 export enum AppUserRole {
     admin = "admin",
@@ -121,22 +148,40 @@ export enum UserRole {
 }
 export interface backendInterface {
     _initializeAccessControlWithSecret(userSecret: string): Promise<void>;
+    addReport(report: ReportData): Promise<void>;
+    addRevenue(amount: number): Promise<void>;
+    applyForProject(projectCreator: Principal, projectIndex: bigint): Promise<void>;
+    approveProject(projectCreator: Principal, projectIndex: bigint): Promise<void>;
     assignCallerUserRole(user: Principal, role: UserRole): Promise<void>;
+    clearReportsData(): Promise<void>;
+    clearRevenueData(): Promise<void>;
+    getAllProjects(): Promise<Array<[Principal, Array<Project>]>>;
+    getAllReports(): Promise<Array<ReportData>>;
+    getAllRevenue(): Promise<Array<RevenueData>>;
+    getAllUsers(): Promise<Array<UserProfile>>;
+    getAnalyticsData(): Promise<AnalyticsData>;
     getApprovedProjects(): Promise<Array<Project>>;
     getCallerUserProfile(): Promise<UserProfile | null>;
     getCallerUserRole(): Promise<UserRole>;
     getContactRequests(): Promise<Array<ContactRequest>>;
+    getMonthlyRevenue(month: bigint, year: bigint): Promise<number>;
+    getPlatformConfig(): Promise<PlatformConfig>;
     getPlatformMetrics(): Promise<[bigint, bigint]>;
-    getTotalProjects(): Promise<bigint>;
-    getTotalUsers(): Promise<bigint>;
+    getProjectApplications(): Promise<Array<ProjectApplication>>;
+    getReportsByDateRange(startDate: Time, endDate: Time): Promise<Array<ReportData>>;
+    getStudentApplications(): Promise<Array<ProjectApplication>>;
+    getTotalRevenue(): Promise<number>;
     getUserProfile(user: Principal): Promise<UserProfile | null>;
     getUserProjects(): Promise<Array<Project>>;
     getUserRole(): Promise<AppUserRole | null>;
     isCallerAdmin(): Promise<boolean>;
     register(name: string, email: string, role: AppUserRole): Promise<void>;
+    rejectProject(projectCreator: Principal, projectIndex: bigint): Promise<void>;
     saveCallerUserProfile(profile: UserProfile): Promise<void>;
     saveProject(project: Project): Promise<void>;
     sendContactRequest(to: Principal, message: string): Promise<void>;
+    updateApplicationStatus(student: Principal, newStatus: string): Promise<void>;
+    updatePlatformConfig(newConfig: PlatformConfig): Promise<void>;
 }
 import type { AppUserRole as _AppUserRole, Time as _Time, UserProfile as _UserProfile, UserRole as _UserRole } from "./declarations/backend.did.d.ts";
 export class Backend implements backendInterface {
@@ -155,6 +200,62 @@ export class Backend implements backendInterface {
             return result;
         }
     }
+    async addReport(arg0: ReportData): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.addReport(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.addReport(arg0);
+            return result;
+        }
+    }
+    async addRevenue(arg0: number): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.addRevenue(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.addRevenue(arg0);
+            return result;
+        }
+    }
+    async applyForProject(arg0: Principal, arg1: bigint): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.applyForProject(arg0, arg1);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.applyForProject(arg0, arg1);
+            return result;
+        }
+    }
+    async approveProject(arg0: Principal, arg1: bigint): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.approveProject(arg0, arg1);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.approveProject(arg0, arg1);
+            return result;
+        }
+    }
     async assignCallerUserRole(arg0: Principal, arg1: UserRole): Promise<void> {
         if (this.processError) {
             try {
@@ -166,6 +267,104 @@ export class Backend implements backendInterface {
             }
         } else {
             const result = await this.actor.assignCallerUserRole(arg0, to_candid_UserRole_n1(this._uploadFile, this._downloadFile, arg1));
+            return result;
+        }
+    }
+    async clearReportsData(): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.clearReportsData();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.clearReportsData();
+            return result;
+        }
+    }
+    async clearRevenueData(): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.clearRevenueData();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.clearRevenueData();
+            return result;
+        }
+    }
+    async getAllProjects(): Promise<Array<[Principal, Array<Project>]>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getAllProjects();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getAllProjects();
+            return result;
+        }
+    }
+    async getAllReports(): Promise<Array<ReportData>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getAllReports();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getAllReports();
+            return result;
+        }
+    }
+    async getAllRevenue(): Promise<Array<RevenueData>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getAllRevenue();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getAllRevenue();
+            return result;
+        }
+    }
+    async getAllUsers(): Promise<Array<UserProfile>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getAllUsers();
+                return from_candid_vec_n3(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getAllUsers();
+            return from_candid_vec_n3(this._uploadFile, this._downloadFile, result);
+        }
+    }
+    async getAnalyticsData(): Promise<AnalyticsData> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getAnalyticsData();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getAnalyticsData();
             return result;
         }
     }
@@ -187,28 +386,28 @@ export class Backend implements backendInterface {
         if (this.processError) {
             try {
                 const result = await this.actor.getCallerUserProfile();
-                return from_candid_opt_n3(this._uploadFile, this._downloadFile, result);
+                return from_candid_opt_n8(this._uploadFile, this._downloadFile, result);
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
             const result = await this.actor.getCallerUserProfile();
-            return from_candid_opt_n3(this._uploadFile, this._downloadFile, result);
+            return from_candid_opt_n8(this._uploadFile, this._downloadFile, result);
         }
     }
     async getCallerUserRole(): Promise<UserRole> {
         if (this.processError) {
             try {
                 const result = await this.actor.getCallerUserRole();
-                return from_candid_UserRole_n8(this._uploadFile, this._downloadFile, result);
+                return from_candid_UserRole_n9(this._uploadFile, this._downloadFile, result);
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
             const result = await this.actor.getCallerUserRole();
-            return from_candid_UserRole_n8(this._uploadFile, this._downloadFile, result);
+            return from_candid_UserRole_n9(this._uploadFile, this._downloadFile, result);
         }
     }
     async getContactRequests(): Promise<Array<ContactRequest>> {
@@ -222,6 +421,34 @@ export class Backend implements backendInterface {
             }
         } else {
             const result = await this.actor.getContactRequests();
+            return result;
+        }
+    }
+    async getMonthlyRevenue(arg0: bigint, arg1: bigint): Promise<number> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getMonthlyRevenue(arg0, arg1);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getMonthlyRevenue(arg0, arg1);
+            return result;
+        }
+    }
+    async getPlatformConfig(): Promise<PlatformConfig> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getPlatformConfig();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getPlatformConfig();
             return result;
         }
     }
@@ -245,31 +472,59 @@ export class Backend implements backendInterface {
             ];
         }
     }
-    async getTotalProjects(): Promise<bigint> {
+    async getProjectApplications(): Promise<Array<ProjectApplication>> {
         if (this.processError) {
             try {
-                const result = await this.actor.getTotalProjects();
+                const result = await this.actor.getProjectApplications();
                 return result;
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
-            const result = await this.actor.getTotalProjects();
+            const result = await this.actor.getProjectApplications();
             return result;
         }
     }
-    async getTotalUsers(): Promise<bigint> {
+    async getReportsByDateRange(arg0: Time, arg1: Time): Promise<Array<ReportData>> {
         if (this.processError) {
             try {
-                const result = await this.actor.getTotalUsers();
+                const result = await this.actor.getReportsByDateRange(arg0, arg1);
                 return result;
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
-            const result = await this.actor.getTotalUsers();
+            const result = await this.actor.getReportsByDateRange(arg0, arg1);
+            return result;
+        }
+    }
+    async getStudentApplications(): Promise<Array<ProjectApplication>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getStudentApplications();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getStudentApplications();
+            return result;
+        }
+    }
+    async getTotalRevenue(): Promise<number> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getTotalRevenue();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getTotalRevenue();
             return result;
         }
     }
@@ -277,14 +532,14 @@ export class Backend implements backendInterface {
         if (this.processError) {
             try {
                 const result = await this.actor.getUserProfile(arg0);
-                return from_candid_opt_n3(this._uploadFile, this._downloadFile, result);
+                return from_candid_opt_n8(this._uploadFile, this._downloadFile, result);
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
             const result = await this.actor.getUserProfile(arg0);
-            return from_candid_opt_n3(this._uploadFile, this._downloadFile, result);
+            return from_candid_opt_n8(this._uploadFile, this._downloadFile, result);
         }
     }
     async getUserProjects(): Promise<Array<Project>> {
@@ -305,14 +560,14 @@ export class Backend implements backendInterface {
         if (this.processError) {
             try {
                 const result = await this.actor.getUserRole();
-                return from_candid_opt_n10(this._uploadFile, this._downloadFile, result);
+                return from_candid_opt_n11(this._uploadFile, this._downloadFile, result);
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
             const result = await this.actor.getUserRole();
-            return from_candid_opt_n10(this._uploadFile, this._downloadFile, result);
+            return from_candid_opt_n11(this._uploadFile, this._downloadFile, result);
         }
     }
     async isCallerAdmin(): Promise<boolean> {
@@ -332,28 +587,42 @@ export class Backend implements backendInterface {
     async register(arg0: string, arg1: string, arg2: AppUserRole): Promise<void> {
         if (this.processError) {
             try {
-                const result = await this.actor.register(arg0, arg1, to_candid_AppUserRole_n11(this._uploadFile, this._downloadFile, arg2));
+                const result = await this.actor.register(arg0, arg1, to_candid_AppUserRole_n12(this._uploadFile, this._downloadFile, arg2));
                 return result;
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
-            const result = await this.actor.register(arg0, arg1, to_candid_AppUserRole_n11(this._uploadFile, this._downloadFile, arg2));
+            const result = await this.actor.register(arg0, arg1, to_candid_AppUserRole_n12(this._uploadFile, this._downloadFile, arg2));
+            return result;
+        }
+    }
+    async rejectProject(arg0: Principal, arg1: bigint): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.rejectProject(arg0, arg1);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.rejectProject(arg0, arg1);
             return result;
         }
     }
     async saveCallerUserProfile(arg0: UserProfile): Promise<void> {
         if (this.processError) {
             try {
-                const result = await this.actor.saveCallerUserProfile(to_candid_UserProfile_n13(this._uploadFile, this._downloadFile, arg0));
+                const result = await this.actor.saveCallerUserProfile(to_candid_UserProfile_n14(this._uploadFile, this._downloadFile, arg0));
                 return result;
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
-            const result = await this.actor.saveCallerUserProfile(to_candid_UserProfile_n13(this._uploadFile, this._downloadFile, arg0));
+            const result = await this.actor.saveCallerUserProfile(to_candid_UserProfile_n14(this._uploadFile, this._downloadFile, arg0));
             return result;
         }
     }
@@ -385,6 +654,34 @@ export class Backend implements backendInterface {
             return result;
         }
     }
+    async updateApplicationStatus(arg0: Principal, arg1: string): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.updateApplicationStatus(arg0, arg1);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.updateApplicationStatus(arg0, arg1);
+            return result;
+        }
+    }
+    async updatePlatformConfig(arg0: PlatformConfig): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.updatePlatformConfig(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.updatePlatformConfig(arg0);
+            return result;
+        }
+    }
 }
 function from_candid_AppUserRole_n6(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _AppUserRole): AppUserRole {
     return from_candid_variant_n7(_uploadFile, _downloadFile, value);
@@ -392,13 +689,13 @@ function from_candid_AppUserRole_n6(_uploadFile: (file: ExternalBlob) => Promise
 function from_candid_UserProfile_n4(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _UserProfile): UserProfile {
     return from_candid_record_n5(_uploadFile, _downloadFile, value);
 }
-function from_candid_UserRole_n8(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _UserRole): UserRole {
-    return from_candid_variant_n9(_uploadFile, _downloadFile, value);
+function from_candid_UserRole_n9(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _UserRole): UserRole {
+    return from_candid_variant_n10(_uploadFile, _downloadFile, value);
 }
-function from_candid_opt_n10(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: [] | [_AppUserRole]): AppUserRole | null {
+function from_candid_opt_n11(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: [] | [_AppUserRole]): AppUserRole | null {
     return value.length === 0 ? null : from_candid_AppUserRole_n6(_uploadFile, _downloadFile, value[0]);
 }
-function from_candid_opt_n3(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: [] | [_UserProfile]): UserProfile | null {
+function from_candid_opt_n8(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: [] | [_UserProfile]): UserProfile | null {
     return value.length === 0 ? null : from_candid_UserProfile_n4(_uploadFile, _downloadFile, value[0]);
 }
 function from_candid_record_n5(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
@@ -422,6 +719,15 @@ function from_candid_record_n5(_uploadFile: (file: ExternalBlob) => Promise<Uint
         principalId: value.principalId
     };
 }
+function from_candid_variant_n10(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
+    admin: null;
+} | {
+    user: null;
+} | {
+    guest: null;
+}): UserRole {
+    return "admin" in value ? UserRole.admin : "user" in value ? UserRole.user : "guest" in value ? UserRole.guest : value;
+}
 function from_candid_variant_n7(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
     admin: null;
 } | {
@@ -431,25 +737,19 @@ function from_candid_variant_n7(_uploadFile: (file: ExternalBlob) => Promise<Uin
 }): AppUserRole {
     return "admin" in value ? AppUserRole.admin : "student" in value ? AppUserRole.student : "industryPartner" in value ? AppUserRole.industryPartner : value;
 }
-function from_candid_variant_n9(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
-    admin: null;
-} | {
-    user: null;
-} | {
-    guest: null;
-}): UserRole {
-    return "admin" in value ? UserRole.admin : "user" in value ? UserRole.user : "guest" in value ? UserRole.guest : value;
+function from_candid_vec_n3(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: Array<_UserProfile>): Array<UserProfile> {
+    return value.map((x)=>from_candid_UserProfile_n4(_uploadFile, _downloadFile, x));
 }
-function to_candid_AppUserRole_n11(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: AppUserRole): _AppUserRole {
-    return to_candid_variant_n12(_uploadFile, _downloadFile, value);
+function to_candid_AppUserRole_n12(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: AppUserRole): _AppUserRole {
+    return to_candid_variant_n13(_uploadFile, _downloadFile, value);
 }
-function to_candid_UserProfile_n13(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: UserProfile): _UserProfile {
-    return to_candid_record_n14(_uploadFile, _downloadFile, value);
+function to_candid_UserProfile_n14(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: UserProfile): _UserProfile {
+    return to_candid_record_n15(_uploadFile, _downloadFile, value);
 }
 function to_candid_UserRole_n1(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: UserRole): _UserRole {
     return to_candid_variant_n2(_uploadFile, _downloadFile, value);
 }
-function to_candid_record_n14(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
+function to_candid_record_n15(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
     name: string;
     role: AppUserRole;
     email: string;
@@ -464,13 +764,13 @@ function to_candid_record_n14(_uploadFile: (file: ExternalBlob) => Promise<Uint8
 } {
     return {
         name: value.name,
-        role: to_candid_AppUserRole_n11(_uploadFile, _downloadFile, value.role),
+        role: to_candid_AppUserRole_n12(_uploadFile, _downloadFile, value.role),
         email: value.email,
         registrationTimestamp: value.registrationTimestamp,
         principalId: value.principalId
     };
 }
-function to_candid_variant_n12(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: AppUserRole): {
+function to_candid_variant_n13(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: AppUserRole): {
     admin: null;
 } | {
     student: null;

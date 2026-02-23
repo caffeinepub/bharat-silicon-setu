@@ -10,6 +10,11 @@ import type { ActorMethod } from '@icp-sdk/core/agent';
 import type { IDL } from '@icp-sdk/core/candid';
 import type { Principal } from '@icp-sdk/core/principal';
 
+export interface AnalyticsData {
+  'activeProjects' : bigint,
+  'engagementRate' : number,
+  'projectApplicantCounts' : Array<[Principal, bigint]>,
+}
 export type AppUserRole = { 'admin' : null } |
   { 'student' : null } |
   { 'industryPartner' : null };
@@ -18,6 +23,11 @@ export interface ContactRequest {
   'from' : Principal,
   'message' : string,
 }
+export interface PlatformConfig {
+  'maintenanceMode' : boolean,
+  'siteName' : string,
+  'registrationOpen' : boolean,
+}
 export interface Project {
   'title' : string,
   'createdBy' : Principal,
@@ -25,6 +35,20 @@ export interface Project {
   'description' : string,
   'approved' : boolean,
 }
+export interface ProjectApplication {
+  'status' : string,
+  'timestamp' : Time,
+  'student' : Principal,
+  'project' : Principal,
+}
+export interface ReportData {
+  'endDate' : Time,
+  'messagesSent' : bigint,
+  'dailyActiveUsers' : bigint,
+  'projectApplications' : bigint,
+  'startDate' : Time,
+}
+export interface RevenueData { 'timestamp' : Time, 'totalRevenue' : number }
 export type Time = bigint;
 export interface UserProfile {
   'name' : string,
@@ -38,22 +62,40 @@ export type UserRole = { 'admin' : null } |
   { 'guest' : null };
 export interface _SERVICE {
   '_initializeAccessControlWithSecret' : ActorMethod<[string], undefined>,
+  'addReport' : ActorMethod<[ReportData], undefined>,
+  'addRevenue' : ActorMethod<[number], undefined>,
+  'applyForProject' : ActorMethod<[Principal, bigint], undefined>,
+  'approveProject' : ActorMethod<[Principal, bigint], undefined>,
   'assignCallerUserRole' : ActorMethod<[Principal, UserRole], undefined>,
+  'clearReportsData' : ActorMethod<[], undefined>,
+  'clearRevenueData' : ActorMethod<[], undefined>,
+  'getAllProjects' : ActorMethod<[], Array<[Principal, Array<Project>]>>,
+  'getAllReports' : ActorMethod<[], Array<ReportData>>,
+  'getAllRevenue' : ActorMethod<[], Array<RevenueData>>,
+  'getAllUsers' : ActorMethod<[], Array<UserProfile>>,
+  'getAnalyticsData' : ActorMethod<[], AnalyticsData>,
   'getApprovedProjects' : ActorMethod<[], Array<Project>>,
   'getCallerUserProfile' : ActorMethod<[], [] | [UserProfile]>,
   'getCallerUserRole' : ActorMethod<[], UserRole>,
   'getContactRequests' : ActorMethod<[], Array<ContactRequest>>,
+  'getMonthlyRevenue' : ActorMethod<[bigint, bigint], number>,
+  'getPlatformConfig' : ActorMethod<[], PlatformConfig>,
   'getPlatformMetrics' : ActorMethod<[], [bigint, bigint]>,
-  'getTotalProjects' : ActorMethod<[], bigint>,
-  'getTotalUsers' : ActorMethod<[], bigint>,
+  'getProjectApplications' : ActorMethod<[], Array<ProjectApplication>>,
+  'getReportsByDateRange' : ActorMethod<[Time, Time], Array<ReportData>>,
+  'getStudentApplications' : ActorMethod<[], Array<ProjectApplication>>,
+  'getTotalRevenue' : ActorMethod<[], number>,
   'getUserProfile' : ActorMethod<[Principal], [] | [UserProfile]>,
   'getUserProjects' : ActorMethod<[], Array<Project>>,
   'getUserRole' : ActorMethod<[], [] | [AppUserRole]>,
   'isCallerAdmin' : ActorMethod<[], boolean>,
   'register' : ActorMethod<[string, string, AppUserRole], undefined>,
+  'rejectProject' : ActorMethod<[Principal, bigint], undefined>,
   'saveCallerUserProfile' : ActorMethod<[UserProfile], undefined>,
   'saveProject' : ActorMethod<[Project], undefined>,
   'sendContactRequest' : ActorMethod<[Principal, string], undefined>,
+  'updateApplicationStatus' : ActorMethod<[Principal, string], undefined>,
+  'updatePlatformConfig' : ActorMethod<[PlatformConfig], undefined>,
 }
 export declare const idlService: IDL.ServiceClass;
 export declare const idlInitArgs: IDL.Type[];

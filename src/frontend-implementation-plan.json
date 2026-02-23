@@ -1,301 +1,265 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Implement functional sidebar navigation pages for all dashboards",
+  "title": "Implement full functionality for all Student, Industry, and Admin dashboard pages",
   "requirements": [
     {
-      "id": "REQ-37",
-      "summary": "Create My Projects page for Student Dashboard displaying user projects with status indicators and filtering",
+      "id": "REQ-53",
+      "summary": "Update MyProjects page to fetch real user projects from backend using useProjects hook",
       "acceptanceCriteria": [
-        "Page is accessible via Student Dashboard sidebar navigation",
-        "Displays all user-specific projects fetched from backend",
-        "Shows project status badges (Applied, In Progress, Completed)",
-        "Includes project title, description, and application date",
-        "Uses white text on dark background for consistency"
+        "MyProjects page displays real user projects from backend",
+        "Project status indicators reflect actual data from backend",
+        "Page handles loading and error states appropriately",
+        "Empty state message shown when user has no projects"
       ],
       "file_operations": [
         {
           "path": "frontend/src/pages/MyProjects.tsx",
-          "operation": "create",
-          "description": "Create My Projects page component that fetches user projects using the useProjects hook (getUserProjects backend method). Display projects in a grid layout with cards showing project title, description, skills required, and status badges. Include filter dropdown for status (Applied, In Progress, Completed). Use white text on dark background with Tailwind classes. Ensure the component handles loading and error states properly."
+          "operation": "modify",
+          "description": "Replace mock data with useProjects hook to fetch real student project applications from backend. Use the getStudentApplications backend method to retrieve actual applications. Add loading spinner during data fetch, display error states with toast notifications, and show empty state message when no applications exist. Map backend ProjectApplication data to display project title, description, status, and required skills. Filter applications by status tabs (Applied, In Progress, Completed)."
+        },
+        {
+          "path": "frontend/src/hooks/useProjects.ts",
+          "operation": "modify",
+          "description": "Add useStudentApplications hook that calls actor.getStudentApplications() to retrieve project applications for the current authenticated user. Include proper error handling and loading states. Return applications array with status, timestamp, student, and project principals."
         }
       ]
     },
     {
-      "id": "REQ-38",
-      "summary": "Create Skill Profile page for Student Dashboard to display and edit student skills and certifications",
+      "id": "REQ-54",
+      "summary": "Update SkillProfile page to display and persist actual user skills from backend",
       "acceptanceCriteria": [
-        "Page is accessible via Student Dashboard sidebar navigation",
-        "Displays skill tags with strength percentages (VLSI, RTL, Embedded Systems, FPGA)",
-        "Includes editable fields for adding/removing skills",
-        "Shows certifications and educational background",
-        "Has a save button that persists changes to backend"
+        "Skill profile loads real user data from backend",
+        "Add skill functionality works and persists to backend",
+        "Remove skill functionality works and updates backend",
+        "Success toast notification shown after saving",
+        "Validation prevents adding duplicate or empty skills"
       ],
       "file_operations": [
         {
           "path": "frontend/src/pages/SkillProfile.tsx",
-          "operation": "create",
-          "description": "Create Skill Profile page component that displays the current user's skills, certifications, and education. Fetch user profile using useUserProfile hook. Display skill tags with visual strength indicators (use progress bars or percentage badges). Include editable form fields for adding/removing skills with inline editing capability. Add a save button that calls saveCallerUserProfile to persist changes. Use white text styling with dark background. Handle loading and error states."
+          "operation": "modify",
+          "description": "Integrate useUserProfile hook to load actual user skills from backend UserProfile. Replace mock skills array with profile.skills from backend data. Implement add skill functionality that validates for empty strings and duplicates before adding to local state. Implement remove skill functionality. Use useSaveCallerUserProfile mutation to persist skill changes to backend when user clicks save. Show loading spinner while fetching profile, display success toast after successful save, and show error toast if save fails. Ensure skills are stored as string array in the user profile."
         }
       ]
     },
     {
-      "id": "REQ-39",
-      "summary": "Create Mentorship page for Student Dashboard to display mentor messages and manage mentorship requests",
+      "id": "REQ-55",
+      "summary": "Update Mentorship page to fetch and send real contact requests using hooks",
       "acceptanceCriteria": [
-        "Page is accessible via Student Dashboard sidebar navigation",
-        "Displays list of mentor messages from contact requests",
-        "Includes message composition interface with send functionality",
-        "Shows mentorship request status (Pending, Accepted, Active)",
-        "Uses white text styling consistently"
+        "Mentorship page displays real received contact requests from backend",
+        "Send message form validates recipient Principal ID format",
+        "Messages are successfully sent to backend and confirmed with toast",
+        "Message list updates automatically after sending",
+        "Empty state shown when no messages exist"
       ],
       "file_operations": [
         {
           "path": "frontend/src/pages/Mentorship.tsx",
-          "operation": "create",
-          "description": "Create Mentorship page component that fetches contact requests using useContactRequests hook. Display received messages in a list with sender name, message content, and timestamp. Include a message composition form with recipient selector and textarea for message content, using sendContactRequest mutation. Add status badges for mentorship requests (Pending, Accepted, Active). Use white text on dark background with proper spacing and typography. Handle loading and error states."
+          "operation": "modify",
+          "description": "Replace mock messages with useContactRequests hook to fetch real contact requests from backend. Display received messages with sender principal, message content, and timestamp. Implement send message form that validates recipient Principal ID format using Principal.fromText() with try-catch for validation errors. Use useSendContactRequest mutation to send messages to backend. Show success toast after message sent and automatically refresh message list. Display loading spinner while fetching messages and show empty state with helpful message when no contact requests exist."
+        },
+        {
+          "path": "frontend/src/hooks/useContactRequests.ts",
+          "operation": "modify",
+          "description": "Ensure useSendContactRequest mutation properly invalidates the contact requests query cache after successful send so the message list refreshes automatically. Add proper error handling with descriptive error messages for Principal ID validation failures and backend errors."
         }
       ]
     },
     {
-      "id": "REQ-40",
-      "summary": "Create Settings page for Student Dashboard to manage profile and notification preferences",
+      "id": "REQ-56",
+      "summary": "Update StudentSettings page to load and save real user profile data",
       "acceptanceCriteria": [
-        "Page is accessible via Student Dashboard sidebar navigation",
-        "Includes editable profile fields (name, email, bio)",
-        "Has notification preference toggles",
-        "Includes save button that persists changes to backend",
-        "Uses white text on dark background"
+        "Settings page loads actual user profile data",
+        "Form fields are populated with current user data",
+        "Save functionality persists changes to backend",
+        "Success toast shown after successful save",
+        "Validation prevents saving invalid data"
       ],
       "file_operations": [
         {
           "path": "frontend/src/pages/StudentSettings.tsx",
-          "operation": "create",
-          "description": "Create Student Settings page component that fetches current user profile using useUserProfile hook. Display editable form fields for name, email, and bio. Add notification preference toggle switches (mock implementation since notification preferences are not in backend interface). Include save button that calls saveCallerUserProfile to persist profile changes. Use white text styling with dark background. Display success/error messages after save attempts. Handle loading and error states."
+          "operation": "modify",
+          "description": "Integrate useUserProfile hook to load actual user profile data from backend. Populate form fields (name, email, bio) with current profile data when loaded. Implement form validation for required fields and valid email format. Use useSaveCallerUserProfile mutation to persist profile changes when user clicks save. Show loading state while fetching profile, display success toast notification after successful save, and show error toast with error message if save fails. Ensure form state syncs with loaded profile data."
         }
       ]
     },
     {
-      "id": "REQ-41",
-      "summary": "Create Applicants page for Industry Dashboard showing student applicants with skill matching and contact functionality",
+      "id": "REQ-57",
+      "summary": "Update Applicants page to fetch real project applicants from backend",
       "acceptanceCriteria": [
-        "Page is accessible via Industry Dashboard sidebar navigation",
-        "Displays student applicant cards with skill match percentages",
-        "Shows skill tags for each applicant (VLSI, RTL, Embedded Systems, FPGA)",
-        "Includes filter dropdown to view applicants by specific project",
-        "Has contact/message button for each applicant"
+        "Applicants page displays real applications from backend",
+        "Skill match percentages calculated from actual student data",
+        "Filter by project works with real project list",
+        "Contact request dialog sends messages to backend",
+        "Empty state shown when no applicants exist"
       ],
       "file_operations": [
         {
           "path": "frontend/src/pages/Applicants.tsx",
-          "operation": "create",
-          "description": "Create Applicants page component that displays mock student applicants (since backend does not have applicant tracking). Show applicant cards with name, skill tags, and skill match percentages. Include project filter dropdown. Add contact button for each applicant that opens a message dialog using sendContactRequest mutation from useContactRequests. Use white text on dark background. Include placeholder message explaining that applicant tracking will be connected to backend in future iterations."
+          "operation": "modify",
+          "description": "Replace mock applicants data with new hook that fetches real project applications from backend using getProjectApplications method. For each application, fetch the student profile using getUserProfile(application.student) to get skills. Calculate skill match percentage by comparing student skills with project required skills. Implement project filter dropdown that fetches user's projects using getUserProjects and filters applications by selected project. Integrate useSendContactRequest mutation in contact dialog to send messages to applicants. Display loading spinner during data fetch, show empty state when no applications exist, and handle errors gracefully with toast notifications."
+        },
+        {
+          "path": "frontend/src/hooks/useProjects.ts",
+          "operation": "modify",
+          "description": "Add useProjectApplications hook that calls actor.getProjectApplications() to retrieve all applications for the current industry partner's projects. Include proper loading and error states. Add useStudentProfile hook that accepts a Principal and calls actor.getUserProfile(principal) to fetch student profile data including skills for skill matching calculations."
         }
       ]
     },
     {
-      "id": "REQ-42",
-      "summary": "Create Analytics page for Industry Dashboard displaying project metrics and engagement statistics",
+      "id": "REQ-59",
+      "summary": "Update IndustryAnalytics page to display real analytics data from backend",
       "acceptanceCriteria": [
-        "Page is accessible via Industry Dashboard sidebar navigation",
-        "Shows total applicants count across all projects",
-        "Displays active projects count",
-        "Includes engagement rate percentage metric",
-        "Has growth chart visualization placeholder",
-        "Uses white text for all labels and metrics"
+        "Analytics page fetches real metrics from backend",
+        "Total applicants count reflects actual application data",
+        "Active projects count shows real project status data",
+        "Engagement rate calculated from actual platform activity",
+        "Data updates when new applications or projects are created"
       ],
       "file_operations": [
         {
           "path": "frontend/src/pages/IndustryAnalytics.tsx",
+          "operation": "modify",
+          "description": "Replace mock analytics data with new hook that fetches real analytics from backend using getAnalyticsData method. Display actual total applicants count from projectApplicantCounts aggregation, show active projects count from backend data, and display engagement rate percentage. Add loading spinner while fetching analytics, handle errors with error message display, and ensure metrics refresh when navigating to the page. Keep the chart visualization placeholder for now but populate the metrics cards with real data."
+        },
+        {
+          "path": "frontend/src/hooks/useAnalytics.ts",
           "operation": "create",
-          "description": "Create Industry Analytics page component that fetches user projects using useProjects hook to calculate active projects count. Display metric cards showing total applicants (mock data), active projects count, and engagement rate percentage (mock calculation). Include a growth chart placeholder using a div with mock chart visualization or chart library. Use white text styling for all labels and metrics on dark background. Handle loading states."
+          "description": "Create React Query hook useAnalyticsData that calls actor.getAnalyticsData() to fetch analytics metrics for the current industry partner. Return activeProjects count, total applicants (sum of projectApplicantCounts), and engagementRate. Include proper error handling and loading states. Export the hook for use in IndustryAnalytics page."
         }
       ]
     },
     {
-      "id": "REQ-43",
-      "summary": "Create Settings page for Industry Dashboard to manage company profile and team preferences",
+      "id": "REQ-61",
+      "summary": "Update IndustrySettings page to load and save actual company profile data",
       "acceptanceCriteria": [
-        "Page is accessible via Industry Dashboard sidebar navigation",
-        "Includes editable company profile fields (company name, description, contact info)",
-        "Has save button that persists changes to backend",
-        "Uses white text styling consistently",
-        "Includes sections for team management and preferences"
+        "Industry settings page loads real company profile data",
+        "Form fields populate with current company information",
+        "Save button persists changes to backend",
+        "Success notification shown after saving",
+        "Form validation prevents invalid inputs"
       ],
       "file_operations": [
         {
           "path": "frontend/src/pages/IndustrySettings.tsx",
-          "operation": "create",
-          "description": "Create Industry Settings page component that fetches current user profile using useUserProfile hook. Display editable form fields for company name (use profile name field), email, and company description (mock field). Add sections for team management (placeholder UI) and posting preferences (placeholder toggles). Include save button that calls saveCallerUserProfile to persist profile changes. Use white text styling with dark background. Display success/error messages. Handle loading and error states."
+          "operation": "modify",
+          "description": "Integrate useUserProfile hook to load actual company profile data from backend. Populate form fields (company name, email, description) with current profile data. Implement form validation for required fields and email format. Use useSaveCallerUserProfile mutation to persist changes to backend. Show loading state while fetching profile, display success toast after successful save, and show error toast if save fails. Ensure form initializes with loaded profile data."
         }
       ]
     },
     {
-      "id": "REQ-44",
-      "summary": "Create Users page for Admin Dashboard with user management, filtering, and search functionality",
+      "id": "REQ-62",
+      "summary": "Update Users page to fetch and display real platform users from backend",
       "acceptanceCriteria": [
-        "Page is accessible via Admin Dashboard sidebar navigation",
-        "Displays user list with role badges (Student, Industry Partner, Admin)",
-        "Includes search functionality to find users by name or email",
-        "Has filter dropdown to view users by role",
-        "Shows user registration dates and status",
-        "Uses white text on dark background"
+        "Users page displays all registered users from backend",
+        "Search box filters users by name or email in real-time",
+        "Role filter shows only users with selected role",
+        "User table shows actual registration dates and roles",
+        "Pagination or infinite scroll for large user lists"
       ],
       "file_operations": [
         {
           "path": "frontend/src/pages/Users.tsx",
+          "operation": "modify",
+          "description": "Replace mock users data with new hook that fetches all platform users from backend using getAllUsers method. Display real user data including name, email, role, and registration timestamp. Implement client-side search filtering that filters users by name or email as user types. Implement role filter dropdown (All/Student/Industry Partner/Admin) that filters displayed users by AppUserRole. Format registration dates using date formatting. Add loading spinner while fetching users and handle errors with error display. Consider pagination for performance if user count exceeds reasonable limit."
+        },
+        {
+          "path": "frontend/src/hooks/useUsers.ts",
           "operation": "create",
-          "description": "Create Users page component that displays mock user list (since backend does not expose user listing for admins). Show user cards/table with name, email, role badges (Student, Industry Partner, Admin), and registration dates. Include search input field for filtering by name/email and role filter dropdown. Use white text on dark background with proper table or card layout. Add placeholder message indicating that user management backend integration is pending."
+          "description": "Create React Query hook useAllUsers that calls actor.getAllUsers() to fetch all registered platform users. Return array of UserProfile objects with name, email, role, registration timestamp, and principal ID. Include proper authorization check awareness (admin-only). Add loading and error states. Export hook for use in Users page."
         }
       ]
     },
     {
-      "id": "REQ-45",
-      "summary": "Create Projects page for Admin Dashboard with project approval and moderation tools",
+      "id": "REQ-64",
+      "summary": "Update AdminProjects page to fetch real projects and implement approve/reject functionality",
       "acceptanceCriteria": [
-        "Page is accessible via Admin Dashboard sidebar navigation",
-        "Displays all projects with status badges (Pending, Approved, Rejected)",
-        "Shows project details including company name, title, and application count",
-        "Includes approve/reject action buttons for pending projects",
-        "Has filtering by project status",
-        "Uses white text styling consistently"
+        "Admin projects page displays all platform projects from backend",
+        "Filter by status shows projects with matching approval state",
+        "Approve button updates project status to approved in backend",
+        "Reject button updates project status to rejected in backend",
+        "Success notifications shown after status changes"
       ],
       "file_operations": [
         {
           "path": "frontend/src/pages/AdminProjects.tsx",
-          "operation": "create",
-          "description": "Create Admin Projects page component that fetches all projects using useProjects hook (getApprovedProjects - note: this only returns approved projects, so add mock pending/rejected projects for demonstration). Display project cards with title, description, company name (use createdBy principal), status badges (Pending, Approved, Rejected), and application count (mock data). Include approve/reject action buttons that update project approval status via saveProject mutation. Add status filter dropdown. Use white text styling on dark background. Handle loading and error states."
+          "operation": "modify",
+          "description": "Replace mock projects with new hook that fetches all platform projects from backend using getAllProjects method. Display projects with title, description, created by principal, required skills, and approval status. Implement status filter dropdown (All/Pending/Approved/Rejected) that filters projects by approval status. Create approve and reject mutation hooks that call approveProject and rejectProject backend methods with projectCreator principal and projectIndex. Show success toast after approve/reject operations and automatically refresh project list. Add loading states for both data fetch and approve/reject operations. Handle errors with error toast notifications."
+        },
+        {
+          "path": "frontend/src/hooks/useProjects.ts",
+          "operation": "modify",
+          "description": "Add useAllProjects hook that calls actor.getAllProjects() to fetch all platform projects for admin review. Add useApproveProject mutation that calls actor.approveProject(projectCreator, projectIndex) and invalidates project queries. Add useRejectProject mutation that calls actor.rejectProject(projectCreator, projectIndex) and invalidates project queries. Include proper authorization awareness (admin-only) and error handling."
         }
       ]
     },
     {
-      "id": "REQ-46",
-      "summary": "Create Revenue page for Admin Dashboard displaying platform financial metrics and growth charts",
+      "id": "REQ-66",
+      "summary": "Update Revenue page to fetch and display actual platform revenue data from backend",
       "acceptanceCriteria": [
-        "Page is accessible via Admin Dashboard sidebar navigation",
-        "Shows total revenue generated metric",
-        "Displays monthly revenue breakdown",
-        "Includes subscription tier statistics",
-        "Has revenue growth chart placeholder",
-        "Uses white text for all financial data and labels"
+        "Revenue page fetches real financial data from backend",
+        "Total revenue displays actual calculated amount",
+        "Monthly breakdown shows revenue per month from backend",
+        "Subscription tier statistics reflect actual user subscription data",
+        "Data updates when new revenue is recorded"
       ],
       "file_operations": [
         {
           "path": "frontend/src/pages/Revenue.tsx",
+          "operation": "modify",
+          "description": "Replace mock revenue data with new hooks that fetch real revenue data from backend. Use getTotalRevenue method to display total platform revenue. Use getAllRevenue method to get revenue records with timestamps, then aggregate by month for monthly breakdown chart. Calculate subscription tier statistics by querying user profiles and counting users by subscription tier (if available in profile). Add loading spinner while fetching data, handle errors with error display, and ensure data refreshes when new revenue is added. Format currency values properly."
+        },
+        {
+          "path": "frontend/src/hooks/useRevenue.ts",
           "operation": "create",
-          "description": "Create Revenue page component that displays mock financial metrics (since backend does not have revenue tracking). Show metric cards for total revenue, monthly revenue breakdown, and subscription tier statistics. Include a revenue growth chart placeholder using a div with mock visualization or chart library. Use white text styling for all financial data and labels on dark background. Add disclaimer that this is mock data pending backend integration."
+          "description": "Create React Query hooks for revenue data. useRevenueTotal calls actor.getTotalRevenue() to get total platform revenue. useAllRevenue calls actor.getAllRevenue() to get all revenue records with timestamps for monthly breakdown. useMonthlyRevenue accepts month and year parameters and calls actor.getMonthlyRevenue(month, year). Include proper authorization awareness (admin-only) and error handling. Export hooks for use in Revenue page."
         }
       ]
     },
     {
-      "id": "REQ-47",
-      "summary": "Create Reports page for Admin Dashboard with activity reports and export functionality",
+      "id": "REQ-68",
+      "summary": "Update Reports page to fetch real platform activity data with date filtering and export",
       "acceptanceCriteria": [
-        "Page is accessible via Admin Dashboard sidebar navigation",
-        "Displays recent activity feed with user actions and timestamps",
-        "Shows engagement metrics (daily active users, project applications, messages sent)",
-        "Includes date range selector for custom report periods",
-        "Has export button to download report data",
-        "Uses white text on dark background consistently"
+        "Reports page displays actual platform activity metrics",
+        "Date range filter queries backend for specific time period",
+        "Daily active users count reflects actual login activity",
+        "Project applications count shows real application data",
+        "Export button downloads actual data as JSON file"
       ],
       "file_operations": [
         {
           "path": "frontend/src/pages/Reports.tsx",
+          "operation": "modify",
+          "description": "Replace mock reports data with new hook that fetches real platform reports from backend. Use getReportsByDateRange method with start and end date parameters to fetch activity metrics for selected date range. Display daily active users, project applications, and messages sent from backend ReportData. Implement date range picker that updates the query with new date range. Implement export functionality that takes actual fetched data and downloads as JSON file. Add loading spinner while fetching reports, handle errors with error display, and show empty state when no reports exist for selected date range."
+        },
+        {
+          "path": "frontend/src/hooks/useReports.ts",
           "operation": "create",
-          "description": "Create Reports page component that displays mock activity feed and engagement metrics (since backend does not expose activity logs). Show recent activity list with user actions, timestamps, and action types. Display metric cards for daily active users, project applications, and messages sent (mock data). Include date range selector using date input fields. Add export button that triggers CSV/JSON download of mock report data. Use white text styling on dark background. Handle loading states."
+          "description": "Create React Query hook useReportsByDateRange that accepts startDate and endDate parameters (Time/bigint) and calls actor.getReportsByDateRange(startDate, endDate) to fetch platform activity reports. Return array of ReportData with dailyActiveUsers, projectApplications, messagesSent, startDate, and endDate. Include proper authorization awareness (admin-only) and error handling. Export hook for use in Reports page."
         }
       ]
     },
     {
-      "id": "REQ-48",
-      "summary": "Create Settings page for Admin Dashboard to configure platform settings and access controls",
+      "id": "REQ-70",
+      "summary": "Update AdminSettings page to load and save actual platform configuration settings",
       "acceptanceCriteria": [
-        "Page is accessible via Admin Dashboard sidebar navigation",
-        "Includes platform configuration options",
-        "Has access control management interface",
-        "Shows system preferences with save functionality",
-        "Uses white text styling consistently"
+        "Admin settings page loads current platform settings from backend",
+        "Site name field updates platform configuration",
+        "Maintenance mode toggle persists to backend",
+        "User access control settings save successfully",
+        "Success notifications shown after saving settings"
       ],
       "file_operations": [
         {
           "path": "frontend/src/pages/AdminSettings.tsx",
+          "operation": "modify",
+          "description": "Replace mock platform settings with new hooks that fetch and update real platform configuration from backend. Use getPlatformConfig method to load current settings including siteName, maintenanceMode, and registrationOpen. Populate form fields with loaded configuration. Implement save functionality using updatePlatformConfig mutation that persists changes to backend. Add loading spinner while fetching config, show success toast after successful save, and handle errors with error toast. Ensure toggle switches and text inputs are bound to form state. Keep existing user access control role assignment functionality using assignCallerUserRole."
+        },
+        {
+          "path": "frontend/src/hooks/usePlatformConfig.ts",
           "operation": "create",
-          "description": "Create Admin Settings page component with sections for platform configuration, access control management, and system preferences. Display form fields for platform settings (mock configuration options like site name, maintenance mode toggle). Include access control section showing role assignments (use assignCallerUserRole capability from authorization component). Add save button for persisting settings (mock implementation). Use white text styling with dark background. Handle loading and error states."
-        }
-      ]
-    },
-    {
-      "id": "REQ-49",
-      "summary": "Update StudentDashboard to use React Router Link components for sidebar navigation",
-      "acceptanceCriteria": [
-        "Sidebar navigation items use React Router Link components",
-        "Clicking 'My Projects' navigates to /student/my-projects",
-        "Clicking 'Skill Profile' navigates to /student/skill-profile",
-        "Clicking 'Mentorship' navigates to /student/mentorship",
-        "Clicking 'Settings' navigates to /student/settings",
-        "Active route is highlighted in the sidebar"
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/pages/StudentDashboard.tsx",
-          "operation": "modify",
-          "description": "Replace hardcoded sidebar anchor tags with React Router Link components imported from '@tanstack/react-router'. Update navigation items to link to /student/my-projects, /student/skill-profile, /student/mentorship, and /student/settings. Add active route highlighting by checking current pathname and applying active classes to the matching Link. Preserve existing white text styling and sidebar layout. Ensure the Dashboard link remains as the default view."
-        }
-      ]
-    },
-    {
-      "id": "REQ-50",
-      "summary": "Update IndustryDashboard to use React Router Link components for sidebar navigation",
-      "acceptanceCriteria": [
-        "Sidebar navigation items use React Router Link components",
-        "Clicking 'Applicants' navigates to /industry/applicants",
-        "Clicking 'Analytics' navigates to /industry/analytics",
-        "Clicking 'Settings' navigates to /industry/settings",
-        "Active route is highlighted in the sidebar"
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/pages/IndustryDashboard.tsx",
-          "operation": "modify",
-          "description": "Replace hardcoded sidebar anchor tags with React Router Link components imported from '@tanstack/react-router'. Update navigation items to link to /industry/applicants, /industry/analytics, and /industry/settings. Add active route highlighting by checking current pathname and applying active classes to the matching Link. Preserve existing white text styling and sidebar layout. Ensure the Dashboard link remains as the default view."
-        }
-      ]
-    },
-    {
-      "id": "REQ-51",
-      "summary": "Update AdminDashboard to use React Router Link components for sidebar navigation",
-      "acceptanceCriteria": [
-        "Sidebar navigation items use React Router Link components",
-        "Clicking 'Users' navigates to /admin/users",
-        "Clicking 'Projects' navigates to /admin/projects",
-        "Clicking 'Revenue' navigates to /admin/revenue",
-        "Clicking 'Reports' navigates to /admin/reports",
-        "Clicking 'Settings' navigates to /admin/settings",
-        "Active route is highlighted in the sidebar"
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/pages/AdminDashboard.tsx",
-          "operation": "modify",
-          "description": "Replace hardcoded sidebar anchor tags with React Router Link components imported from '@tanstack/react-router'. Update navigation items to link to /admin/users, /admin/projects, /admin/revenue, /admin/reports, and /admin/settings. Add active route highlighting by checking current pathname and applying active classes to the matching Link. Preserve existing white text styling, platform metrics display, and sidebar layout. Ensure the Dashboard link remains as the default view."
-        }
-      ]
-    },
-    {
-      "id": "REQ-52",
-      "summary": "Update App.tsx to add route definitions for all new dashboard pages with role-based protection",
-      "acceptanceCriteria": [
-        "All student sub-routes are registered with 'student' role protection",
-        "All industry sub-routes are registered with 'industryPartner' role protection",
-        "All admin sub-routes are registered with 'admin' role protection",
-        "Routes use lazy loading for page components",
-        "Navigation between routes works correctly"
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/App.tsx",
-          "operation": "modify",
-          "description": "Add route definitions for all new dashboard pages in the router configuration. Create student routes: /student/my-projects (MyProjects), /student/skill-profile (SkillProfile), /student/mentorship (Mentorship), /student/settings (StudentSettings). Create industry routes: /industry/applicants (Applicants), /industry/analytics (IndustryAnalytics), /industry/settings (IndustrySettings). Create admin routes: /admin/users (Users), /admin/projects (AdminProjects), /admin/revenue (Revenue), /admin/reports (Reports), /admin/settings (AdminSettings). Wrap all routes with ProtectedRoute component using appropriate role props ('student', 'industryPartner', 'admin'). Use lazy loading for all new page components. Ensure routes are nested under their respective dashboard parent routes to maintain layout consistency."
+          "description": "Create React Query hooks for platform configuration. usePlatformConfig calls actor.getPlatformConfig() to fetch current platform settings (siteName, maintenanceMode, registrationOpen). useUpdatePlatformConfig mutation calls actor.updatePlatformConfig(newConfig) to persist configuration changes and invalidates platform config query. Include proper authorization awareness (admin-only) and error handling. Export hooks for use in AdminSettings page."
         }
       ]
     }

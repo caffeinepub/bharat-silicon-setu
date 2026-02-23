@@ -8,6 +8,14 @@
 
 import { IDL } from '@icp-sdk/core/candid';
 
+export const Time = IDL.Int;
+export const ReportData = IDL.Record({
+  'endDate' : Time,
+  'messagesSent' : IDL.Nat,
+  'dailyActiveUsers' : IDL.Nat,
+  'projectApplications' : IDL.Nat,
+  'startDate' : Time,
+});
 export const UserRole = IDL.Variant({
   'admin' : IDL.Null,
   'user' : IDL.Null,
@@ -20,12 +28,15 @@ export const Project = IDL.Record({
   'description' : IDL.Text,
   'approved' : IDL.Bool,
 });
+export const RevenueData = IDL.Record({
+  'timestamp' : Time,
+  'totalRevenue' : IDL.Float64,
+});
 export const AppUserRole = IDL.Variant({
   'admin' : IDL.Null,
   'student' : IDL.Null,
   'industryPartner' : IDL.Null,
 });
-export const Time = IDL.Int;
 export const UserProfile = IDL.Record({
   'name' : IDL.Text,
   'role' : AppUserRole,
@@ -33,22 +44,69 @@ export const UserProfile = IDL.Record({
   'registrationTimestamp' : Time,
   'principalId' : IDL.Principal,
 });
+export const AnalyticsData = IDL.Record({
+  'activeProjects' : IDL.Nat,
+  'engagementRate' : IDL.Float64,
+  'projectApplicantCounts' : IDL.Vec(IDL.Tuple(IDL.Principal, IDL.Nat)),
+});
 export const ContactRequest = IDL.Record({
   'to' : IDL.Principal,
   'from' : IDL.Principal,
   'message' : IDL.Text,
 });
+export const PlatformConfig = IDL.Record({
+  'maintenanceMode' : IDL.Bool,
+  'siteName' : IDL.Text,
+  'registrationOpen' : IDL.Bool,
+});
+export const ProjectApplication = IDL.Record({
+  'status' : IDL.Text,
+  'timestamp' : Time,
+  'student' : IDL.Principal,
+  'project' : IDL.Principal,
+});
 
 export const idlService = IDL.Service({
   '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
+  'addReport' : IDL.Func([ReportData], [], []),
+  'addRevenue' : IDL.Func([IDL.Float64], [], []),
+  'applyForProject' : IDL.Func([IDL.Principal, IDL.Nat], [], []),
+  'approveProject' : IDL.Func([IDL.Principal, IDL.Nat], [], []),
   'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
+  'clearReportsData' : IDL.Func([], [], []),
+  'clearRevenueData' : IDL.Func([], [], []),
+  'getAllProjects' : IDL.Func(
+      [],
+      [IDL.Vec(IDL.Tuple(IDL.Principal, IDL.Vec(Project)))],
+      ['query'],
+    ),
+  'getAllReports' : IDL.Func([], [IDL.Vec(ReportData)], ['query']),
+  'getAllRevenue' : IDL.Func([], [IDL.Vec(RevenueData)], ['query']),
+  'getAllUsers' : IDL.Func([], [IDL.Vec(UserProfile)], ['query']),
+  'getAnalyticsData' : IDL.Func([], [AnalyticsData], ['query']),
   'getApprovedProjects' : IDL.Func([], [IDL.Vec(Project)], ['query']),
   'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
   'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
   'getContactRequests' : IDL.Func([], [IDL.Vec(ContactRequest)], ['query']),
+  'getMonthlyRevenue' : IDL.Func([IDL.Nat, IDL.Nat], [IDL.Float64], ['query']),
+  'getPlatformConfig' : IDL.Func([], [PlatformConfig], ['query']),
   'getPlatformMetrics' : IDL.Func([], [IDL.Nat, IDL.Nat], ['query']),
-  'getTotalProjects' : IDL.Func([], [IDL.Nat], ['query']),
-  'getTotalUsers' : IDL.Func([], [IDL.Nat], ['query']),
+  'getProjectApplications' : IDL.Func(
+      [],
+      [IDL.Vec(ProjectApplication)],
+      ['query'],
+    ),
+  'getReportsByDateRange' : IDL.Func(
+      [Time, Time],
+      [IDL.Vec(ReportData)],
+      ['query'],
+    ),
+  'getStudentApplications' : IDL.Func(
+      [],
+      [IDL.Vec(ProjectApplication)],
+      ['query'],
+    ),
+  'getTotalRevenue' : IDL.Func([], [IDL.Float64], ['query']),
   'getUserProfile' : IDL.Func(
       [IDL.Principal],
       [IDL.Opt(UserProfile)],
@@ -58,14 +116,25 @@ export const idlService = IDL.Service({
   'getUserRole' : IDL.Func([], [IDL.Opt(AppUserRole)], ['query']),
   'isCallerAdmin' : IDL.Func([], [IDL.Bool], ['query']),
   'register' : IDL.Func([IDL.Text, IDL.Text, AppUserRole], [], []),
+  'rejectProject' : IDL.Func([IDL.Principal, IDL.Nat], [], []),
   'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
   'saveProject' : IDL.Func([Project], [], []),
   'sendContactRequest' : IDL.Func([IDL.Principal, IDL.Text], [], []),
+  'updateApplicationStatus' : IDL.Func([IDL.Principal, IDL.Text], [], []),
+  'updatePlatformConfig' : IDL.Func([PlatformConfig], [], []),
 });
 
 export const idlInitArgs = [];
 
 export const idlFactory = ({ IDL }) => {
+  const Time = IDL.Int;
+  const ReportData = IDL.Record({
+    'endDate' : Time,
+    'messagesSent' : IDL.Nat,
+    'dailyActiveUsers' : IDL.Nat,
+    'projectApplications' : IDL.Nat,
+    'startDate' : Time,
+  });
   const UserRole = IDL.Variant({
     'admin' : IDL.Null,
     'user' : IDL.Null,
@@ -78,12 +147,15 @@ export const idlFactory = ({ IDL }) => {
     'description' : IDL.Text,
     'approved' : IDL.Bool,
   });
+  const RevenueData = IDL.Record({
+    'timestamp' : Time,
+    'totalRevenue' : IDL.Float64,
+  });
   const AppUserRole = IDL.Variant({
     'admin' : IDL.Null,
     'student' : IDL.Null,
     'industryPartner' : IDL.Null,
   });
-  const Time = IDL.Int;
   const UserProfile = IDL.Record({
     'name' : IDL.Text,
     'role' : AppUserRole,
@@ -91,22 +163,73 @@ export const idlFactory = ({ IDL }) => {
     'registrationTimestamp' : Time,
     'principalId' : IDL.Principal,
   });
+  const AnalyticsData = IDL.Record({
+    'activeProjects' : IDL.Nat,
+    'engagementRate' : IDL.Float64,
+    'projectApplicantCounts' : IDL.Vec(IDL.Tuple(IDL.Principal, IDL.Nat)),
+  });
   const ContactRequest = IDL.Record({
     'to' : IDL.Principal,
     'from' : IDL.Principal,
     'message' : IDL.Text,
   });
+  const PlatformConfig = IDL.Record({
+    'maintenanceMode' : IDL.Bool,
+    'siteName' : IDL.Text,
+    'registrationOpen' : IDL.Bool,
+  });
+  const ProjectApplication = IDL.Record({
+    'status' : IDL.Text,
+    'timestamp' : Time,
+    'student' : IDL.Principal,
+    'project' : IDL.Principal,
+  });
   
   return IDL.Service({
     '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
+    'addReport' : IDL.Func([ReportData], [], []),
+    'addRevenue' : IDL.Func([IDL.Float64], [], []),
+    'applyForProject' : IDL.Func([IDL.Principal, IDL.Nat], [], []),
+    'approveProject' : IDL.Func([IDL.Principal, IDL.Nat], [], []),
     'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
+    'clearReportsData' : IDL.Func([], [], []),
+    'clearRevenueData' : IDL.Func([], [], []),
+    'getAllProjects' : IDL.Func(
+        [],
+        [IDL.Vec(IDL.Tuple(IDL.Principal, IDL.Vec(Project)))],
+        ['query'],
+      ),
+    'getAllReports' : IDL.Func([], [IDL.Vec(ReportData)], ['query']),
+    'getAllRevenue' : IDL.Func([], [IDL.Vec(RevenueData)], ['query']),
+    'getAllUsers' : IDL.Func([], [IDL.Vec(UserProfile)], ['query']),
+    'getAnalyticsData' : IDL.Func([], [AnalyticsData], ['query']),
     'getApprovedProjects' : IDL.Func([], [IDL.Vec(Project)], ['query']),
     'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
     'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
     'getContactRequests' : IDL.Func([], [IDL.Vec(ContactRequest)], ['query']),
+    'getMonthlyRevenue' : IDL.Func(
+        [IDL.Nat, IDL.Nat],
+        [IDL.Float64],
+        ['query'],
+      ),
+    'getPlatformConfig' : IDL.Func([], [PlatformConfig], ['query']),
     'getPlatformMetrics' : IDL.Func([], [IDL.Nat, IDL.Nat], ['query']),
-    'getTotalProjects' : IDL.Func([], [IDL.Nat], ['query']),
-    'getTotalUsers' : IDL.Func([], [IDL.Nat], ['query']),
+    'getProjectApplications' : IDL.Func(
+        [],
+        [IDL.Vec(ProjectApplication)],
+        ['query'],
+      ),
+    'getReportsByDateRange' : IDL.Func(
+        [Time, Time],
+        [IDL.Vec(ReportData)],
+        ['query'],
+      ),
+    'getStudentApplications' : IDL.Func(
+        [],
+        [IDL.Vec(ProjectApplication)],
+        ['query'],
+      ),
+    'getTotalRevenue' : IDL.Func([], [IDL.Float64], ['query']),
     'getUserProfile' : IDL.Func(
         [IDL.Principal],
         [IDL.Opt(UserProfile)],
@@ -116,9 +239,12 @@ export const idlFactory = ({ IDL }) => {
     'getUserRole' : IDL.Func([], [IDL.Opt(AppUserRole)], ['query']),
     'isCallerAdmin' : IDL.Func([], [IDL.Bool], ['query']),
     'register' : IDL.Func([IDL.Text, IDL.Text, AppUserRole], [], []),
+    'rejectProject' : IDL.Func([IDL.Principal, IDL.Nat], [], []),
     'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
     'saveProject' : IDL.Func([Project], [], []),
     'sendContactRequest' : IDL.Func([IDL.Principal, IDL.Text], [], []),
+    'updateApplicationStatus' : IDL.Func([IDL.Principal, IDL.Text], [], []),
+    'updatePlatformConfig' : IDL.Func([PlatformConfig], [], []),
   });
 };
 

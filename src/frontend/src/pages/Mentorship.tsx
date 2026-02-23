@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useGetContactRequests, useSendContactRequest } from '../hooks/useContactRequests';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
-import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
 import { Textarea } from '../components/ui/textarea';
 import { Input } from '../components/ui/input';
@@ -24,25 +23,23 @@ export default function Mentorship() {
     }
 
     try {
-      const principal = Principal.fromText(recipientPrincipal);
+      const principal = Principal.fromText(recipientPrincipal.trim());
       await sendMessageMutation.mutateAsync({
         to: principal,
-        message: messageContent
+        message: messageContent.trim()
       });
       
       toast.success('Message sent successfully!');
       setRecipientPrincipal('');
       setMessageContent('');
-    } catch (error) {
-      toast.error('Failed to send message. Please check the principal ID.');
+    } catch (error: any) {
+      if (error.message?.includes('Invalid principal')) {
+        toast.error('Invalid Principal ID format. Please check and try again.');
+      } else {
+        toast.error('Failed to send message. Please try again.');
+      }
       console.error('Send message error:', error);
     }
-  };
-
-  // Mock mentorship status
-  const getMentorshipStatus = (index: number) => {
-    const statuses = ['Pending', 'Accepted', 'Active'];
-    return statuses[index % statuses.length];
   };
 
   if (isLoading) {
@@ -74,11 +71,14 @@ export default function Mentorship() {
               <Label htmlFor="recipient" className="text-white">Recipient Principal ID</Label>
               <Input
                 id="recipient"
-                placeholder="Enter principal ID"
+                placeholder="Enter principal ID (e.g., xxxxx-xxxxx-xxxxx-xxxxx-xxx)"
                 value={recipientPrincipal}
                 onChange={(e) => setRecipientPrincipal(e.target.value)}
                 className="text-white"
               />
+              <p className="text-xs text-muted-foreground">
+                You can find Principal IDs from project listings or user profiles
+              </p>
             </div>
             <div className="space-y-2">
               <Label htmlFor="message" className="text-white">Message</Label>
@@ -110,39 +110,28 @@ export default function Mentorship() {
               <CardContent className="py-12 text-center">
                 <MessageSquare className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
                 <p className="text-white">No messages yet</p>
+                <p className="text-sm text-muted-foreground mt-2">
+                  Messages from mentors and industry partners will appear here
+                </p>
               </CardContent>
             </Card>
           ) : (
             <div className="space-y-4">
-              {messages.map((msg, index) => {
-                const status = getMentorshipStatus(index);
-                const statusVariant = status === 'Active' ? 'default' : status === 'Accepted' ? 'secondary' : 'outline';
-                
-                return (
-                  <Card key={index}>
-                    <CardHeader>
-                      <div className="flex justify-between items-start">
-                        <div className="flex items-center gap-2">
-                          <User className="h-5 w-5 text-primary" />
-                          <CardTitle className="text-sm text-white">
-                            From: {msg.from.toString().slice(0, 20)}...
-                          </CardTitle>
-                        </div>
-                        <Badge variant={statusVariant} className="text-white">
-                          {status}
-                        </Badge>
-                      </div>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-white">{msg.message}</p>
-                      <div className="mt-4 flex gap-2">
-                        <Button size="sm" variant="outline">Reply</Button>
-                        <Button size="sm" variant="outline">Accept</Button>
-                      </div>
-                    </CardContent>
-                  </Card>
-                );
-              })}
+              {messages.map((msg, index) => (
+                <Card key={index}>
+                  <CardHeader>
+                    <div className="flex items-center gap-2">
+                      <User className="h-5 w-5 text-primary" />
+                      <CardTitle className="text-sm text-white">
+                        From: {msg.from.toString().slice(0, 30)}...
+                      </CardTitle>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-white whitespace-pre-wrap">{msg.message}</p>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
           )}
         </div>

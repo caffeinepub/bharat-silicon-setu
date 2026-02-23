@@ -2,9 +2,10 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-create-a-my-projects-page-frontend-src-pages-myprojects-tsx-for-the-student-dashboard-that-displays-all-projects-the-student-has-applied-to-or-is-working-on-with-status-indicators-applied-in-progress-completed-project-details-and-filtering-options",
-      "featureTitle": "Create a My Projects page (frontend/src/pages/MyProjects.tsx) for the Student Dashboard that displays all projects the student has applied to or is working on, with status indicators (Applied, In Progress, Completed), project details, and filtering options",
+      "featureId": "feature-update-frontend-src-pages-myprojects-tsx-to-fetch-real-user-projects-from-the-backend-using-the-useprojects-hook-instead-of-displaying-mock-data-showing-actual-project-applications-with-real-status-indicators-and-project-details",
+      "featureTitle": "Update frontend/src/pages/MyProjects.tsx to fetch real user projects from the backend using the useProjects hook instead of displaying mock data, showing actual project applications with real status indicators and project details",
       "files": [
+        "frontend/src/hooks/useProjects.ts",
         "frontend/src/pages/MyProjects.tsx"
       ],
       "components": [
@@ -16,13 +17,13 @@
         "authorization@4.0.0"
       ],
       "testIds": [
-        "REQ-37"
+        "REQ-53"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-create-a-skill-profile-page-frontend-src-pages-skillprofile-tsx-for-the-student-dashboard-that-displays-the-student-s-skill-strengths-certifications-and-allows-editing-of-skill-data-with-save-functionality",
-      "featureTitle": "Create a Skill Profile page (frontend/src/pages/SkillProfile.tsx) for the Student Dashboard that displays the student's skill strengths, certifications, and allows editing of skill data with save functionality",
+      "featureId": "feature-update-frontend-src-pages-skillprofile-tsx-to-display-actual-user-skills-from-backend-using-useuserprofile-hook-and-persist-skill-changes-using-usesavecalleruserprofile-hook-with-proper-form-validation-and-success-feedback",
+      "featureTitle": "Update frontend/src/pages/SkillProfile.tsx to display actual user skills from backend using useUserProfile hook and persist skill changes using useSaveCallerUserProfile hook with proper form validation and success feedback",
       "files": [
         "frontend/src/pages/SkillProfile.tsx"
       ],
@@ -35,13 +36,13 @@
         "authorization@4.0.0"
       ],
       "testIds": [
-        "REQ-38"
+        "REQ-54"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-create-a-mentorship-page-frontend-src-pages-mentorship-tsx-for-the-student-dashboard-that-displays-mentor-messages-allows-sending-messages-to-mentors-and-shows-mentorship-requests-with-status-tracking",
-      "featureTitle": "Create a Mentorship page (frontend/src/pages/Mentorship.tsx) for the Student Dashboard that displays mentor messages, allows sending messages to mentors, and shows mentorship requests with status tracking",
+      "featureId": "feature-update-frontend-src-pages-mentorship-tsx-to-fetch-real-contact-requests-using-usecontactrequests-hook-and-enable-sending-messages-using-usesendcontactrequest-hook-with-proper-message-validation-and-confirmation-feedback",
+      "featureTitle": "Update frontend/src/pages/Mentorship.tsx to fetch real contact requests using useContactRequests hook and enable sending messages using useSendContactRequest hook with proper message validation and confirmation feedback",
       "files": [
         "frontend/src/pages/Mentorship.tsx"
       ],
@@ -54,13 +55,13 @@
         "authorization@4.0.0"
       ],
       "testIds": [
-        "REQ-39"
+        "REQ-55"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-create-a-settings-page-frontend-src-pages-studentsettings-tsx-for-the-student-dashboard-that-allows-students-to-update-profile-information-change-notification-preferences-and-manage-account-settings",
-      "featureTitle": "Create a Settings page (frontend/src/pages/StudentSettings.tsx) for the Student Dashboard that allows students to update profile information, change notification preferences, and manage account settings",
+      "featureId": "feature-update-frontend-src-pages-studentsettings-tsx-to-load-real-user-profile-data-using-useuserprofile-hook-and-save-changes-using-usesavecalleruserprofile-hook-with-form-validation-success-notifications-and-proper-error-handling",
+      "featureTitle": "Update frontend/src/pages/StudentSettings.tsx to load real user profile data using useUserProfile hook and save changes using useSaveCallerUserProfile hook with form validation, success notifications, and proper error handling",
       "files": [
         "frontend/src/pages/StudentSettings.tsx"
       ],
@@ -73,14 +74,15 @@
         "authorization@4.0.0"
       ],
       "testIds": [
-        "REQ-40"
+        "REQ-56"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-create-an-applicants-page-frontend-src-pages-applicants-tsx-for-the-industry-dashboard-that-displays-all-students-who-have-applied-to-the-company-s-projects-with-skill-match-percentages-filtering-by-project-and-contact-functionality",
-      "featureTitle": "Create an Applicants page (frontend/src/pages/Applicants.tsx) for the Industry Dashboard that displays all students who have applied to the company's projects, with skill match percentages, filtering by project, and contact functionality",
+      "featureId": "feature-update-frontend-src-pages-applicants-tsx-to-fetch-real-project-applicants-from-the-backend-instead-of-using-mock-data-displaying-actual-student-applications-with-real-skill-match-percentages-and-contact-functionality",
+      "featureTitle": "Update frontend/src/pages/Applicants.tsx to fetch real project applicants from the backend instead of using mock data, displaying actual student applications with real skill match percentages and contact functionality",
       "files": [
+        "frontend/src/hooks/useProjects.ts",
         "frontend/src/pages/Applicants.tsx"
       ],
       "components": [
@@ -92,14 +94,15 @@
         "authorization@4.0.0"
       ],
       "testIds": [
-        "REQ-41"
+        "REQ-57"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-create-an-analytics-page-frontend-src-pages-industryanalytics-tsx-for-the-industry-dashboard-that-displays-project-performance-metrics-applicant-statistics-engagement-rates-and-growth-charts-for-the-company-s-posted-projects",
-      "featureTitle": "Create an Analytics page (frontend/src/pages/IndustryAnalytics.tsx) for the Industry Dashboard that displays project performance metrics, applicant statistics, engagement rates, and growth charts for the company's posted projects",
+      "featureId": "feature-update-frontend-src-pages-industryanalytics-tsx-to-display-real-analytics-data-from-the-backend-including-actual-applicant-counts-active-project-metrics-and-engagement-rates-with-proper-data-visualization",
+      "featureTitle": "Update frontend/src/pages/IndustryAnalytics.tsx to display real analytics data from the backend including actual applicant counts, active project metrics, and engagement rates with proper data visualization",
       "files": [
+        "frontend/src/hooks/useAnalytics.ts",
         "frontend/src/pages/IndustryAnalytics.tsx"
       ],
       "components": [
@@ -111,13 +114,13 @@
         "authorization@4.0.0"
       ],
       "testIds": [
-        "REQ-42"
+        "REQ-59"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-create-a-settings-page-frontend-src-pages-industrysettings-tsx-for-the-industry-dashboard-that-allows-industry-partners-to-update-company-profile-information-manage-team-members-and-configure-posting-preferences",
-      "featureTitle": "Create a Settings page (frontend/src/pages/IndustrySettings.tsx) for the Industry Dashboard that allows industry partners to update company profile information, manage team members, and configure posting preferences",
+      "featureId": "feature-update-frontend-src-pages-industrysettings-tsx-to-load-actual-company-profile-data-using-useuserprofile-hook-and-save-changes-using-usesavecalleruserprofile-hook-with-validation-and-success-feedback",
+      "featureTitle": "Update frontend/src/pages/IndustrySettings.tsx to load actual company profile data using useUserProfile hook and save changes using useSaveCallerUserProfile hook with validation and success feedback",
       "files": [
         "frontend/src/pages/IndustrySettings.tsx"
       ],
@@ -130,14 +133,15 @@
         "authorization@4.0.0"
       ],
       "testIds": [
-        "REQ-43"
+        "REQ-61"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-create-a-users-page-frontend-src-pages-users-tsx-for-the-admin-dashboard-that-displays-all-registered-users-students-industry-partners-admins-with-filtering-search-functionality-and-user-management-actions",
-      "featureTitle": "Create a Users page (frontend/src/pages/Users.tsx) for the Admin Dashboard that displays all registered users (students, industry partners, admins) with filtering, search functionality, and user management actions",
+      "featureId": "feature-update-frontend-src-pages-users-tsx-to-fetch-and-display-real-platform-users-from-the-backend-instead-of-mock-data-with-working-search-functionality-and-role-based-filtering",
+      "featureTitle": "Update frontend/src/pages/Users.tsx to fetch and display real platform users from the backend instead of mock data, with working search functionality and role-based filtering",
       "files": [
+        "frontend/src/hooks/useUsers.ts",
         "frontend/src/pages/Users.tsx"
       ],
       "components": [
@@ -149,14 +153,15 @@
         "authorization@4.0.0"
       ],
       "testIds": [
-        "REQ-44"
+        "REQ-62"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-create-a-projects-page-frontend-src-pages-adminprojects-tsx-for-the-admin-dashboard-that-displays-all-projects-posted-on-the-platform-with-approval-status-moderation-tools-and-analytics",
-      "featureTitle": "Create a Projects page (frontend/src/pages/AdminProjects.tsx) for the Admin Dashboard that displays all projects posted on the platform with approval status, moderation tools, and analytics",
+      "featureId": "feature-update-frontend-src-pages-adminprojects-tsx-to-fetch-real-platform-projects-from-backend-with-actual-approval-status-implementing-working-approve-reject-functionality-that-updates-project-status-in-the-backend",
+      "featureTitle": "Update frontend/src/pages/AdminProjects.tsx to fetch real platform projects from backend with actual approval status, implementing working approve/reject functionality that updates project status in the backend",
       "files": [
+        "frontend/src/hooks/useProjects.ts",
         "frontend/src/pages/AdminProjects.tsx"
       ],
       "components": [
@@ -168,14 +173,15 @@
         "authorization@4.0.0"
       ],
       "testIds": [
-        "REQ-45"
+        "REQ-64"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-create-a-revenue-page-frontend-src-pages-revenue-tsx-for-the-admin-dashboard-that-displays-platform-revenue-metrics-subscription-data-payment-history-and-financial-growth-charts",
-      "featureTitle": "Create a Revenue page (frontend/src/pages/Revenue.tsx) for the Admin Dashboard that displays platform revenue metrics, subscription data, payment history, and financial growth charts",
+      "featureId": "feature-update-frontend-src-pages-revenue-tsx-to-fetch-and-display-actual-platform-revenue-data-from-the-backend-including-total-revenue-monthly-breakdown-and-subscription-statistics-instead-of-placeholder-mock-data",
+      "featureTitle": "Update frontend/src/pages/Revenue.tsx to fetch and display actual platform revenue data from the backend including total revenue, monthly breakdown, and subscription statistics instead of placeholder mock data",
       "files": [
+        "frontend/src/hooks/useRevenue.ts",
         "frontend/src/pages/Revenue.tsx"
       ],
       "components": [
@@ -187,14 +193,15 @@
         "authorization@4.0.0"
       ],
       "testIds": [
-        "REQ-46"
+        "REQ-66"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-create-a-reports-page-frontend-src-pages-reports-tsx-for-the-admin-dashboard-that-displays-platform-activity-reports-user-engagement-metrics-and-export-functionality-for-generating-custom-reports",
-      "featureTitle": "Create a Reports page (frontend/src/pages/Reports.tsx) for the Admin Dashboard that displays platform activity reports, user engagement metrics, and export functionality for generating custom reports",
+      "featureId": "feature-update-frontend-src-pages-reports-tsx-to-fetch-real-platform-activity-data-from-the-backend-including-daily-active-users-project-applications-and-message-counts-with-working-date-range-filtering-and-json-export-functionality",
+      "featureTitle": "Update frontend/src/pages/Reports.tsx to fetch real platform activity data from the backend including daily active users, project applications, and message counts with working date range filtering and JSON export functionality",
       "files": [
+        "frontend/src/hooks/useReports.ts",
         "frontend/src/pages/Reports.tsx"
       ],
       "components": [
@@ -206,14 +213,15 @@
         "authorization@4.0.0"
       ],
       "testIds": [
-        "REQ-47"
+        "REQ-68"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-create-a-settings-page-frontend-src-pages-adminsettings-tsx-for-the-admin-dashboard-that-allows-admins-to-configure-platform-settings-manage-access-controls-and-update-system-preferences",
-      "featureTitle": "Create a Settings page (frontend/src/pages/AdminSettings.tsx) for the Admin Dashboard that allows admins to configure platform settings, manage access controls, and update system preferences",
+      "featureId": "feature-update-frontend-src-pages-adminsettings-tsx-to-load-actual-platform-configuration-settings-from-the-backend-and-enable-saving-configuration-changes-including-site-name-maintenance-mode-and-user-access-controls-with-persistence",
+      "featureTitle": "Update frontend/src/pages/AdminSettings.tsx to load actual platform configuration settings from the backend and enable saving configuration changes including site name, maintenance mode, and user access controls with persistence",
       "files": [
+        "frontend/src/hooks/usePlatformConfig.ts",
         "frontend/src/pages/AdminSettings.tsx"
       ],
       "components": [
@@ -225,83 +233,7 @@
         "authorization@4.0.0"
       ],
       "testIds": [
-        "REQ-48"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-update-frontend-src-pages-studentdashboard-tsx-to-replace-the-hardcoded-sidebar-links-with-proper-react-router-link-components-that-navigate-to-student-my-projects-student-skill-profile-student-mentorship-and-student-settings",
-      "featureTitle": "Update frontend/src/pages/StudentDashboard.tsx to replace the hardcoded sidebar links with proper React Router Link components that navigate to /student/my-projects, /student/skill-profile, /student/mentorship, and /student/settings",
-      "files": [
-        "frontend/src/pages/StudentDashboard.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0",
-        "authorization@4.0.0"
-      ],
-      "testIds": [
-        "REQ-49"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-update-frontend-src-pages-industrydashboard-tsx-to-replace-the-hardcoded-sidebar-links-with-proper-react-router-link-components-that-navigate-to-industry-applicants-industry-analytics-and-industry-settings",
-      "featureTitle": "Update frontend/src/pages/IndustryDashboard.tsx to replace the hardcoded sidebar links with proper React Router Link components that navigate to /industry/applicants, /industry/analytics, and /industry/settings",
-      "files": [
-        "frontend/src/pages/IndustryDashboard.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0",
-        "authorization@4.0.0"
-      ],
-      "testIds": [
-        "REQ-50"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-update-frontend-src-pages-admindashboard-tsx-to-replace-the-hardcoded-sidebar-links-with-proper-react-router-link-components-that-navigate-to-admin-users-admin-projects-admin-revenue-and-admin-reports-and-admin-settings",
-      "featureTitle": "Update frontend/src/pages/AdminDashboard.tsx to replace the hardcoded sidebar links with proper React Router Link components that navigate to /admin/users, /admin/projects, /admin/revenue, and /admin/reports, and /admin/settings",
-      "files": [
-        "frontend/src/pages/AdminDashboard.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0",
-        "authorization@4.0.0"
-      ],
-      "testIds": [
-        "REQ-51"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-update-frontend-src-app-tsx-to-add-route-definitions-for-all-new-dashboard-pages-including-student-routes-student-my-projects-student-skill-profile-student-mentorship-student-settings-industry-routes-industry-applicants-industry-analytics-industry-settings-and-admin-routes-admin-users-admin-projects-admin-revenue-admin-reports-admin-settings-with-proper-protectedroute-guards",
-      "featureTitle": "Update frontend/src/App.tsx to add route definitions for all new dashboard pages including student routes (/student/my-projects, /student/skill-profile, /student/mentorship, /student/settings), industry routes (/industry/applicants, /industry/analytics, /industry/settings), and admin routes (/admin/users, /admin/projects, /admin/revenue, /admin/reports, /admin/settings) with proper ProtectedRoute guards",
-      "files": [
-        "frontend/src/App.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0",
-        "authorization@4.0.0"
-      ],
-      "testIds": [
-        "REQ-52"
+        "REQ-70"
       ],
       "confidence": "high"
     }
