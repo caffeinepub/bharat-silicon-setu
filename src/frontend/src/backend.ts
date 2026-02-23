@@ -133,7 +133,7 @@ export interface backendInterface {
     getUserProjects(): Promise<Array<Project>>;
     getUserRole(): Promise<AppUserRole | null>;
     isCallerAdmin(): Promise<boolean>;
-    registerNewUser(name: string, email: string, role: AppUserRole): Promise<void>;
+    register(name: string, email: string, role: AppUserRole): Promise<void>;
     saveCallerUserProfile(profile: UserProfile): Promise<void>;
     saveProject(project: Project): Promise<void>;
     sendContactRequest(to: Principal, message: string): Promise<void>;
@@ -329,17 +329,17 @@ export class Backend implements backendInterface {
             return result;
         }
     }
-    async registerNewUser(arg0: string, arg1: string, arg2: AppUserRole): Promise<void> {
+    async register(arg0: string, arg1: string, arg2: AppUserRole): Promise<void> {
         if (this.processError) {
             try {
-                const result = await this.actor.registerNewUser(arg0, arg1, to_candid_AppUserRole_n11(this._uploadFile, this._downloadFile, arg2));
+                const result = await this.actor.register(arg0, arg1, to_candid_AppUserRole_n11(this._uploadFile, this._downloadFile, arg2));
                 return result;
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
-            const result = await this.actor.registerNewUser(arg0, arg1, to_candid_AppUserRole_n11(this._uploadFile, this._downloadFile, arg2));
+            const result = await this.actor.register(arg0, arg1, to_candid_AppUserRole_n11(this._uploadFile, this._downloadFile, arg2));
             return result;
         }
     }

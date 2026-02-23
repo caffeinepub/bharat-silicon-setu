@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 5,
+  "projectStateVersion": 13,
   "summary": "Bharat Silicon Setu - A semiconductor execution ecosystem SaaS platform connecting students, semiconductor companies, startups, and institutions. Built with React + Tailwind CSS with a dark blue professional startup theme.",
   "architectural_notes": [
     "React + Tailwind CSS stack for all UI components",
@@ -8,8 +8,10 @@
     "Sidebar navigation pattern for dashboard interfaces",
     "Multi-stakeholder platform: students, industry, startups, institutions"
   ],
-  "known_issues": [],
-  "isFixRequest": false,
+  "known_issues": [
+    "Dashboard redirect navigation not working - users cannot navigate to any dashboard from landing page"
+  ],
+  "isFixRequest": true,
   "existing_features": [
     {
       "id": "feature-create-a-landing-page-with-a-hero-section-displaying-bharat-silicon-setu-as-the-platform-name-the-tagline-bridging-talent-to-semiconductor-execution-and-two-cta-buttons-labeled-join-as-student-and-partner-with-industry",
@@ -162,6 +164,78 @@
         "REQ-22"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-redesign-the-role-selection-modal-in-frontend-src-components-roleselectionmodal-tsx-with-larger-more-prominent-role-selection-buttons-that-clearly-display-role-names-and-helpful-descriptions-for-each-role-student-industry-partner-admin",
+      "title": "Redesign the role selection modal in frontend/src/components/RoleSelectionModal.tsx with larger, more prominent role selection buttons that clearly display role names and helpful descriptions for each role (Student, Industry Partner, Admin)",
+      "reqIds": [
+        "REQ-25"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-simplify-the-role-selection-form-in-frontend-src-components-roleselectionmodal-tsx-by-removing-or-making-optional-the-name-and-email-input-fields-focusing-primarily-on-role-selection-as-the-key-registration-step",
+      "title": "Simplify the role selection form in frontend/src/components/RoleSelectionModal.tsx by removing or making optional the name and email input fields, focusing primarily on role selection as the key registration step",
+      "reqIds": [
+        "REQ-26"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-change-the-bharat-silicon-setu-platform-name-text-color-to-white-in-the-landing-page-header-component-frontend-src-pages-landingpage-tsx-to-improve-visibility-against-the-dark-background",
+      "title": "Change the 'Bharat Silicon Setu' platform name text color to white in the landing page header component (frontend/src/pages/LandingPage.tsx) to improve visibility against the dark background",
+      "reqIds": [
+        "REQ-27"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-all-text-color-classes-in-frontend-src-pages-landingpage-tsx-from-black-text-black-text-gray-900-text-gray-800-to-white-text-white-for-all-headings-paragraphs-body-text-and-labels-including-hero-section-problem-section-how-it-works-section-stakeholder-cards-and-impact-metrics-to-ensure-visibility-against-the-dark-background",
+      "title": "Update all text color classes in frontend/src/pages/LandingPage.tsx from black (text-black, text-gray-900, text-gray-800) to white (text-white) for all headings, paragraphs, body text, and labels including hero section, problem section, how it works section, stakeholder cards, and impact metrics to ensure visibility against the dark background",
+      "reqIds": [
+        "REQ-28"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-all-text-color-classes-in-frontend-src-pages-studentdashboard-tsx-from-black-to-white-including-sidebar-navigation-labels-dashboard-headings-profile-completion-text-skill-tags-project-card-titles-and-descriptions-applied-projects-list-and-mentor-messages-preview-to-maintain-consistency-with-the-white-text-theme",
+      "title": "Update all text color classes in frontend/src/pages/StudentDashboard.tsx from black to white including sidebar navigation labels, dashboard headings, profile completion text, skill tags, project card titles and descriptions, applied projects list, and mentor messages preview to maintain consistency with the white text theme",
+      "reqIds": [
+        "REQ-29"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-all-text-color-classes-in-frontend-src-pages-industrydashboard-tsx-from-black-to-white-including-sidebar-navigation-dashboard-headings-project-listings-status-indicators-applicant-cards-skill-match-percentages-and-analytics-section-text-to-ensure-uniform-white-text-styling-across-the-dashboard",
+      "title": "Update all text color classes in frontend/src/pages/IndustryDashboard.tsx from black to white including sidebar navigation, dashboard headings, project listings, status indicators, applicant cards, skill match percentages, and analytics section text to ensure uniform white text styling across the dashboard",
+      "reqIds": [
+        "REQ-30"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-all-text-color-classes-in-frontend-src-pages-admindashboard-tsx-from-black-to-white-including-sidebar-navigation-overview-headings-user-count-metrics-project-statistics-revenue-data-growth-chart-labels-and-recent-activity-feed-text-to-maintain-the-white-text-theme-consistently",
+      "title": "Update all text color classes in frontend/src/pages/AdminDashboard.tsx from black to white including sidebar navigation, overview headings, user count metrics, project statistics, revenue data, growth chart labels, and recent activity feed text to maintain the white text theme consistently",
+      "reqIds": [
+        "REQ-31"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-all-text-color-classes-in-frontend-src-pages-aiskillmapping-tsx-from-black-to-white-including-page-headings-upload-box-instructions-analyze-button-labels-ai-analysis-result-headings-extracted-skills-list-skill-strength-labels-suggested-projects-and-match-score-text-to-ensure-complete-white-text-coverage",
+      "title": "Update all text color classes in frontend/src/pages/AISkillMapping.tsx from black to white including page headings, upload box instructions, analyze button labels, AI analysis result headings, extracted skills list, skill strength labels, suggested projects, and match score text to ensure complete white text coverage",
+      "reqIds": [
+        "REQ-32"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-all-text-color-classes-in-frontend-src-components-roleselectionmodal-tsx-from-black-to-white-including-modal-title-role-selection-card-titles-student-industry-partner-admin-role-descriptions-and-any-instruction-text-to-maintain-white-text-consistency-in-the-registration-flow",
+      "title": "Update all text color classes in frontend/src/components/RoleSelectionModal.tsx from black to white including modal title, role selection card titles (Student, Industry Partner, Admin), role descriptions, and any instruction text to maintain white text consistency in the registration flow",
+      "reqIds": [
+        "REQ-33"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -223,6 +297,28 @@
       "reqIds": [
         "REQ-21"
       ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-15",
+      "summary": "Add the 'shared' keyword to the register function in backend/main.mo to make it publicly accessible from the frontend, changing the function signature from 'public func register' to 'public shared func register'",
+      "reqIds": [
+        "REQ-23"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-16",
+      "summary": "Add the 'shared' keyword to the register function in backend/main.mo to make it publicly accessible, changing the function signature from 'public func register' to 'public shared func register' and adding the caller parameter",
+      "reqIds": [
+        "REQ-24"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-18",
+      "summary": "Change all black text to white text across entire application for better visibility on dark background",
+      "reqIds": [],
       "status": "pending"
     }
   ],

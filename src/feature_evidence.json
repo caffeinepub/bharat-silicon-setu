@@ -2,8 +2,8 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-integrate-internet-identity-login-button-on-the-landing-page-header-replacing-or-supplementing-the-existing-navigation-with-a-login-button-that-triggers-the-internet-identity-authentication-flow",
-      "featureTitle": "Integrate Internet Identity login button on the landing page header, replacing or supplementing the existing navigation with a 'Login' button that triggers the Internet Identity authentication flow",
+      "featureId": "feature-update-all-text-color-classes-in-frontend-src-pages-landingpage-tsx-from-black-text-black-text-gray-900-text-gray-800-to-white-text-white-for-all-headings-paragraphs-body-text-and-labels-including-hero-section-problem-section-how-it-works-section-stakeholder-cards-and-impact-metrics-to-ensure-visibility-against-the-dark-background",
+      "featureTitle": "Update all text color classes in frontend/src/pages/LandingPage.tsx from black (text-black, text-gray-900, text-gray-800) to white (text-white) for all headings, paragraphs, body text, and labels including hero section, problem section, how it works section, stakeholder cards, and impact metrics to ensure visibility against the dark background",
       "files": [
         "frontend/src/pages/LandingPage.tsx"
       ],
@@ -16,57 +16,14 @@
         "authorization@4.0.0"
       ],
       "testIds": [
-        "REQ-14"
+        "REQ-28"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-create-a-user-registration-flow-that-allows-new-users-to-select-their-role-student-industry-partner-admin-after-completing-internet-identity-authentication-for-the-first-time",
-      "featureTitle": "Create a user registration flow that allows new users to select their role (Student, Industry Partner, Admin) after completing Internet Identity authentication for the first time",
+      "featureId": "feature-update-all-text-color-classes-in-frontend-src-pages-studentdashboard-tsx-from-black-to-white-including-sidebar-navigation-labels-dashboard-headings-profile-completion-text-skill-tags-project-card-titles-and-descriptions-applied-projects-list-and-mentor-messages-preview-to-maintain-consistency-with-the-white-text-theme",
+      "featureTitle": "Update all text color classes in frontend/src/pages/StudentDashboard.tsx from black to white including sidebar navigation labels, dashboard headings, profile completion text, skill tags, project card titles and descriptions, applied projects list, and mentor messages preview to maintain consistency with the white text theme",
       "files": [
-        "frontend/src/App.tsx",
-        "frontend/src/components/RoleSelectionModal.tsx",
-        "frontend/src/hooks/useUserProfile.ts"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0",
-        "authorization@4.0.0"
-      ],
-      "testIds": [
-        "REQ-15"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-add-authentication-guards-to-all-dashboard-routes-student-industry-admin-that-redirect-unauthenticated-users-to-the-landing-page",
-      "featureTitle": "Add authentication guards to all dashboard routes (Student, Industry, Admin) that redirect unauthenticated users to the landing page",
-      "files": [
-        "frontend/src/App.tsx",
-        "frontend/src/components/ProtectedRoute.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0",
-        "authorization@4.0.0"
-      ],
-      "testIds": [
-        "REQ-17"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-add-a-logout-button-to-all-dashboard-sidebars-that-clears-the-internet-identity-session-and-redirects-to-the-landing-page",
-      "featureTitle": "Add a logout button to all dashboard sidebars that clears the Internet Identity session and redirects to the landing page",
-      "files": [
-        "frontend/src/pages/AdminDashboard.tsx",
-        "frontend/src/pages/IndustryDashboard.tsx",
         "frontend/src/pages/StudentDashboard.tsx"
       ],
       "components": [
@@ -78,17 +35,15 @@
         "authorization@4.0.0"
       ],
       "testIds": [
-        "REQ-18"
+        "REQ-29"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-implement-role-based-routing-that-automatically-directs-authenticated-users-to-their-correct-dashboard-student-industry-or-admin-based-on-their-stored-role",
-      "featureTitle": "Implement role-based routing that automatically directs authenticated users to their correct dashboard (Student, Industry, or Admin) based on their stored role",
+      "featureId": "feature-update-all-text-color-classes-in-frontend-src-pages-industrydashboard-tsx-from-black-to-white-including-sidebar-navigation-dashboard-headings-project-listings-status-indicators-applicant-cards-skill-match-percentages-and-analytics-section-text-to-ensure-uniform-white-text-styling-across-the-dashboard",
+      "featureTitle": "Update all text color classes in frontend/src/pages/IndustryDashboard.tsx from black to white including sidebar navigation, dashboard headings, project listings, status indicators, applicant cards, skill match percentages, and analytics section text to ensure uniform white text styling across the dashboard",
       "files": [
-        "frontend/src/App.tsx",
-        "frontend/src/components/ProtectedRoute.tsx",
-        "frontend/src/hooks/useRoleBasedRedirect.ts"
+        "frontend/src/pages/IndustryDashboard.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -99,20 +54,15 @@
         "authorization@4.0.0"
       ],
       "testIds": [
-        "REQ-19"
+        "REQ-30"
       ],
       "confidence": "high"
     },
     {
-      "featureId": "feature-update-all-dashboard-pages-to-fetch-and-display-real-user-data-from-the-backend-instead-of-using-hardcoded-dummy-data",
-      "featureTitle": "Update all dashboard pages to fetch and display real user data from the backend instead of using hardcoded dummy data",
+      "featureId": "feature-update-all-text-color-classes-in-frontend-src-pages-admindashboard-tsx-from-black-to-white-including-sidebar-navigation-overview-headings-user-count-metrics-project-statistics-revenue-data-growth-chart-labels-and-recent-activity-feed-text-to-maintain-the-white-text-theme-consistently",
+      "featureTitle": "Update all text color classes in frontend/src/pages/AdminDashboard.tsx from black to white including sidebar navigation, overview headings, user count metrics, project statistics, revenue data, growth chart labels, and recent activity feed text to maintain the white text theme consistently",
       "files": [
-        "frontend/src/hooks/useContactRequests.ts",
-        "frontend/src/hooks/usePlatformMetrics.ts",
-        "frontend/src/hooks/useProjects.ts",
-        "frontend/src/pages/AdminDashboard.tsx",
-        "frontend/src/pages/IndustryDashboard.tsx",
-        "frontend/src/pages/StudentDashboard.tsx"
+        "frontend/src/pages/AdminDashboard.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -123,7 +73,45 @@
         "authorization@4.0.0"
       ],
       "testIds": [
-        "REQ-22"
+        "REQ-31"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-update-all-text-color-classes-in-frontend-src-pages-aiskillmapping-tsx-from-black-to-white-including-page-headings-upload-box-instructions-analyze-button-labels-ai-analysis-result-headings-extracted-skills-list-skill-strength-labels-suggested-projects-and-match-score-text-to-ensure-complete-white-text-coverage",
+      "featureTitle": "Update all text color classes in frontend/src/pages/AISkillMapping.tsx from black to white including page headings, upload box instructions, analyze button labels, AI analysis result headings, extracted skills list, skill strength labels, suggested projects, and match score text to ensure complete white text coverage",
+      "files": [
+        "frontend/src/pages/AISkillMapping.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-32"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-update-all-text-color-classes-in-frontend-src-components-roleselectionmodal-tsx-from-black-to-white-including-modal-title-role-selection-card-titles-student-industry-partner-admin-role-descriptions-and-any-instruction-text-to-maintain-white-text-consistency-in-the-registration-flow",
+      "featureTitle": "Update all text color classes in frontend/src/components/RoleSelectionModal.tsx from black to white including modal title, role selection card titles (Student, Industry Partner, Admin), role descriptions, and any instruction text to maintain white text consistency in the registration flow",
+      "files": [
+        "frontend/src/components/RoleSelectionModal.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-33"
       ],
       "confidence": "high"
     }

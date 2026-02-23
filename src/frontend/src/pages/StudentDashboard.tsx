@@ -1,21 +1,19 @@
 import { useState } from 'react';
-import { Link, useNavigate } from '@tanstack/react-router';
+import { useNavigate } from '@tanstack/react-router';
 import { useQueryClient } from '@tanstack/react-query';
-import { Cpu, Home, Briefcase, MessageSquare, User, Settings, LogOut, TrendingUp, Award, Clock } from 'lucide-react';
+import { GraduationCap, Briefcase, MessageSquare, LogOut, TrendingUp, Award, BookOpen, Target } from 'lucide-react';
 import { useInternetIdentity } from '../hooks/useInternetIdentity';
-import { useUserProfile } from '../hooks/useUserProfile';
 import { useGetApprovedProjects } from '../hooks/useProjects';
 import { useGetContactRequests } from '../hooks/useContactRequests';
+import { Button } from '../components/ui/button';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
-import { Progress } from '../components/ui/progress';
-import { Skeleton } from '../components/ui/skeleton';
 
 export default function StudentDashboard() {
-  const [activeTab, setActiveTab] = useState('overview');
-  const { clear } = useInternetIdentity();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const { userProfile, isLoading: profileLoading } = useUserProfile();
+  const { clear } = useInternetIdentity();
   const { data: projects = [], isLoading: projectsLoading } = useGetApprovedProjects();
   const { data: messages = [], isLoading: messagesLoading } = useGetContactRequests();
 
@@ -25,313 +23,219 @@ export default function StudentDashboard() {
     navigate({ to: '/' });
   };
 
-  // Calculate profile completion (simplified)
-  const profileCompletion = userProfile ? 75 : 0;
+  const mockSkills = ['VLSI Design', 'Verilog', 'SystemVerilog', 'Digital Design', 'ASIC Design'];
+  const profileCompletion = 75;
 
   return (
-    <div className="min-h-screen bg-background dark flex">
+    <div className="min-h-screen bg-background dark">
       {/* Sidebar */}
-      <aside className="w-64 border-r border-border bg-card/50 flex flex-col">
-        <div className="p-6 border-b border-border">
-          <div className="flex items-center gap-2">
-            <Cpu className="h-8 w-8 text-primary" />
-            <span className="text-lg font-display font-bold">Silicon Setu</span>
-          </div>
+      <aside className="fixed left-0 top-0 h-full w-64 bg-card border-r border-border p-6 flex flex-col">
+        <div className="flex items-center gap-2 mb-8">
+          <GraduationCap className="h-8 w-8 text-primary" />
+          <span className="text-xl font-display font-bold text-white">Student Portal</span>
         </div>
         
-        <nav className="flex-1 p-4 space-y-2">
-          <button
-            onClick={() => setActiveTab('overview')}
-            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
-              activeTab === 'overview' ? 'bg-primary text-primary-foreground' : 'hover:bg-accent'
-            }`}
-          >
-            <Home className="h-5 w-5" />
-            <span className="font-medium">Overview</span>
+        <nav className="flex-1 space-y-2">
+          <button className="w-full flex items-center gap-3 px-4 py-3 rounded-lg bg-primary/10 text-primary font-medium">
+            <Target className="h-5 w-5" />
+            <span className="text-white">Dashboard</span>
           </button>
-          <button
-            onClick={() => setActiveTab('projects')}
-            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
-              activeTab === 'projects' ? 'bg-primary text-primary-foreground' : 'hover:bg-accent'
-            }`}
-          >
+          <button className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-accent transition-colors text-white">
             <Briefcase className="h-5 w-5" />
-            <span className="font-medium">Projects</span>
+            <span>Projects</span>
           </button>
-          <button
-            onClick={() => setActiveTab('messages')}
-            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
-              activeTab === 'messages' ? 'bg-primary text-primary-foreground' : 'hover:bg-accent'
-            }`}
-          >
+          <button className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-accent transition-colors text-white">
+            <BookOpen className="h-5 w-5" />
+            <span>My Skills</span>
+          </button>
+          <button className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-accent transition-colors text-white">
             <MessageSquare className="h-5 w-5" />
-            <span className="font-medium">Messages</span>
-            {messages.length > 0 && (
-              <Badge variant="destructive" className="ml-auto">{messages.length}</Badge>
-            )}
-          </button>
-          <button
-            onClick={() => setActiveTab('profile')}
-            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
-              activeTab === 'profile' ? 'bg-primary text-primary-foreground' : 'hover:bg-accent'
-            }`}
-          >
-            <User className="h-5 w-5" />
-            <span className="font-medium">Profile</span>
-          </button>
-          <button
-            onClick={() => setActiveTab('settings')}
-            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
-              activeTab === 'settings' ? 'bg-primary text-primary-foreground' : 'hover:bg-accent'
-            }`}
-          >
-            <Settings className="h-5 w-5" />
-            <span className="font-medium">Settings</span>
+            <span>Messages</span>
           </button>
         </nav>
 
-        <div className="p-4 border-t border-border">
-          <button
-            onClick={handleLogout}
-            className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-destructive/10 text-destructive transition-colors"
-          >
-            <LogOut className="h-5 w-5" />
-            <span className="font-medium">Logout</span>
-          </button>
-        </div>
+        <Button
+          onClick={handleLogout}
+          variant="outline"
+          className="w-full justify-start gap-3"
+        >
+          <LogOut className="h-5 w-5" />
+          Logout
+        </Button>
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 overflow-auto">
-        <div className="p-8">
+      <main className="ml-64 p-8">
+        <div className="max-w-7xl mx-auto space-y-8">
           {/* Header */}
-          <div className="mb-8">
-            <h1 className="text-3xl font-display font-bold mb-2">
-              Welcome back, {profileLoading ? '...' : userProfile?.name || 'Student'}!
-            </h1>
-            <p className="text-muted-foreground">Track your progress and explore new opportunities</p>
+          <div>
+            <h1 className="text-4xl font-display font-bold mb-2 text-white">Welcome Back!</h1>
+            <p className="text-white">Continue your semiconductor journey</p>
           </div>
 
-          {activeTab === 'overview' && (
-            <div className="space-y-6">
-              {/* Profile Completion */}
-              <div className="bg-card border border-border rounded-xl p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-xl font-semibold">Profile Completion</h2>
-                  <span className="text-2xl font-bold text-primary">{profileCompletion}%</span>
+          {/* Profile Completion Card */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-white">Profile Completion</CardTitle>
+              <CardDescription className="text-white">Complete your profile to unlock more opportunities</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-2">
+                <div className="flex justify-between text-sm text-white">
+                  <span>Progress</span>
+                  <span className="font-semibold">{profileCompletion}%</span>
                 </div>
-                <Progress value={profileCompletion} className="mb-4" />
-                <p className="text-sm text-muted-foreground">
-                  Complete your profile to unlock more opportunities and improve project matching
-                </p>
-              </div>
-
-              {/* Skills */}
-              <div className="bg-card border border-border rounded-xl p-6">
-                <h2 className="text-xl font-semibold mb-4">Your Skills</h2>
-                <div className="flex flex-wrap gap-2">
-                  <Badge variant="secondary">VLSI Design</Badge>
-                  <Badge variant="secondary">Verilog</Badge>
-                  <Badge variant="secondary">SystemVerilog</Badge>
-                  <Badge variant="secondary">Digital Design</Badge>
-                  <Badge variant="secondary">FPGA</Badge>
-                  <Badge variant="secondary">ASIC</Badge>
+                <div className="h-2 bg-secondary rounded-full overflow-hidden">
+                  <div 
+                    className="h-full bg-primary transition-all duration-500"
+                    style={{ width: `${profileCompletion}%` }}
+                  />
                 </div>
-                <Link to="/ai-skill-mapping" className="inline-block mt-4 text-sm text-primary hover:underline">
-                  Update skills with AI →
-                </Link>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Tabs */}
+          <Tabs defaultValue="overview" className="space-y-6">
+            <TabsList>
+              <TabsTrigger value="overview" className="text-white">Overview</TabsTrigger>
+              <TabsTrigger value="projects" className="text-white">Available Projects</TabsTrigger>
+              <TabsTrigger value="applied" className="text-white">Applied Projects</TabsTrigger>
+              <TabsTrigger value="messages" className="text-white">Messages</TabsTrigger>
+            </TabsList>
+
+            {/* Overview Tab */}
+            <TabsContent value="overview" className="space-y-6">
+              {/* Stats Grid */}
+              <div className="grid md:grid-cols-3 gap-6">
+                <Card>
+                  <CardHeader className="flex flex-row items-center justify-between pb-2">
+                    <CardTitle className="text-sm font-medium text-white">Skills Mapped</CardTitle>
+                    <Award className="h-4 w-4 text-muted-foreground" />
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-2xl font-bold text-white">{mockSkills.length}</div>
+                    <p className="text-xs text-white mt-1">+2 from last month</p>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardHeader className="flex flex-row items-center justify-between pb-2">
+                    <CardTitle className="text-sm font-medium text-white">Projects Applied</CardTitle>
+                    <Briefcase className="h-4 w-4 text-muted-foreground" />
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-2xl font-bold text-white">3</div>
+                    <p className="text-xs text-white mt-1">2 pending review</p>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardHeader className="flex flex-row items-center justify-between pb-2">
+                    <CardTitle className="text-sm font-medium text-white">Match Score</CardTitle>
+                    <TrendingUp className="h-4 w-4 text-muted-foreground" />
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-2xl font-bold text-white">87%</div>
+                    <p className="text-xs text-white mt-1">Above average</p>
+                  </CardContent>
+                </Card>
               </div>
 
-              {/* Available Projects */}
-              <div className="bg-card border border-border rounded-xl p-6">
-                <h2 className="text-xl font-semibold mb-4">Available Projects</h2>
-                {projectsLoading ? (
-                  <div className="space-y-4">
-                    <Skeleton className="h-24 w-full" />
-                    <Skeleton className="h-24 w-full" />
-                  </div>
-                ) : projects.length === 0 ? (
-                  <div className="text-center py-8 text-muted-foreground">
-                    <Briefcase className="h-12 w-12 mx-auto mb-3 opacity-50" />
-                    <p>No projects available yet</p>
-                    <p className="text-sm mt-1">Check back soon for new opportunities</p>
-                  </div>
-                ) : (
-                  <div className="space-y-4">
-                    {projects.slice(0, 3).map((project, idx) => (
-                      <div key={idx} className="border border-border rounded-lg p-4 hover:border-primary/50 transition-colors">
-                        <div className="flex items-start justify-between mb-2">
-                          <h3 className="font-semibold">{project.title}</h3>
-                          <Badge variant="outline" className="text-xs">
-                            {Math.floor(Math.random() * 30 + 70)}% Match
-                          </Badge>
-                        </div>
-                        <p className="text-sm text-muted-foreground mb-3">{project.description}</p>
-                        <div className="flex flex-wrap gap-2">
-                          {project.skillsRequired.map((skill, i) => (
-                            <Badge key={i} variant="secondary" className="text-xs">{skill}</Badge>
-                          ))}
-                        </div>
-                      </div>
+              {/* My Skills */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-white">My Skills</CardTitle>
+                  <CardDescription className="text-white">Your semiconductor expertise</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex flex-wrap gap-2">
+                    {mockSkills.map((skill) => (
+                      <Badge key={skill} variant="secondary" className="text-white">
+                        {skill}
+                      </Badge>
                     ))}
                   </div>
-                )}
-              </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
 
-              {/* Recent Messages */}
-              <div className="bg-card border border-border rounded-xl p-6">
-                <h2 className="text-xl font-semibold mb-4">Mentor Messages</h2>
-                {messagesLoading ? (
-                  <Skeleton className="h-20 w-full" />
-                ) : messages.length === 0 ? (
-                  <div className="text-center py-8 text-muted-foreground">
-                    <MessageSquare className="h-12 w-12 mx-auto mb-3 opacity-50" />
-                    <p>No messages yet</p>
-                    <p className="text-sm mt-1">Connect with mentors to get guidance</p>
-                  </div>
-                ) : (
-                  <div className="space-y-3">
-                    {messages.slice(0, 3).map((msg, idx) => (
-                      <div key={idx} className="border border-border rounded-lg p-4">
-                        <div className="flex items-center gap-2 mb-2">
-                          <div className="h-8 w-8 bg-primary/10 rounded-full flex items-center justify-center">
-                            <User className="h-4 w-4 text-primary" />
-                          </div>
-                          <span className="font-medium text-sm">Industry Mentor</span>
-                        </div>
-                        <p className="text-sm text-muted-foreground">{msg.message}</p>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
-
-          {activeTab === 'projects' && (
-            <div className="space-y-6">
-              <div className="bg-card border border-border rounded-xl p-6">
-                <h2 className="text-2xl font-semibold mb-6">All Available Projects</h2>
-                {projectsLoading ? (
-                  <div className="space-y-4">
-                    <Skeleton className="h-32 w-full" />
-                    <Skeleton className="h-32 w-full" />
-                    <Skeleton className="h-32 w-full" />
-                  </div>
-                ) : projects.length === 0 ? (
-                  <div className="text-center py-12 text-muted-foreground">
-                    <Briefcase className="h-16 w-16 mx-auto mb-4 opacity-50" />
-                    <p className="text-lg font-medium">No projects available yet</p>
-                    <p className="text-sm mt-2">Check back soon for new opportunities</p>
-                  </div>
-                ) : (
-                  <div className="grid gap-4">
-                    {projects.map((project, idx) => (
-                      <div key={idx} className="border border-border rounded-lg p-6 hover:border-primary/50 transition-colors">
-                        <div className="flex items-start justify-between mb-3">
-                          <div>
-                            <h3 className="text-lg font-semibold mb-1">{project.title}</h3>
-                            <p className="text-sm text-muted-foreground">{project.description}</p>
-                          </div>
-                          <Badge variant="outline" className="ml-4">
-                            {Math.floor(Math.random() * 30 + 70)}% Match
-                          </Badge>
-                        </div>
-                        <div className="flex flex-wrap gap-2 mb-4">
-                          {project.skillsRequired.map((skill, i) => (
-                            <Badge key={i} variant="secondary">{skill}</Badge>
-                          ))}
-                        </div>
-                        <button className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">
-                          Apply Now
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
-
-          {activeTab === 'messages' && (
-            <div className="space-y-6">
-              <div className="bg-card border border-border rounded-xl p-6">
-                <h2 className="text-2xl font-semibold mb-6">Messages</h2>
-                {messagesLoading ? (
-                  <div className="space-y-4">
-                    <Skeleton className="h-24 w-full" />
-                    <Skeleton className="h-24 w-full" />
-                  </div>
-                ) : messages.length === 0 ? (
-                  <div className="text-center py-12 text-muted-foreground">
-                    <MessageSquare className="h-16 w-16 mx-auto mb-4 opacity-50" />
-                    <p className="text-lg font-medium">No messages yet</p>
-                    <p className="text-sm mt-2">Connect with mentors to get guidance</p>
-                  </div>
-                ) : (
-                  <div className="space-y-4">
-                    {messages.map((msg, idx) => (
-                      <div key={idx} className="border border-border rounded-lg p-6">
-                        <div className="flex items-center gap-3 mb-3">
-                          <div className="h-10 w-10 bg-primary/10 rounded-full flex items-center justify-center">
-                            <User className="h-5 w-5 text-primary" />
-                          </div>
-                          <div>
-                            <p className="font-medium">Industry Mentor</p>
-                            <p className="text-xs text-muted-foreground">From: {msg.from.toString().slice(0, 10)}...</p>
+            {/* Projects Tab */}
+            <TabsContent value="projects" className="space-y-6">
+              {projectsLoading ? (
+                <div className="text-center py-12 text-white">Loading projects...</div>
+              ) : projects.length === 0 ? (
+                <Card>
+                  <CardContent className="py-12 text-center">
+                    <Briefcase className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+                    <p className="text-white">No projects available at the moment</p>
+                  </CardContent>
+                </Card>
+              ) : (
+                <div className="grid md:grid-cols-2 gap-6">
+                  {projects.map((project, index) => (
+                    <Card key={index}>
+                      <CardHeader>
+                        <CardTitle className="text-white">{project.title}</CardTitle>
+                        <CardDescription className="text-white">{project.description}</CardDescription>
+                      </CardHeader>
+                      <CardContent className="space-y-4">
+                        <div>
+                          <p className="text-sm font-medium mb-2 text-white">Required Skills:</p>
+                          <div className="flex flex-wrap gap-2">
+                            {project.skillsRequired.map((skill) => (
+                              <Badge key={skill} variant="outline" className="text-white">
+                                {skill}
+                              </Badge>
+                            ))}
                           </div>
                         </div>
-                        <p className="text-muted-foreground">{msg.message}</p>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
+                        <Button className="w-full">Apply Now</Button>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              )}
+            </TabsContent>
 
-          {activeTab === 'profile' && (
-            <div className="space-y-6">
-              <div className="bg-card border border-border rounded-xl p-6">
-                <h2 className="text-2xl font-semibold mb-6">Your Profile</h2>
-                {profileLoading ? (
-                  <div className="space-y-4">
-                    <Skeleton className="h-12 w-full" />
-                    <Skeleton className="h-12 w-full" />
-                    <Skeleton className="h-12 w-full" />
-                  </div>
-                ) : (
-                  <div className="space-y-4">
-                    <div>
-                      <label className="text-sm font-medium text-muted-foreground">Name</label>
-                      <p className="text-lg">{userProfile?.name || 'Not set'}</p>
-                    </div>
-                    <div>
-                      <label className="text-sm font-medium text-muted-foreground">Email</label>
-                      <p className="text-lg">{userProfile?.email || 'Not set'}</p>
-                    </div>
-                    <div>
-                      <label className="text-sm font-medium text-muted-foreground">Role</label>
-                      <p className="text-lg capitalize">{userProfile?.role || 'Not set'}</p>
-                    </div>
-                    <div>
-                      <label className="text-sm font-medium text-muted-foreground">Principal ID</label>
-                      <p className="text-sm font-mono break-all">{userProfile?.principalId.toString()}</p>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
+            {/* Applied Projects Tab */}
+            <TabsContent value="applied" className="space-y-6">
+              <Card>
+                <CardContent className="py-12 text-center">
+                  <Briefcase className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+                  <p className="text-white">You haven't applied to any projects yet</p>
+                  <Button className="mt-4" onClick={() => document.querySelector('[value="projects"]')?.dispatchEvent(new Event('click', { bubbles: true }))}>
+                    Browse Projects
+                  </Button>
+                </CardContent>
+              </Card>
+            </TabsContent>
 
-          {activeTab === 'settings' && (
-            <div className="space-y-6">
-              <div className="bg-card border border-border rounded-xl p-6">
-                <h2 className="text-2xl font-semibold mb-6">Settings</h2>
-                <p className="text-muted-foreground">Settings panel coming soon...</p>
-              </div>
-            </div>
-          )}
+            {/* Messages Tab */}
+            <TabsContent value="messages" className="space-y-6">
+              {messagesLoading ? (
+                <div className="text-center py-12 text-white">Loading messages...</div>
+              ) : messages.length === 0 ? (
+                <Card>
+                  <CardContent className="py-12 text-center">
+                    <MessageSquare className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+                    <p className="text-white">No messages yet</p>
+                  </CardContent>
+                </Card>
+              ) : (
+                <div className="space-y-4">
+                  {messages.map((msg, index) => (
+                    <Card key={index}>
+                      <CardHeader>
+                        <CardTitle className="text-sm text-white">From: {msg.from.toString()}</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-white">{msg.message}</p>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              )}
+            </TabsContent>
+          </Tabs>
         </div>
       </main>
     </div>

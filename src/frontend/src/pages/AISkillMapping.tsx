@@ -1,47 +1,54 @@
 import { useState } from 'react';
+import { Upload, Zap, TrendingUp, Award, ArrowLeft } from 'lucide-react';
 import { Link } from '@tanstack/react-router';
-import { Upload, Zap, Cpu, TrendingUp, Target, CheckCircle2, ArrowLeft } from 'lucide-react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
-import { Badge } from '@/components/ui/badge';
+import { Button } from '../components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
+import { Badge } from '../components/ui/badge';
+import { Progress } from '../components/ui/progress';
 
 export default function AISkillMapping() {
   const [file, setFile] = useState<File | null>(null);
-  const [analyzing, setAnalyzing] = useState(false);
-  const [analyzed, setAnalyzed] = useState(false);
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [analysisComplete, setAnalysisComplete] = useState(false);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setFile(e.target.files[0]);
-      setAnalyzed(false);
     }
   };
 
   const handleAnalyze = () => {
-    setAnalyzing(true);
+    if (!file) return;
+    setIsAnalyzing(true);
+    // Simulate analysis
     setTimeout(() => {
-      setAnalyzing(false);
-      setAnalyzed(true);
-    }, 2000);
+      setIsAnalyzing(false);
+      setAnalysisComplete(true);
+    }, 3000);
   };
 
-  const extractedSkills = [
-    { name: 'VLSI Design', strength: 92, category: 'Core' },
-    { name: 'RTL Design', strength: 88, category: 'Core' },
-    { name: 'Verilog/SystemVerilog', strength: 85, category: 'Programming' },
-    { name: 'FPGA Development', strength: 78, category: 'Hardware' },
-    { name: 'Digital Circuit Design', strength: 82, category: 'Core' },
-    { name: 'Embedded Systems', strength: 75, category: 'Systems' }
+  const mockSkills = [
+    { name: 'VLSI Design', strength: 85 },
+    { name: 'Verilog', strength: 90 },
+    { name: 'SystemVerilog', strength: 75 },
+    { name: 'Digital Design', strength: 80 },
+    { name: 'ASIC Design', strength: 70 }
   ];
 
-  const suggestedProjects = [
-    { id: 1, title: 'RISC-V Processor Design', company: 'TechCore Semiconductors', match: 92 },
-    { id: 2, title: 'SoC Verification Framework', company: 'ChipVerify Labs', match: 88 },
-    { id: 3, title: 'Memory Controller Optimization', company: 'MemTech Solutions', match: 85 }
+  const mockProjects = [
+    {
+      title: 'ASIC Design Engineer',
+      company: 'TechCorp',
+      match: 92,
+      skills: ['VLSI Design', 'Verilog', 'ASIC Design']
+    },
+    {
+      title: 'Digital Design Specialist',
+      company: 'SemiTech',
+      match: 88,
+      skills: ['Digital Design', 'SystemVerilog']
+    }
   ];
-
-  const overallMatch = 82;
 
   return (
     <div className="min-h-screen bg-background dark">
@@ -49,224 +56,246 @@ export default function AISkillMapping() {
       <header className="border-b border-border/50 backdrop-blur-sm sticky top-0 z-50 bg-background/80">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <Link to="/" className="flex items-center gap-2">
-              <Cpu className="h-8 w-8 text-primary" />
-              <span className="text-xl font-display font-bold">Bharat Silicon Setu</span>
+            <Link to="/" className="flex items-center gap-2 text-white hover:text-primary transition-colors">
+              <ArrowLeft className="h-5 w-5" />
+              <span>Back to Home</span>
             </Link>
-            <Link to="/">
-              <Button variant="ghost">
-                <ArrowLeft className="h-4 w-4 mr-2" />
-                Back to Home
-              </Button>
+            <Link to="/student-dashboard">
+              <Button>Go to Dashboard</Button>
             </Link>
           </div>
         </div>
       </header>
 
       <main className="container mx-auto px-4 py-12">
-        <div className="max-w-5xl mx-auto">
-          {/* Hero Section */}
-          <div className="text-center mb-12">
+        <div className="max-w-5xl mx-auto space-y-8">
+          {/* Page Header */}
+          <div className="text-center space-y-4">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm text-primary mb-4">
               <Zap className="h-4 w-4" />
-              AI-Powered Skill Analysis
+              AI-Powered Analysis
             </div>
-            <h1 className="text-4xl md:text-5xl font-display font-bold mb-4">
+            <h1 className="text-4xl md:text-5xl font-display font-bold text-white">
               AI Skill Mapping
             </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Upload your resume and let our advanced AI analyze your semiconductor skills, identify strengths, and match you with perfect industry projects
+            <p className="text-xl text-white max-w-2xl mx-auto">
+              Upload your resume and let our AI analyze your semiconductor skills with precision
             </p>
           </div>
 
-          {/* Upload Section */}
-          {!analyzed && (
-            <Card className="mb-8">
-              <CardHeader>
-                <CardTitle>Upload Your Resume</CardTitle>
-                <CardDescription>Supported formats: PDF, DOC, DOCX (Max 5MB)</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-6">
-                  <div className="border-2 border-dashed border-border rounded-lg p-12 text-center hover:border-primary/50 transition-colors">
-                    <input
-                      type="file"
-                      id="resume-upload"
-                      className="hidden"
-                      accept=".pdf,.doc,.docx"
-                      onChange={handleFileChange}
-                    />
-                    <label htmlFor="resume-upload" className="cursor-pointer">
-                      <Upload className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                      {file ? (
-                        <div className="space-y-2">
-                          <p className="text-lg font-semibold">{file.name}</p>
-                          <p className="text-sm text-muted-foreground">
-                            {(file.size / 1024).toFixed(2)} KB
-                          </p>
-                          <Button variant="outline" size="sm" className="mt-2">
-                            Change File
-                          </Button>
-                        </div>
-                      ) : (
-                        <div className="space-y-2">
-                          <p className="text-lg font-semibold">Click to upload or drag and drop</p>
-                          <p className="text-sm text-muted-foreground">
-                            Your resume will be analyzed securely
-                          </p>
-                        </div>
-                      )}
-                    </label>
+          {!analysisComplete ? (
+            <>
+              {/* Upload Section */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-white">Upload Your Resume</CardTitle>
+                  <CardDescription className="text-white">
+                    Supported formats: PDF, DOC, DOCX (Max 5MB)
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="border-2 border-dashed border-border rounded-lg p-12 text-center space-y-4">
+                    <Upload className="h-12 w-12 text-muted-foreground mx-auto" />
+                    <div>
+                      <label htmlFor="resume-upload" className="cursor-pointer">
+                        <span className="text-primary hover:text-primary/80 font-semibold">
+                          Click to upload
+                        </span>
+                        <span className="text-white"> or drag and drop</span>
+                      </label>
+                      <input
+                        id="resume-upload"
+                        type="file"
+                        className="hidden"
+                        accept=".pdf,.doc,.docx"
+                        onChange={handleFileChange}
+                      />
+                    </div>
+                    {file && (
+                      <div className="text-sm text-white">
+                        Selected: {file.name}
+                      </div>
+                    )}
                   </div>
                   <Button
-                    size="lg"
-                    className="w-full"
-                    disabled={!file || analyzing}
                     onClick={handleAnalyze}
+                    disabled={!file || isAnalyzing}
+                    className="w-full mt-4"
+                    size="lg"
                   >
-                    {analyzing ? (
+                    {isAnalyzing ? (
                       <>
-                        <Zap className="h-5 w-5 mr-2 animate-pulse" />
-                        Analyzing Skills...
+                        <div className="h-4 w-4 border-2 border-current border-t-transparent rounded-full animate-spin mr-2" />
+                        Analyzing...
                       </>
                     ) : (
                       <>
                         <Zap className="h-5 w-5 mr-2" />
-                        Analyze Skills
+                        Analyze Resume
                       </>
                     )}
                   </Button>
-                </div>
-              </CardContent>
-            </Card>
-          )}
-
-          {/* Analysis Results */}
-          {analyzed && (
-            <div className="space-y-8 animate-fade-in">
-              {/* Overall Match Score */}
-              <Card className="border-primary/50 bg-primary/5">
-                <CardHeader>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <CardTitle className="text-2xl">AI Analysis Complete</CardTitle>
-                      <CardDescription>Your semiconductor skill profile has been generated</CardDescription>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-5xl font-bold text-primary mb-1">{overallMatch}%</div>
-                      <p className="text-sm text-muted-foreground">Overall Match Score</p>
-                    </div>
-                  </div>
-                </CardHeader>
+                </CardContent>
               </Card>
 
-              {/* Extracted Skills */}
+              {/* How It Works */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Target className="h-5 w-5 text-primary" />
-                    Extracted Skills
-                  </CardTitle>
-                  <CardDescription>AI-identified competencies from your resume</CardDescription>
+                  <CardTitle className="text-white">How It Works</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-6">
-                    {extractedSkills.map((skill) => (
-                      <div key={skill.name} className="space-y-2">
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-3">
-                            <h4 className="font-semibold">{skill.name}</h4>
-                            <Badge variant="outline" className="text-xs">
-                              {skill.category}
+                  <div className="grid md:grid-cols-3 gap-6">
+                    <div className="space-y-2">
+                      <div className="h-10 w-10 bg-primary/10 rounded-lg flex items-center justify-center mb-3">
+                        <Upload className="h-5 w-5 text-primary" />
+                      </div>
+                      <h3 className="font-semibold text-white">1. Upload</h3>
+                      <p className="text-sm text-white">
+                        Upload your resume in PDF or DOC format
+                      </p>
+                    </div>
+                    <div className="space-y-2">
+                      <div className="h-10 w-10 bg-primary/10 rounded-lg flex items-center justify-center mb-3">
+                        <Zap className="h-5 w-5 text-primary" />
+                      </div>
+                      <h3 className="font-semibold text-white">2. Analyze</h3>
+                      <p className="text-sm text-white">
+                        Our AI extracts and evaluates your semiconductor skills
+                      </p>
+                    </div>
+                    <div className="space-y-2">
+                      <div className="h-10 w-10 bg-primary/10 rounded-lg flex items-center justify-center mb-3">
+                        <Award className="h-5 w-5 text-primary" />
+                      </div>
+                      <h3 className="font-semibold text-white">3. Match</h3>
+                      <p className="text-sm text-white">
+                        Get matched with relevant projects and opportunities
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </>
+          ) : (
+            <>
+              {/* Analysis Results */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-white">
+                    <Award className="h-6 w-6 text-primary" />
+                    Your Skill Profile
+                  </CardTitle>
+                  <CardDescription className="text-white">
+                    AI-extracted skills from your resume
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  {mockSkills.map((skill) => (
+                    <div key={skill.name} className="space-y-2">
+                      <div className="flex justify-between items-center">
+                        <span className="font-medium text-white">{skill.name}</span>
+                        <span className="text-sm text-white">{skill.strength}%</span>
+                      </div>
+                      <Progress value={skill.strength} className="h-2" />
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
+
+              {/* Recommended Projects */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-white">
+                    <TrendingUp className="h-6 w-6 text-primary" />
+                    Recommended Projects
+                  </CardTitle>
+                  <CardDescription className="text-white">
+                    Projects that match your skill profile
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    {mockProjects.map((project, index) => (
+                      <div
+                        key={index}
+                        className="border border-border rounded-lg p-6 space-y-4 hover:border-primary/50 transition-colors"
+                      >
+                        <div className="flex justify-between items-start">
+                          <div>
+                            <h3 className="font-semibold text-lg text-white">{project.title}</h3>
+                            <p className="text-sm text-white">{project.company}</p>
+                          </div>
+                          <div className="text-right">
+                            <div className="text-2xl font-bold text-primary">{project.match}%</div>
+                            <p className="text-xs text-white">Match</p>
+                          </div>
+                        </div>
+                        <div className="flex flex-wrap gap-2">
+                          {project.skills.map((skill) => (
+                            <Badge key={skill} variant="secondary" className="text-white">
+                              {skill}
                             </Badge>
-                          </div>
-                          <span className="text-sm font-bold text-primary">{skill.strength}%</span>
+                          ))}
                         </div>
-                        <Progress value={skill.strength} className="h-2" />
+                        <Button className="w-full">Apply Now</Button>
                       </div>
                     ))}
                   </div>
                 </CardContent>
               </Card>
 
-              {/* Suggested Projects */}
+              {/* Skill Development Recommendations */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <TrendingUp className="h-5 w-5 text-primary" />
-                    Suggested Industry Projects
-                  </CardTitle>
-                  <CardDescription>Top project matches based on your skill profile</CardDescription>
+                  <CardTitle className="text-white">Skill Development Recommendations</CardTitle>
+                  <CardDescription className="text-white">
+                    Areas to focus on for career growth
+                  </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-4">
-                    {suggestedProjects.map((project) => (
-                      <div key={project.id} className="p-4 border border-border rounded-lg hover:border-primary/50 transition-colors">
-                        <div className="flex items-start justify-between mb-3">
-                          <div className="flex-1">
-                            <h4 className="font-semibold text-lg mb-1">{project.title}</h4>
-                            <p className="text-sm text-muted-foreground">{project.company}</p>
-                          </div>
-                          <Badge variant="outline" className="bg-primary/10 text-primary border-primary/20">
-                            {project.match}% Match
-                          </Badge>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <CheckCircle2 className="h-4 w-4 text-primary" />
-                          <span className="text-sm text-muted-foreground">
-                            Highly compatible with your skill set
-                          </span>
-                        </div>
+                  <ul className="space-y-3">
+                    <li className="flex items-start gap-3">
+                      <div className="h-6 w-6 bg-primary/10 rounded-full flex items-center justify-center shrink-0 mt-0.5">
+                        <span className="text-xs text-primary font-bold">1</span>
                       </div>
-                    ))}
-                  </div>
-                  <div className="mt-6 flex gap-4">
-                    <Link to="/student-dashboard" className="flex-1">
-                      <Button className="w-full" size="lg">
-                        View All Projects
-                      </Button>
-                    </Link>
-                    <Button variant="outline" size="lg" onClick={() => setAnalyzed(false)}>
-                      Analyze Another Resume
-                    </Button>
-                  </div>
+                      <div>
+                        <p className="font-medium text-white">Advanced ASIC Design</p>
+                        <p className="text-sm text-white">
+                          Strengthen your ASIC design skills to increase project matches by 15%
+                        </p>
+                      </div>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="h-6 w-6 bg-primary/10 rounded-full flex items-center justify-center shrink-0 mt-0.5">
+                        <span className="text-xs text-primary font-bold">2</span>
+                      </div>
+                      <div>
+                        <p className="font-medium text-white">SystemVerilog Proficiency</p>
+                        <p className="text-sm text-white">
+                          Improve your SystemVerilog skills to qualify for senior positions
+                        </p>
+                      </div>
+                    </li>
+                  </ul>
                 </CardContent>
               </Card>
 
-              {/* Skill Recommendations */}
-              <Card>
-                <CardHeader>
-                  <CardTitle>Skill Development Recommendations</CardTitle>
-                  <CardDescription>Areas to focus on for career growth</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    <div className="flex items-start gap-3 p-4 bg-muted/50 rounded-lg">
-                      <div className="h-8 w-8 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <TrendingUp className="h-4 w-4 text-primary" />
-                      </div>
-                      <div>
-                        <h4 className="font-semibold mb-1">Advanced Verification Techniques</h4>
-                        <p className="text-sm text-muted-foreground">
-                          Consider learning UVM and formal verification to complement your RTL skills
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3 p-4 bg-muted/50 rounded-lg">
-                      <div className="h-8 w-8 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <Target className="h-4 w-4 text-primary" />
-                      </div>
-                      <div>
-                        <h4 className="font-semibold mb-1">Low Power Design</h4>
-                        <p className="text-sm text-muted-foreground">
-                          High demand skill in the industry - would increase your project matches by 15%
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
+              <div className="flex gap-4">
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    setFile(null);
+                    setAnalysisComplete(false);
+                  }}
+                  className="flex-1"
+                >
+                  Analyze Another Resume
+                </Button>
+                <Link to="/student-dashboard" className="flex-1">
+                  <Button className="w-full">Go to Dashboard</Button>
+                </Link>
+              </div>
+            </>
           )}
         </div>
       </main>

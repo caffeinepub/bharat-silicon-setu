@@ -2,9 +2,9 @@ import Map "mo:core/Map";
 import Principal "mo:core/Principal";
 import Runtime "mo:core/Runtime";
 import Time "mo:core/Time";
+import Iter "mo:core/Iter";
 import MixinAuthorization "authorization/MixinAuthorization";
 import AccessControl "authorization/access-control";
-import Iter "mo:core/Iter";
 
 actor {
   public type AppUserRole = {
@@ -53,7 +53,7 @@ actor {
     };
   };
 
-  public shared ({ caller }) func registerNewUser(name : Text, email : Text, role : AppUserRole) : async () {
+  public shared ({ caller }) func register(name : Text, email : Text, role : AppUserRole) : async () {
     // Prevent anonymous principals from registering
     if (caller.isAnonymous()) {
       Runtime.trap("Unauthorized: Anonymous users cannot register");
@@ -65,9 +65,10 @@ actor {
       case (null) { () };
     };
 
-    // Only admins can register as admin
+    // Only existing admins can register new admin accounts
+    // Exception: if no users exist yet, allow first admin registration
     if (role == #admin) {
-      if (not AccessControl.isAdmin(accessControlState, caller)) {
+      if (totalUsers > 0 and not AccessControl.isAdmin(accessControlState, caller)) {
         Runtime.trap("Unauthorized: Only admins can register admin accounts");
       };
     };
@@ -135,8 +136,13 @@ actor {
     switch (userProfiles.get(caller)) {
       case (?existingProfile) {
         // Only admins can change roles
-        if (existingProfile.role != profile.role and not AccessControl.isAdmin(accessControlState, caller)) {
-          Runtime.trap("Unauthorized: Only admins can change user roles");
+        if (existingProfile.role != profile.role) {
+          if (not AccessControl.isAdmin(accessControlState, caller)) {
+            Runtime.trap("Unauthorized: Only admins can change user roles");
+          };
+          // Update the AccessControl system with the new role
+          let newAcRole = mapToAccessControlRole(profile.role);
+          AccessControl.assignRole(accessControlState, caller, caller, newAcRole);
         };
       };
       case (null) {
@@ -242,8 +248,9 @@ actor {
     };
   };
 
-  public query ({ caller }) func getApprovedProjects() : async [Project] {
-    // Any authenticated user (including guests) can view approved projects
+  public query func getApprovedProjects() : async [Project] {
+    // Public endpoint - any user including guests can view approved projects
+    // No authorization check needed as this is intentionally public information
     let allProjects = projects.values().flatMap(
         func(projectList : [Project]) : Iter.Iter<Project> {
           projectList.vals();

@@ -1,167 +1,107 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Add Internet Identity authentication system",
+  "title": "Change all black text to white throughout application",
   "requirements": [
     {
-      "id": "REQ-14",
-      "summary": "Add Internet Identity login button to landing page header",
+      "id": "REQ-28",
+      "summary": "Update all text colors in LandingPage from black to white for visibility against dark background",
       "acceptanceCriteria": [
-        "Login button is visible in the landing page header",
-        "Clicking the login button initiates Internet Identity authentication",
-        "Successful login redirects users to their appropriate dashboard based on role"
+        "All headings in the landing page display white text",
+        "All body paragraphs and descriptions display white text",
+        "All card text content displays white text",
+        "Text remains readable with proper contrast against dark backgrounds"
       ],
       "file_operations": [
         {
           "path": "frontend/src/pages/LandingPage.tsx",
           "operation": "modify",
-          "description": "Add Login button to the header navigation that triggers Internet Identity authentication flow using the useInternetIdentity hook. Position the button prominently in the header alongside existing navigation links. The button should show 'Login' when unauthenticated and handle the login flow. After successful login and role verification, redirect to the appropriate dashboard based on the user's stored role."
+          "description": "Replace all text color classes from black variants (text-black, text-gray-900, text-gray-800) to text-white across all sections including hero headings and subtext, problem section heading and description, how it works section heading and step descriptions, stakeholder card titles and descriptions, and impact metrics labels and values"
         }
       ]
     },
     {
-      "id": "REQ-15",
-      "summary": "Create user registration flow for role selection after first-time authentication",
+      "id": "REQ-29",
+      "summary": "Update all text colors in StudentDashboard from black to white for consistency",
       "acceptanceCriteria": [
-        "First-time users see a role selection interface after authentication",
-        "Role selection includes Student, Industry Partner, and Admin options",
-        "Selected role is stored and persists across sessions",
-        "Users are redirected to their role-specific dashboard after selection"
+        "All sidebar menu items display white text",
+        "All dashboard section headings display white text",
+        "All project card content displays white text",
+        "All list items and labels display white text"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/StudentDashboard.tsx",
+          "operation": "modify",
+          "description": "Replace all text color classes from black variants to text-white across sidebar navigation labels, dashboard tab headings, profile completion text, skill tags, project card titles and descriptions, applied projects list items, and mentor messages preview text"
+        }
+      ]
+    },
+    {
+      "id": "REQ-30",
+      "summary": "Update all text colors in IndustryDashboard from black to white for uniform styling",
+      "acceptanceCriteria": [
+        "All sidebar menu items display white text",
+        "All project listings display white text",
+        "All applicant card information displays white text",
+        "Analytics metrics display white text"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/IndustryDashboard.tsx",
+          "operation": "modify",
+          "description": "Replace all text color classes from black variants to text-white across sidebar navigation items, dashboard section headings, project listing titles and descriptions, status indicator labels, applicant card names and skills, skill match percentages, and analytics section text"
+        }
+      ]
+    },
+    {
+      "id": "REQ-31",
+      "summary": "Update all text colors in AdminDashboard from black to white for theme consistency",
+      "acceptanceCriteria": [
+        "All sidebar navigation displays white text",
+        "All metric labels and values display white text",
+        "All activity feed items display white text",
+        "All section headings display white text"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/AdminDashboard.tsx",
+          "operation": "modify",
+          "description": "Replace all text color classes from black variants to text-white across sidebar navigation labels, overview tab headings, user count metric labels and values, project statistics text, revenue data displays, growth chart labels, and recent activity feed item text"
+        }
+      ]
+    },
+    {
+      "id": "REQ-32",
+      "summary": "Update all text colors in AISkillMapping from black to white for complete coverage",
+      "acceptanceCriteria": [
+        "All page headings display white text",
+        "All instruction text displays white text",
+        "All skill analysis results display white text",
+        "Match score and percentages display white text"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/AISkillMapping.tsx",
+          "operation": "modify",
+          "description": "Replace all text color classes from black variants to text-white across page title heading, upload box instruction text, analyze button labels, AI analysis result section headings, extracted skills list items, skill strength labels and values, suggested projects titles and descriptions, and match score percentages"
+        }
+      ]
+    },
+    {
+      "id": "REQ-33",
+      "summary": "Update all text colors in RoleSelectionModal from black to white for registration flow consistency",
+      "acceptanceCriteria": [
+        "Modal title displays white text",
+        "All role card titles display white text",
+        "All role descriptions display white text",
+        "Text remains readable on card backgrounds"
       ],
       "file_operations": [
         {
           "path": "frontend/src/components/RoleSelectionModal.tsx",
-          "operation": "create",
-          "description": "Create a modal component that displays after Internet Identity authentication for first-time users. Show three role options (Student, Industry Partner, Admin) with descriptions. Include a form that captures the user's name, email, and selected role. On submission, call the backend registerNewUser method with the selected AppUserRole enum value. Handle loading and error states. After successful registration, redirect to the appropriate dashboard based on role."
-        },
-        {
-          "path": "frontend/src/hooks/useUserProfile.ts",
-          "operation": "create",
-          "description": "Create a custom hook that wraps the backend getCallerUserProfile and saveCallerUserProfile methods using React Query. Include proper loading states and cache management. Ensure the hook properly waits for the actor to be available before fetching to prevent modal flash issues. Return isLoading state that accounts for both actor loading and query loading. Use queryKey 'currentUserProfile' for cache management."
-        },
-        {
-          "path": "frontend/src/App.tsx",
           "operation": "modify",
-          "description": "Add logic to check if authenticated users have a profile. Use the useUserProfile hook and useInternetIdentity hook to determine authentication state. Show the RoleSelectionModal when user is authenticated but has no profile (userProfile === null and isFetched === true). Ensure proper coordination between authentication state and profile loading to prevent UI flicker."
-        }
-      ]
-    },
-    {
-      "id": "REQ-17",
-      "summary": "Add authentication guards to dashboard routes",
-      "acceptanceCriteria": [
-        "Unauthenticated users cannot access dashboard pages",
-        "Attempting to access protected routes redirects to landing page",
-        "Authenticated users can access their role-specific dashboard",
-        "Authentication state is checked on route navigation"
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/components/ProtectedRoute.tsx",
-          "operation": "create",
-          "description": "Create a route guard component that checks authentication status using useInternetIdentity hook. If user is not authenticated, redirect to the landing page ('/'). If authenticated, render the children. Show a loading state while checking authentication. Use TanStack Router's Navigate component for redirects."
-        },
-        {
-          "path": "frontend/src/App.tsx",
-          "operation": "modify",
-          "description": "Wrap all dashboard routes (student-dashboard, industry-dashboard, admin-dashboard) with the ProtectedRoute component. Ensure authentication checks happen before rendering any dashboard content. Maintain the existing route structure and component references."
-        }
-      ]
-    },
-    {
-      "id": "REQ-18",
-      "summary": "Add logout button to dashboard sidebars",
-      "acceptanceCriteria": [
-        "Logout button appears in the sidebar navigation of all dashboards",
-        "Clicking logout clears the authentication session",
-        "User is redirected to the landing page after logout",
-        "Session data is properly cleaned up"
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/pages/StudentDashboard.tsx",
-          "operation": "modify",
-          "description": "Add a Logout button to the sidebar navigation below the existing nav items. Use the useInternetIdentity hook's clear method and useQueryClient to clear all cached data. After logout, navigate to the landing page using TanStack Router's useNavigate hook. Style the button consistently with the dark blue theme."
-        },
-        {
-          "path": "frontend/src/pages/IndustryDashboard.tsx",
-          "operation": "modify",
-          "description": "Add a Logout button to the sidebar navigation below the existing nav items. Use the useInternetIdentity hook's clear method and useQueryClient to clear all cached data. After logout, navigate to the landing page using TanStack Router's useNavigate hook. Style the button consistently with the dark blue theme."
-        },
-        {
-          "path": "frontend/src/pages/AdminDashboard.tsx",
-          "operation": "modify",
-          "description": "Add a Logout button to the sidebar navigation below the existing nav items. Use the useInternetIdentity hook's clear method and useQueryClient to clear all cached data. After logout, navigate to the landing page using TanStack Router's useNavigate hook. Style the button consistently with the dark blue theme."
-        }
-      ]
-    },
-    {
-      "id": "REQ-19",
-      "summary": "Implement role-based routing to direct users to correct dashboards",
-      "acceptanceCriteria": [
-        "Students are directed to /student-dashboard after login",
-        "Industry partners are directed to /industry-dashboard after login",
-        "Admins are directed to /admin-dashboard after login",
-        "Users attempting to access dashboards for other roles are redirected to their own dashboard"
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/hooks/useRoleBasedRedirect.ts",
-          "operation": "create",
-          "description": "Create a hook that fetches the user's role from the backend using getUserRole method and returns the appropriate dashboard path. Map AppUserRole.student to '/student-dashboard', AppUserRole.industryPartner to '/industry-dashboard', and AppUserRole.admin to '/admin-dashboard'. Handle loading and error states."
-        },
-        {
-          "path": "frontend/src/components/ProtectedRoute.tsx",
-          "operation": "modify",
-          "description": "Add role-based access control to the ProtectedRoute component. Use the useRoleBasedRedirect hook to fetch the user's role and verify they have access to the requested route. If the user's role doesn't match the required role for the route, redirect them to their correct dashboard. Pass a required role prop to enable per-route validation."
-        },
-        {
-          "path": "frontend/src/App.tsx",
-          "operation": "modify",
-          "description": "Update route definitions to specify required roles for each dashboard route. Pass role requirements to ProtectedRoute wrappers: student-dashboard requires AppUserRole.student, industry-dashboard requires AppUserRole.industryPartner, admin-dashboard requires AppUserRole.admin. After successful login or registration, use the role-based redirect logic to navigate to the correct dashboard."
-        }
-      ]
-    },
-    {
-      "id": "REQ-22",
-      "summary": "Update dashboard pages to fetch and display real user data from backend",
-      "acceptanceCriteria": [
-        "Student dashboard loads actual user profile and project data",
-        "Industry dashboard shows real posted projects and applicants",
-        "Admin dashboard displays actual platform metrics",
-        "Loading states are shown while fetching data",
-        "Empty states are shown when no data exists"
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/hooks/useProjects.ts",
-          "operation": "create",
-          "description": "Create React Query hooks for project-related backend methods: useGetApprovedProjects (wraps getApprovedProjects), useGetUserProjects (wraps getUserProjects), and useSaveProject (wraps saveProject mutation). Include proper error handling and loading states. Use appropriate query keys for cache management."
-        },
-        {
-          "path": "frontend/src/hooks/usePlatformMetrics.ts",
-          "operation": "create",
-          "description": "Create React Query hook that wraps getPlatformMetrics, getTotalUsers, and getTotalProjects backend methods. Combine the data into a single object for the admin dashboard. Handle loading and error states appropriately."
-        },
-        {
-          "path": "frontend/src/hooks/useContactRequests.ts",
-          "operation": "create",
-          "description": "Create React Query hooks for contact request functionality: useGetContactRequests (wraps getContactRequests) and useSendContactRequest (wraps sendContactRequest mutation). Include proper error handling and cache invalidation after sending requests."
-        },
-        {
-          "path": "frontend/src/pages/StudentDashboard.tsx",
-          "operation": "modify",
-          "description": "Replace hardcoded dummy data with real backend data. Use useUserProfile hook to fetch and display profile completion percentage and user info. Use useGetApprovedProjects to fetch available projects with skill matching. Use useContactRequests to fetch and display mentor messages. Add loading skeletons while data is fetching. Show empty states with helpful messages when no data exists (e.g., 'No projects available yet')."
-        },
-        {
-          "path": "frontend/src/pages/IndustryDashboard.tsx",
-          "operation": "modify",
-          "description": "Replace hardcoded dummy data with real backend data. Use useGetUserProjects to fetch projects posted by the authenticated industry partner. Display project details, applicant counts, and status. Add loading skeletons while fetching. Show empty state when no projects have been posted yet with a call-to-action to create the first project. Use useSaveProject for the project creation flow."
-        },
-        {
-          "path": "frontend/src/pages/AdminDashboard.tsx",
-          "operation": "modify",
-          "description": "Replace hardcoded platform metrics with real backend data. Use usePlatformMetrics hook to fetch total users, total projects, and calculated growth metrics. Display the data in the existing metric cards. Add loading skeletons while data is fetching. Handle cases where metrics might be zero for new platforms."
+          "description": "Replace all text color classes from black variants to text-white across modal title heading, role selection card titles for Student, Industry Partner, and Admin options, role description text, and any instructional text within the modal"
         }
       ]
     }

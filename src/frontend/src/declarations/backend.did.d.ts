@@ -50,7 +50,7 @@ export interface _SERVICE {
   'getUserProjects' : ActorMethod<[], Array<Project>>,
   'getUserRole' : ActorMethod<[], [] | [AppUserRole]>,
   'isCallerAdmin' : ActorMethod<[], boolean>,
-  'registerNewUser' : ActorMethod<[string, string, AppUserRole], undefined>,
+  'register' : ActorMethod<[string, string, AppUserRole], undefined>,
   'saveCallerUserProfile' : ActorMethod<[UserProfile], undefined>,
   'saveProject' : ActorMethod<[Project], undefined>,
   'sendContactRequest' : ActorMethod<[Principal, string], undefined>,

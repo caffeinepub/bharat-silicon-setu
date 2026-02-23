@@ -50,7 +50,7 @@ export interface backendInterface {
     getUserProjects(): Promise<Array<Project>>;
     getUserRole(): Promise<AppUserRole | null>;
     isCallerAdmin(): Promise<boolean>;
-    registerNewUser(name: string, email: string, role: AppUserRole): Promise<void>;
+    register(name: string, email: string, role: AppUserRole): Promise<void>;
     saveCallerUserProfile(profile: UserProfile): Promise<void>;
     saveProject(project: Project): Promise<void>;
     sendContactRequest(to: Principal, message: string): Promise<void>;

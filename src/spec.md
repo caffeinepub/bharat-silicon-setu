@@ -1,17 +1,14 @@
 # Specification
 
 ## Summary
-**Goal:** Add Internet Identity authentication system with role-based access control and persistent user data storage.
+**Goal:** Change all black text to white throughout the application for better visibility against dark backgrounds.
 
 **Planned changes:**
-- Add Internet Identity login button to landing page header
-- Create role selection flow for new users (Student, Industry Partner, Admin)
-- Implement backend user profile storage with principal ID, role, and timestamp
-- Add authentication guards to all dashboard routes
-- Add logout button to all dashboard sidebars
-- Implement role-based routing to direct users to correct dashboards
-- Create backend methods to store and retrieve student data (projects, skills, messages)
-- Create backend methods to store and retrieve industry partner data (projects, applicants, analytics)
-- Update all dashboards to fetch and display real user data from backend instead of hardcoded data
+- Update all text colors from black/gray to white in LandingPage.tsx (hero section, problem section, how it works, stakeholder cards, impact metrics)
+- Update all text colors from black to white in StudentDashboard.tsx (sidebar, headings, skill tags, project cards, applied projects, mentor messages)
+- Update all text colors from black to white in IndustryDashboard.tsx (sidebar, project listings, status indicators, applicant cards, analytics)
+- Update all text colors from black to white in AdminDashboard.tsx (sidebar, metrics, revenue data, chart labels, activity feed)
+- Update all text colors from black to white in AISkillMapping.tsx (headings, instructions, skill analysis results, match scores)
+- Update all text colors from black to white in RoleSelectionModal.tsx (modal title, role card titles and descriptions)
 
-**User-visible outcome:** Users can authenticate with Internet Identity, select their role on first login, access their role-specific dashboard with personalized data that persists across sessions, and securely logout. Unauthenticated users are redirected to the landing page when attempting to access protected routes.
+**User-visible outcome:** All text throughout the application displays in white color, providing consistent readability against the dark blue professional theme.
