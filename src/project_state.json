@@ -1,0 +1,233 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 5,
+  "summary": "Bharat Silicon Setu - A semiconductor execution ecosystem SaaS platform connecting students, semiconductor companies, startups, and institutions. Built with React + Tailwind CSS with a dark blue professional startup theme.",
+  "architectural_notes": [
+    "React + Tailwind CSS stack for all UI components",
+    "Dark blue professional startup theme across platform",
+    "Sidebar navigation pattern for dashboard interfaces",
+    "Multi-stakeholder platform: students, industry, startups, institutions"
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-create-a-landing-page-with-a-hero-section-displaying-bharat-silicon-setu-as-the-platform-name-the-tagline-bridging-talent-to-semiconductor-execution-and-two-cta-buttons-labeled-join-as-student-and-partner-with-industry",
+      "title": "Create a landing page with a Hero Section displaying 'Bharat Silicon Setu' as the platform name, the tagline 'Bridging Talent to Semiconductor Execution', and two CTA buttons labeled 'Join as Student' and 'Partner with Industry'",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-problem-section-to-the-landing-page-that-explains-the-skill-mismatch-in-the-semiconductor-ecosystem",
+      "title": "Add a Problem Section to the landing page that explains the skill mismatch in the semiconductor ecosystem",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-how-it-works-section-on-the-landing-page-with-three-steps-ai-skill-mapping-industry-project-matching-and-execution-validation",
+      "title": "Create a 'How It Works' section on the landing page with three steps: AI Skill Mapping, Industry Project Matching, and Execution & Validation",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-stakeholder-section-to-the-landing-page-with-cards-for-students-industry-startups-and-institutions",
+      "title": "Add a Stakeholder Section to the landing page with cards for Students, Industry, Startups, and Institutions",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-an-impact-metrics-section-on-the-landing-page-showing-dummy-stats-10-000-students-1-000-projects-and-200-startups",
+      "title": "Create an Impact Metrics Section on the landing page showing dummy stats: 10,000+ Students, 1,000+ Projects, and 200+ Startups",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-student-dashboard-with-sidebar-navigation-containing-dashboard-my-projects-skill-profile-mentorship-and-settings-menu-items",
+      "title": "Create a Student Dashboard with sidebar navigation containing Dashboard, My Projects, Skill Profile, Mentorship, and Settings menu items",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-main-dashboard-content-to-the-student-dashboard-including-a-profile-completion-percentage-bar-skill-tags-vlsi-rtl-embedded-systems-fpga-available-industry-projects-section-with-cards-applied-projects-list-and-mentor-messages-preview-using-dummy-data",
+      "title": "Add main dashboard content to the Student Dashboard including a profile completion percentage bar, skill tags (VLSI, RTL, Embedded Systems, FPGA), Available Industry Projects section with cards, Applied Projects list, and Mentor Messages preview using dummy data",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-an-industry-dashboard-with-sidebar-navigation-containing-dashboard-post-project-applicants-analytics-and-settings-menu-items",
+      "title": "Create an Industry Dashboard with sidebar navigation containing Dashboard, Post Project, Applicants, Analytics, and Settings menu items",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-main-content-to-the-industry-dashboard-including-a-post-new-project-button-project-listings-with-status-indicators-student-applicant-cards-showing-skill-match-percentages-and-an-analytics-section-displaying-total-applicants-active-projects-and-engagement-rate-using-dummy-placeholder-data",
+      "title": "Add main content to the Industry Dashboard including a 'Post New Project' button, project listings with status indicators, student applicant cards showing skill match percentages, and an analytics section displaying Total Applicants, Active Projects, and Engagement rate using dummy placeholder data",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-an-ai-skill-mapping-interface-page-with-a-resume-upload-box-analyze-skills-button-and-an-ai-analysis-result-section-displaying-extracted-skills-skill-strength-percentage-bars-suggested-industry-projects-and-a-match-score-example-82-using-dummy-simulation-data",
+      "title": "Create an AI Skill Mapping interface page with a resume upload box, 'Analyze Skills' button, and an AI Analysis Result section displaying extracted skills, skill strength percentage bars, suggested industry projects, and a match score (example: 82%) using dummy simulation data",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-an-admin-dashboard-with-sidebar-navigation-containing-overview-users-projects-revenue-and-reports-menu-items",
+      "title": "Create an Admin Dashboard with sidebar navigation containing Overview, Users, Projects, Revenue, and Reports menu items",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-main-dashboard-content-to-the-admin-dashboard-displaying-total-users-count-active-projects-revenue-generated-a-growth-chart-placeholder-and-a-recent-activity-feed-using-dummy-data",
+      "title": "Add main dashboard content to the Admin Dashboard displaying Total Users count, Active Projects, Revenue Generated, a growth chart placeholder, and a Recent Activity feed using dummy data",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-dark-blue-professional-startup-theme-consistently-across-all-pages-and-dashboards-using-tailwind-css-with-modern-clean-minimal-ui-design-professional-spacing-and-responsive-layout-optimized-for-investor-demo-presentation",
+      "title": "Apply a dark blue professional startup theme consistently across all pages and dashboards using Tailwind CSS with modern, clean, minimal UI design, professional spacing, and responsive layout optimized for investor demo presentation",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-integrate-internet-identity-login-button-on-the-landing-page-header-replacing-or-supplementing-the-existing-navigation-with-a-login-button-that-triggers-the-internet-identity-authentication-flow",
+      "title": "Integrate Internet Identity login button on the landing page header, replacing or supplementing the existing navigation with a 'Login' button that triggers the Internet Identity authentication flow",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-user-registration-flow-that-allows-new-users-to-select-their-role-student-industry-partner-admin-after-completing-internet-identity-authentication-for-the-first-time",
+      "title": "Create a user registration flow that allows new users to select their role (Student, Industry Partner, Admin) after completing Internet Identity authentication for the first time",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-authentication-guards-to-all-dashboard-routes-student-industry-admin-that-redirect-unauthenticated-users-to-the-landing-page",
+      "title": "Add authentication guards to all dashboard routes (Student, Industry, Admin) that redirect unauthenticated users to the landing page",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-logout-button-to-all-dashboard-sidebars-that-clears-the-internet-identity-session-and-redirects-to-the-landing-page",
+      "title": "Add a logout button to all dashboard sidebars that clears the Internet Identity session and redirects to the landing page",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-role-based-routing-that-automatically-directs-authenticated-users-to-their-correct-dashboard-student-industry-or-admin-based-on-their-stored-role",
+      "title": "Implement role-based routing that automatically directs authenticated users to their correct dashboard (Student, Industry, or Admin) based on their stored role",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-all-dashboard-pages-to-fetch-and-display-real-user-data-from-the-backend-instead-of-using-hardcoded-dummy-data",
+      "title": "Update all dashboard pages to fetch and display real user data from the backend instead of using hardcoded dummy data",
+      "reqIds": [
+        "REQ-22"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Landing page with hero, problem section, how it works, stakeholder cards, and impact metrics",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Student dashboard with sidebar navigation, profile completion, skill tags, projects, and mentor messages",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Industry dashboard with project posting, applicant management, skill match percentages, and analytics",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "AI Skill Mapping interface with resume upload, skill analysis, strength bars, and project suggestions",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Admin dashboard with user management, project oversight, revenue tracking, and activity feed",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Add user authentication system for login and data persistence",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Implement backend user profile storage in Motoko to persist user data including principal ID, selected role, registration timestamp, and basic profile information",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-13",
+      "summary": "Create backend methods to store and retrieve user-specific data for students including saved projects, skill profile data, and mentorship messages so data persists across sessions",
+      "reqIds": [
+        "REQ-20"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-14",
+      "summary": "Create backend methods to store and retrieve industry partner data including posted projects, applicant lists, and analytics so data persists across sessions",
+      "reqIds": [
+        "REQ-21"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Bharat Silicon Setu",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

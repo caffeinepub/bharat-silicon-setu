@@ -1,0 +1,199 @@
+{
+  "kind": "build_request",
+  "title": "Add Internet Identity authentication system",
+  "projectName": "Bharat Silicon Setu",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-14",
+      "text": "Integrate Internet Identity login button on the landing page header, replacing or supplementing the existing navigation with a 'Login' button that triggers the Internet Identity authentication flow",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-last"
+        ],
+        "quotes": [
+          "Yes plz add"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Login button is visible in the landing page header",
+        "Clicking the login button initiates Internet Identity authentication",
+        "Successful login redirects users to their appropriate dashboard based on role"
+      ]
+    },
+    {
+      "id": "REQ-15",
+      "text": "Create a user registration flow that allows new users to select their role (Student, Industry Partner, Admin) after completing Internet Identity authentication for the first time",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-last"
+        ],
+        "quotes": [
+          "Yes plz add"
+        ]
+      },
+      "acceptanceCriteria": [
+        "First-time users see a role selection interface after authentication",
+        "Role selection includes Student, Industry Partner, and Admin options",
+        "Selected role is stored and persists across sessions",
+        "Users are redirected to their role-specific dashboard after selection"
+      ]
+    },
+    {
+      "id": "REQ-16",
+      "text": "Implement backend user profile storage in Motoko to persist user data including principal ID, selected role, registration timestamp, and basic profile information",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-last"
+        ],
+        "quotes": [
+          "Yes plz add"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend stores user profiles with principal ID as the key",
+        "User role (Student/Industry/Admin) is persisted",
+        "Registration timestamp is recorded",
+        "Profile data survives canister upgrades"
+      ]
+    },
+    {
+      "id": "REQ-17",
+      "text": "Add authentication guards to all dashboard routes (Student, Industry, Admin) that redirect unauthenticated users to the landing page",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-last"
+        ],
+        "quotes": [
+          "Yes plz add"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Unauthenticated users cannot access dashboard pages",
+        "Attempting to access protected routes redirects to landing page",
+        "Authenticated users can access their role-specific dashboard",
+        "Authentication state is checked on route navigation"
+      ]
+    },
+    {
+      "id": "REQ-18",
+      "text": "Add a logout button to all dashboard sidebars that clears the Internet Identity session and redirects to the landing page",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-last"
+        ],
+        "quotes": [
+          "Yes plz add"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Logout button appears in the sidebar navigation of all dashboards",
+        "Clicking logout clears the authentication session",
+        "User is redirected to the landing page after logout",
+        "Session data is properly cleaned up"
+      ]
+    },
+    {
+      "id": "REQ-19",
+      "text": "Implement role-based routing that automatically directs authenticated users to their correct dashboard (Student, Industry, or Admin) based on their stored role",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-last"
+        ],
+        "quotes": [
+          "Yes plz add"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Students are directed to /student-dashboard after login",
+        "Industry partners are directed to /industry-dashboard after login",
+        "Admins are directed to /admin-dashboard after login",
+        "Users attempting to access dashboards for other roles are redirected to their own dashboard"
+      ]
+    },
+    {
+      "id": "REQ-20",
+      "text": "Create backend methods to store and retrieve user-specific data for students including saved projects, skill profile data, and mentorship messages so data persists across sessions",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-last"
+        ],
+        "quotes": [
+          "Yes plz add"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend stores student profile completion percentage",
+        "Student skill tags are persisted",
+        "Applied projects list is stored per user",
+        "Mentor messages are saved and retrievable",
+        "Data is associated with the user's principal ID"
+      ]
+    },
+    {
+      "id": "REQ-21",
+      "text": "Create backend methods to store and retrieve industry partner data including posted projects, applicant lists, and analytics so data persists across sessions",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-last"
+        ],
+        "quotes": [
+          "Yes plz add"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend stores projects posted by industry partners",
+        "Project applicants are associated with each project",
+        "Analytics data (total applicants, engagement rate) is persisted",
+        "Data is scoped to the authenticated industry partner's principal ID"
+      ]
+    },
+    {
+      "id": "REQ-22",
+      "text": "Update all dashboard pages to fetch and display real user data from the backend instead of using hardcoded dummy data",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-last"
+        ],
+        "quotes": [
+          "Yes plz add"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Student dashboard loads actual user profile and project data",
+        "Industry dashboard shows real posted projects and applicants",
+        "Admin dashboard displays actual platform metrics",
+        "Loading states are shown while fetching data",
+        "Empty states are shown when no data exists"
+      ]
+    }
+  ],
+  "constraints": [
+    "Use the existing useInternetIdentity hook and useActor hook without modification",
+    "Maintain the current single-actor backend architecture",
+    "Preserve all existing dashboard UI layouts and styling",
+    "Keep the dark blue professional theme consistent across all pages"
+  ],
+  "nonGoals": [
+    "Email/password authentication",
+    "Social login integrations (Facebook, Google, GitHub)",
+    "Multi-factor authentication beyond Internet Identity",
+    "Password recovery flows",
+    "User invitation system",
+    "Team collaboration features",
+    "Real-time notifications"
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

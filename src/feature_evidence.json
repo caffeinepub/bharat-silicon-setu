@@ -1,0 +1,131 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-integrate-internet-identity-login-button-on-the-landing-page-header-replacing-or-supplementing-the-existing-navigation-with-a-login-button-that-triggers-the-internet-identity-authentication-flow",
+      "featureTitle": "Integrate Internet Identity login button on the landing page header, replacing or supplementing the existing navigation with a 'Login' button that triggers the Internet Identity authentication flow",
+      "files": [
+        "frontend/src/pages/LandingPage.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-14"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-a-user-registration-flow-that-allows-new-users-to-select-their-role-student-industry-partner-admin-after-completing-internet-identity-authentication-for-the-first-time",
+      "featureTitle": "Create a user registration flow that allows new users to select their role (Student, Industry Partner, Admin) after completing Internet Identity authentication for the first time",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/RoleSelectionModal.tsx",
+        "frontend/src/hooks/useUserProfile.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-15"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-authentication-guards-to-all-dashboard-routes-student-industry-admin-that-redirect-unauthenticated-users-to-the-landing-page",
+      "featureTitle": "Add authentication guards to all dashboard routes (Student, Industry, Admin) that redirect unauthenticated users to the landing page",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/ProtectedRoute.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-17"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-a-logout-button-to-all-dashboard-sidebars-that-clears-the-internet-identity-session-and-redirects-to-the-landing-page",
+      "featureTitle": "Add a logout button to all dashboard sidebars that clears the Internet Identity session and redirects to the landing page",
+      "files": [
+        "frontend/src/pages/AdminDashboard.tsx",
+        "frontend/src/pages/IndustryDashboard.tsx",
+        "frontend/src/pages/StudentDashboard.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-18"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-role-based-routing-that-automatically-directs-authenticated-users-to-their-correct-dashboard-student-industry-or-admin-based-on-their-stored-role",
+      "featureTitle": "Implement role-based routing that automatically directs authenticated users to their correct dashboard (Student, Industry, or Admin) based on their stored role",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/ProtectedRoute.tsx",
+        "frontend/src/hooks/useRoleBasedRedirect.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-19"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-update-all-dashboard-pages-to-fetch-and-display-real-user-data-from-the-backend-instead-of-using-hardcoded-dummy-data",
+      "featureTitle": "Update all dashboard pages to fetch and display real user data from the backend instead of using hardcoded dummy data",
+      "files": [
+        "frontend/src/hooks/useContactRequests.ts",
+        "frontend/src/hooks/usePlatformMetrics.ts",
+        "frontend/src/hooks/useProjects.ts",
+        "frontend/src/pages/AdminDashboard.tsx",
+        "frontend/src/pages/IndustryDashboard.tsx",
+        "frontend/src/pages/StudentDashboard.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-22"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

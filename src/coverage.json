@@ -1,0 +1,160 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-23T08:30:08.689Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 9,
+    "implemented": 6,
+    "items": [
+      {
+        "id": "REQ-14",
+        "summary": "Integrate Internet Identity login button on the landing page header, replacing or supplementing the existing navigation with a 'Login' button that triggers the Internet Identity authentication flow",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/LandingPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/LandingPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-15",
+        "summary": "Create a user registration flow that allows new users to select their role (Student, Industry Partner, Admin) after completing Internet Identity authentication for the first time",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/RoleSelectionModal.tsx",
+          "frontend/src/hooks/useUserProfile.ts",
+          "frontend/src/App.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/RoleSelectionModal.tsx",
+          "frontend/src/hooks/useUserProfile.ts",
+          "frontend/src/App.tsx"
+        ]
+      },
+      {
+        "id": "REQ-16",
+        "summary": "Implement backend user profile storage in Motoko to persist user data including principal ID, selected role, registration timestamp, and basic profile information",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-17",
+        "summary": "Add authentication guards to all dashboard routes (Student, Industry, Admin) that redirect unauthenticated users to the landing page",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/ProtectedRoute.tsx",
+          "frontend/src/App.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/ProtectedRoute.tsx",
+          "frontend/src/App.tsx"
+        ]
+      },
+      {
+        "id": "REQ-18",
+        "summary": "Add a logout button to all dashboard sidebars that clears the Internet Identity session and redirects to the landing page",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/StudentDashboard.tsx",
+          "frontend/src/pages/IndustryDashboard.tsx",
+          "frontend/src/pages/AdminDashboard.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/StudentDashboard.tsx",
+          "frontend/src/pages/IndustryDashboard.tsx",
+          "frontend/src/pages/AdminDashboard.tsx"
+        ]
+      },
+      {
+        "id": "REQ-19",
+        "summary": "Implement role-based routing that automatically directs authenticated users to their correct dashboard (Student, Industry, or Admin) based on their stored role",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/hooks/useRoleBasedRedirect.ts",
+          "frontend/src/components/ProtectedRoute.tsx",
+          "frontend/src/App.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/hooks/useRoleBasedRedirect.ts",
+          "frontend/src/components/ProtectedRoute.tsx",
+          "frontend/src/App.tsx"
+        ]
+      },
+      {
+        "id": "REQ-20",
+        "summary": "Create backend methods to store and retrieve user-specific data for students including saved projects, skill profile data, and mentorship messages so data persists across sessions",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-21",
+        "summary": "Create backend methods to store and retrieve industry partner data including posted projects, applicant lists, and analytics so data persists across sessions",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-22",
+        "summary": "Update all dashboard pages to fetch and display real user data from the backend instead of using hardcoded dummy data",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/hooks/useProjects.ts",
+          "frontend/src/hooks/usePlatformMetrics.ts",
+          "frontend/src/hooks/useContactRequests.ts",
+          "frontend/src/pages/StudentDashboard.tsx",
+          "frontend/src/pages/IndustryDashboard.tsx",
+          "frontend/src/pages/AdminDashboard.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/hooks/useProjects.ts",
+          "frontend/src/hooks/usePlatformMetrics.ts",
+          "frontend/src/hooks/useContactRequests.ts",
+          "frontend/src/pages/StudentDashboard.tsx",
+          "frontend/src/pages/IndustryDashboard.tsx",
+          "frontend/src/pages/AdminDashboard.tsx"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "backend/authorization/MixinAuthorization.mo",
+    "backend/authorization/access-control.mo",
+    "backend/main.mo",
+    "build-request.json",
+    "build-template/README.md",
+    "caffeine.lock.json",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/src/App.tsx",
+    "frontend/src/backend.d.ts",
+    "frontend/src/backend.ts",
+    "frontend/src/components/ProtectedRoute.tsx",
+    "frontend/src/components/RoleSelectionModal.tsx",
+    "frontend/src/declarations/backend.did.d.ts",
+    "frontend/src/declarations/backend.did.js",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useContactRequests.ts",
+    "frontend/src/hooks/usePlatformMetrics.ts",
+    "frontend/src/hooks/useProjects.ts",
+    "frontend/src/hooks/useRoleBasedRedirect.ts",
+    "frontend/src/hooks/useUserProfile.ts",
+    "frontend/src/pages/AISkillMapping.tsx",
+    "frontend/src/pages/AdminDashboard.tsx",
+    "frontend/src/pages/IndustryDashboard.tsx",
+    "frontend/src/pages/LandingPage.tsx",
+    "frontend/src/pages/StudentDashboard.tsx",
+    "frontend/src/utils/urlParams.ts",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}
